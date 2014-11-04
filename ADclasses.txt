@@ -1,4 +1,4 @@
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Mob
 {
 private:
@@ -55,3 +55,54 @@ public:
 	int getDefense() const;
 	int getHealth() const;
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Location//Exactly what it says. Locations on a map
+{
+	House** ;//lists houses in current location
+	Location* North,South,East,West; //Adjoining locations in the map
+	virtual Item** mapItems();//list of items contained in location
+	virtual NPC** mapNPC();//list NPC in location on map
+	virtual bool checkNew();//Check if location has been discovered
+	bool checkHouse();//returns true if location contains a House
+	bool checkItems();//returns true if location contains any uncollected/unused items
+};
+//Some classes that would inherit from Location include but are not limited to:
+class cityCenter:public Location{	};
+class Gardem:public Location{	};
+class Graveyard:public Location{	};
+
+
+class House//A house would be used for buildings which would contain rooms
+{         //for example Bar, Mansion
+private:
+	Room** doors;//Rooms adjoining with current
+	string description;//Description of building
+public:
+	House()//House constructor
+};
+//Some classes that would inherit from House include but are not limited to:
+class Bar:public House{	};
+class Mansion:public House{	};
+class TownHall:public House{	};
+
+
+class Room:public House
+{
+private:
+	Item** listItems;//list of items
+	NPC** listNPC;//
+	Item** listStatic;
+public:
+	Room();//Room constructor. Should Create room
+	Item** roomStatic();//List of static items contained in room Eg. Furniture
+	NPC** roomNPC();//List of non-playable characters in room
+	bool checkNew();//Check if room has been discovered
+};
+//Some classes that would inherit from House include but are not limited to:
+class bedroom:public room{	};
+class Kitchen:public room{	};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
