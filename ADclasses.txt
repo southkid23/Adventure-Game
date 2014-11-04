@@ -1,4 +1,57 @@
-Hello all
-This is our group project
-I like turtles
-We are a group of Bad-ass Programmers and 2 others(Names witheld)
+
+class Mob
+{
+private:
+	
+	std::string name;
+	int atkD, defense, health;
+	Mob(Mob& other);
+	Mob& operator=(Mob&);
+
+public:
+
+	Mob(std::string name, int atk, int health);
+	void setName(std::string name);
+	void setatkD(int);
+	void setDefense(int);
+	void setHealth(int);
+	std::string getName() const;
+	int getatkD() const;
+	int getDefense() const;
+	int getHealth() const;
+};
+
+class specialMob:public Mob // special type of Mob(like vampire, demon, etc.)
+{
+private:
+
+	double atkM, healthM; // multipliers
+
+public:
+
+	void setHealthMulti(double);
+	void setAtkMulti(double);
+	double getAtkM() const;
+	double getHealth() const;
+};
+
+class NPC
+{
+private:
+
+	std::string name;
+	int health, atkD;
+	NPC(NPC& other);
+	NPC& operator=(NPC&);
+
+public:
+	
+	void setName(int);
+	void setatkD(int);
+	void setDefense(int);
+	void setHealth(int);
+	std::string getName();
+	int getatkD() const;
+	int getDefense() const;
+	int getHealth() const;
+};
