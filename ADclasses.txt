@@ -57,7 +57,47 @@ public:
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+class Items
+{
+	private:
+		string Inventory[]; string Check[];
+	public:
+	// This checks if the items are active items
+		bool Edible();
+		bool Usable();
+		bool Movable();
+	// Checks if the inventory is empty
+		bool isEmpty();
 
+	// Checks if the inventory is full 
+		bool isFull();
+
+	// Specific actions for each item
+		void Pickup();
+		void Throw();
+		void move();
+		void use();
+
+	//returns the description that describes the item
+		string ItemInfo();
+};
+
+
+class Character
+{
+	private:
+		double health, armor, damage;
+	
+	public:
+		Character(){};
+
+	//Set & Get health, armor and damage
+		void HealthBar(double){}; double HealthBar(){return health};
+		void ArmorBar(double){}; double ArmorBar(){return armor};
+		void attack(double){}double attack(){return damage};
+
+		string CharInfo(){return} // return the attributes of the character
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Location//Exactly what it says. Locations on a map
