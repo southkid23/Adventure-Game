@@ -6,4 +6,6 @@ that seems to be trying to rebuild itself. The player will meet people, search f
 who roams around the village.
 ------------------------------------------
 
-We want to make objects that can interact with other objects and the environment.
+FIRST ROOM--------------
+The player will wake up in a room. In the room are 
+
