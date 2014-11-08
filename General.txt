@@ -1,0 +1,9 @@
+General Idea and Notes
+------------------------------------------
+The game will be adventure based with added mystery. The player will wake up in a room, with no memories of who he is
+and what he did before. The player leaves the room and he finds himself outside. Surrounding him is a broken-down village
+that seems to be trying to rebuild itself. The player will meet people, search for clues about himself and about the monster
+who roams around the village.
+------------------------------------------
+
+We want to make objects that can interact with other objects and the environment.
