@@ -1,0 +1,17 @@
+Story and Notes
+------------------------------------------
+The game will be adventure based with added mystery. The player will wake up in a room, with no memories of who he is
+and what he did before. The player leaves the room and he finds himself outside. Surrounding him is a broken-down village
+that seems to be trying to rebuild itself. The player will meet people, search for clues about himself and about the monster
+who roams around the village.
+------------------------------------------
+
+FIRST ROOM--------------
+The player will wake up in a room. In the room is a little girl that tells the player how she dragged him from the outside.
+She tells him that there was a recent fire in the village and that she managed to save him. In this room there is an apple,
+a butter knife, and a journal. The door leads to outside.
+
+Village Center----------
+In the center of the village there is a small well. Next to the well is an old man with a long bear and a long staff. He
+appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the
+East is a fenced graveyard. To the West is a bank. To the North is a large house.
