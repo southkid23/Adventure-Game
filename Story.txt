@@ -15,3 +15,18 @@ Village Center----------
 In the center of the village there is a small well. Next to the well is an old man with a long bear(d?) and a long staff. He
 appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the
 East is a fenced graveyard. To the West is a bank. To the North is a large house.
+
+Bank------
+The Bank seemed to be underconstruction due to some unusual damages. You can't go into the bank.
+
+Fenced Graveyard----
+{(first time visiting) - vision}
+You just had a weird vision about the village being on fire. The villagers were trembling in fear, shouting and trying to get away
+from something. I wonder what.
+
+The Graveyard is misty. Some tombs seems to be built fairly recent. In this place there's a shovel, flowers, and a note on one
+of the St. Shawn's tomb.
+
+
+
+
