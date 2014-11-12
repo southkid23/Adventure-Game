@@ -6,20 +6,26 @@ that seems to be trying to rebuild itself. The player will meet people, search f
 who roams around the village.
 ------------------------------------------
 
-FIRST ROOM--------------
+FIRST ROOM---------------------------------------------------------------------
 The player will wake up in a room. In the room is a little girl that tells the player how she dragged him from the outside.
 She tells him that there was a recent fire in the village and that she managed to save him. In this room there is an apple,
 a butter knife, and a journal. The door leads to outside.
 
-Village Center----------
-In the center of the village there is a small well. Next to the well is an old man with a long bear(d?) and a long staff. He
+Village Center------------------------------------------------------------------
+In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He
 appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the
 East is a fenced graveyard. To the West is a bank. To the North is a large house.
 
-Bank------
-The Bank seemed to be underconstruction due to some unusual damages. You can't go into the bank.
+Bank----------------------------------------------------------------------------------------
+The Bank seemed to be underconstruction due to some unusual damages. You can't go into the bank because the people constructing
+the bank will not let you in. Once you give them the gold you found in the Graveyard, then they will allow you to enter. In the bank
+there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire at all.
+You do something to activate the wall. 
 
-Fenced Graveyard----
+The wall opens to some stairs that lead West to the basement. In this basement, you see that the
+giant door of the safe room is open. You go in and explore. You somehow find a golden key.
+
+Fenced Graveyard---------------------------------------------------
 {(first time visiting) - vision}
 You just had a weird vision about the village being on fire. The villagers were trembling in fear, shouting and trying to get away
 from something. I wonder what.
@@ -28,5 +34,11 @@ The Graveyard is misty. Some tombs seems to be built fairly recent. In this plac
 of the St. Shawn's tomb.
 
 
+Stairs From St. Shawn's Tomb(Leading kinda Northward)-------------------------------------
+A dark and misty room. There are cobwebs everywhere and there is a cold but dusty air. In the room is an old wooden box. In this
+wooden box is a talisman with an ancient symbol carved on it. There should also be a bit of gold.
 
-
+Mansion House(North of the Village Center)---------------------------------------------
+Is suppose to be closed. However, once the key is acquired, then the House is accesible. The house looks really fancy. Would look better
+if not for the dust that had collected over the months. The living room seems to have a weird symbol. For the sake of finishing this stupid
+story, you somehow get lead to the backyard.
