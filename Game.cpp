@@ -12,6 +12,8 @@ int main()
 
 }
 
+
+
 /*
 Village Center------------------------------------------------------------------
 In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He
