@@ -1,0 +1,17 @@
+How to Use Git Shell
+-----------------------------
+1. Open up the Git Shell application and move to the directory you wish to work on.
+
+2. Once you are in that directory, for example like "Adventure-Game", do a
+	
+	git pull
+
+	command. This updates your local directory on any changes that may have been made by others.
+
+3. Once you are done making some changes and edits yourself, do
+
+	git add -A
+
+	git commit -m "Your Message Here On Any Changes"
+
+	git push
