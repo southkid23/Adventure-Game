@@ -20,25 +20,42 @@ Bank----------------------------------------------------------------------------
 The Bank seemed to be underconstruction due to some unusual damages. You can't go into the bank because the people constructing
 the bank will not let you in. Once you give them the gold you found in the Graveyard, then they will allow you to enter. In the bank
 there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire at all.
-You do something to activate the wall. 
+There appears to be a weird looking hole on the wall. 
 
-The wall opens to some stairs that lead West to the basement. In this basement, you see that the
-giant door of the safe room is open. You go in and explore. You somehow find a golden key.
+After using the brick: The wall opens to some stairs that lead West to the basement. 
+
+In this basement, you see that the giant door of the safe room is open. You go in and explore. You somehow find a golden key.
 
 Fenced Graveyard---------------------------------------------------
 {(first time visiting) - vision}
 You just had a weird vision about the village being on fire. The villagers were trembling in fear, shouting and trying to get away
 from something. I wonder what.
 
-The Graveyard is misty. Some tombs seems to be built fairly recent. In this place there's a shovel, flowers, and a note on one
-of the St. Shawn's tomb.
+The Graveyard is misty. Some tombs seems to be built fairly recent. In this place there's a shovel, A weird looking brick, flowers, and a note on St. Shawn's tomb.
 
+Note: Greats thing happens to those who shovel
+
+After Shovel: It appears to have a wooden door under those sand.
+
+(Open)
 
 Stairs From St. Shawn's Tomb(Leading kinda Northward)-------------------------------------
 A dark and misty room. There are cobwebs everywhere and there is a cold but dusty air. In the room is an old wooden box. In this
 wooden box is a talisman with an ancient symbol carved on it. There should also be a bit of gold.
 
 Mansion House(North of the Village Center)---------------------------------------------
-Is suppose to be closed. However, once the key is acquired, then the House is accesible. The house looks really fancy. Would look better
-if not for the dust that had collected over the months. The living room seems to have a weird symbol. For the sake of finishing this stupid
+The door to the house is locked. Having a key would be the only way in.
+
+After key is used: The House is accesible. The house looks really fancy.  Would look better
+if not for the dust that had collected over the months.There's a beautiful backyard at the back of the house. The living room seems to have a weird symbol.
+One of the windows seems to be unlocked. 
+
+Once unlocked the player jump out of the window and to be backyard. 
+(Vision)
+Something that reminds him that this was once his house. and then something something that makes him go back to the starting room to find the secret
+about himself.
+
+ For the sake of finishing this stupid
 story, you somehow get lead to the backyard.
+
+Room -> Center -> Graveyard -> Under the Tomb -> Bank -> Mansion
