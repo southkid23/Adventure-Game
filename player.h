@@ -1,16 +1,16 @@
-
+#include <iostream>
 class Player {
 
 private:
-		Location* l;
+		Room* r;
 		linkedList* invItems;
 
 public:
-		Player(Location* lo);
+		Player(Room* lo);
 		~Player(){}
 		linkedList* inventory(){return invItems;}
 		void inventory(linkedList* items){invItems=items;}
-		Location* currentL(){return l;}
-		void currentL(Location* nw){l=nw;}
+		Room* currentR(){return room;}
+		void currentR(Room* nw){r=nw;}
 		void doAction(string verb, string noun);
 };
