@@ -12,7 +12,26 @@ class Item{
 		virtual ~Item(){};
 
 		string getName(){return itemName;} void getName(string thing){itemName = thing;}
-		string getDescript(){return itemInfo;} void getDescript(string info){itemInfo = info;}
+		string getInfo(){return itemInfo;} void getInfo(string info){itemInfo = info;}
 		virtual bool itemCondition(){return 0;}
 };
 
+class inventItem:Item
+{
+	public:
+		inventItem(){};
+		inventItem(string thing, string info){getName(thing); getInfo(info);}
+		~inventItem(){};
+
+		bool take{};
+		bool drop{};
+		bool use{};
+};
+
+class envItem: public Item
+{
+	public:
+		envItem(){};
+		envItem(string thing, string info){getName(thing); getInfo(thing);}
+		~envItem(){};
+};
