@@ -1,3 +1,8 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
 class Room
 {
 private:
@@ -7,14 +12,14 @@ private:
 	NPC** listNPC;int nNPC;//list of live/unkillable NPC in room
 	bool hasBeen;
 public:
-	Room(string n,Room* listr[],int room,Item* listi[],int items,NPC* listn[],int NPC,string descr);//Room constructor. Should Create room
+	Room(string n,Room* listr[]/*,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr);//Room constructor. Should Create room
 	ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
 	ostream& roomNPC(ostream&);//List of non-playable characters in room
 	bool entered();//Check if room has been discovered
 	virtual void enter();//When player enters the room
 };
 
-Room::Room(string n,Room* listr[],int room,Item* listi[],int items,NPC* listn[],int NPC,string descr)
+Room::Room(string n,Room* listr[]/*,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr)
 {
 	hasBeen = false;
 	name = n;
@@ -60,5 +65,6 @@ void Room::enter()
 	}
 	else
 		cout << "You are back in " << name << "." << endl << roomNPC(cout) << roomitems(cout);
-	setCurrentposition(this);
 }
+
+ 
