@@ -1,4 +1,4 @@
-#include "locations.h"
+#include "definitions.cpp"
 #include <iostream>
 #include <string>
 #include <sstream>

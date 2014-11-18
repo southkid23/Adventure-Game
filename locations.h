@@ -19,7 +19,7 @@ public:
 	//bool entered();//Check if room has been discovered
 	//virtual void enter();//When player enters the room
 	string getDescription(){return description;}
-	Room** getDoors(){return doors;}
+	Room* getDoors(int i){return doors[i];}
 
 };
 
@@ -98,23 +98,23 @@ void Player::doAction(string verb, string noun)
 		if(noun == "NORTH")
 		{
 			cout << noun;
-			r = (r->getDoors())[0];
-			cout << "You moved North./n" << endl << currentR()->getDescription() << endl;
+			r = r->getDoors(0);
+			cout << "You moved North.\n" << endl << r->getDescription() << endl;
 		}
 		else if(noun == "SOUTH")
 		{
-			r = currentR()->getDoors()[2];
-			cout << "You moved South./n" << endl << currentR()->getDescription() << endl;
+			r = currentR()->getDoors(1);
+			cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
 		}
 		else if(noun == "EAST")
 		{
-			r = currentR()->getDoors()[1];
-			cout << "You moved East./n" << endl << currentR()->getDescription() << endl;
+			r = currentR()->getDoors(2);
+			cout << "You moved East.\n" << endl << currentR()->getDescription() << endl;
 		}
 		else
 		{
-			r = currentR()->getDoors()[3];
-			cout << "You moved West./n" << endl << currentR()->getDescription() << endl;
+			r = currentR()->getDoors(3);
+			cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
 		}
 	}
 	else
