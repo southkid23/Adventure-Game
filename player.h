@@ -35,7 +35,7 @@ void Player::doAction(string verb, string noun)
 		else if(noun == "SOUTH")
 		{
 			r = currentR()->getDoors()[2];
-			cout << "You moved South./n" << endl <<currentR()->getDescription() << endl;
+			cout << "You moved South./n" << endl << currentR()->getDescription() << endl;
 		}
 		else if(noun == "EAST")
 		{	
