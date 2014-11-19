@@ -126,10 +126,10 @@ bool List::isEmpty(){
 	return (head == NULL);
 }
 
-void List::append(Item* value){
+void List::add(Item* item){
     Node* walker=head;
     Node* n=new Node;
-    n->data=value;
+    n->data=item;
     if (head==NULL) {
         head=n;
         head->prev=NULL;
@@ -183,7 +183,7 @@ Item* List::findName(string value){
 
 
 std::string List::listAll(){
-	string all ="";
+	std::string all ="";
 	Node* walker = head;
     while (walker!=NULL) {
 		
@@ -205,37 +205,14 @@ std::string List::listAll(){
     return all;
 }
 
-void List::removeNth(int n){
-    int number=0;
-    Node* walker=head;
-    Node* trailer;
-    while (number<n-1) {
-        number++;
-        trailer=walker;
-        walker=walker->next;
+void List::removeItem(Item* item){    // needs work
+    Node* walker = head;
+    while(walker->data != item)
+    {
+    	walker = walker->next;
     }
-    if (this -> getSize()==1 && n==1) {
-        delete head;
-        head=NULL;
-    }
-    else if (n==1) {
-        Node* del=head;
-        head=head->next;
-        head->prev=NULL;
-        delete del;	//no-op to remove unused but set variable compile warning
-        del=NULL;
-    }
-    else{
-        if (walker->next==NULL) {
-            trailer->next=NULL;
-            delete walker;
-            walker=NULL;
-        }
-        else{
-           trailer->next=walker->next;
-           walker->next->prev=walker->prev;
-           delete walker;
-           walker=NULL;
-        }
-    }
+    Node* del = walker;
+    walker->next->prev = walker->prev;
+    walker->prev->next = walker->next;
+    delete del;
 }

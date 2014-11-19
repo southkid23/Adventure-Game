@@ -1,22 +1,25 @@
 #include "definitions.cpp"
-#include "list.h"
 #include <iostream>
 #include <string>
 #include <sstream>
 using namespace std;
 
+void toUpper(string& input)
+{
+	int j = 0; char c;
+	while ( input[j] )
+	{
+		c = input[j];
+		c = toupper(c);
+		input[j] = c;
+		j++;
+	}
+}
+
 int main()
 {
-
-
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
-	////////////////////////////////////////////////////////////////////////
-	/*Room* VillageCentLocs[] = new *Room{LargeHouse,Graveyard,Shack,Bank};
-	Room* ShackLocs[] = new *Room{VillageCent,NULL,NULL,NULL};
-	Room* BankLocs[] = new *Room{NULL,VillageCent,NULL,NULL};
-	Room* MansionLocs[] = new *Room{NULL,NULL,VillageCent,NULL};
-	Room* GraveLocs[] = new *Room{NULL,NULL,NULL,VillageCent};*/
-	/////////////////////////////////////////////////////////////////////
+
 	VillageCent = new Room("Village Center"/*,VillageCentLocs*/,"In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the East is a fenced graveyard. To the West is a bank. To the North is a large house.");
 	Shack = new Room("Shack"/*,ShackLocs*/,"You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.");
 	Bank = new Room("Bank",/*BankLocs,*/"The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
@@ -44,6 +47,7 @@ int main()
 		stringstream ss(line);
 		ss >> verb;
 		ss >> noun;
+		toUpper(verb); toUpper(noun);
 		cout << endl;
 		if (ss.rdbuf()->in_avail() != 0) // Check if there're any words left in buffer, if there are, then user input was more than 2 words.
 		{

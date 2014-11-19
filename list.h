@@ -30,7 +30,7 @@ void initialize(List<T>& l)
 template <class T>
 void destroy(List<T>& l)
 {
-    Node<T>* walker=l.head;
+    Node<T>* walker = l.head;
     while(walker!=NULL){
         l.head=walker;
         walker=walker->next;

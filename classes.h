@@ -3,7 +3,6 @@
 #include <string>
 using namespace std;
 
-
 class Room
 {
 private:
@@ -31,6 +30,42 @@ public:
 	Room* getWest(){return West;}
 };
 
+class Item{
+	protected:
+		string itemName;
+		string itemInfo;
+	public:
+		Item(){}
+		Item(string thing, string info){itemName = thing; itemInfo = info;}
+		virtual ~Item(){};
+
+		string getName(){return itemName;} void setName(string thing){itemName = thing;}
+		string getInfo(){return itemInfo;} void setInfo(string info){itemInfo = info;}
+		virtual bool itemCondition(){return 0;}
+};
+
+struct Node{
+	Item* data;
+	Node* next;
+	Node* prev;
+};
+
+class List{
+	private:
+		Node* head;
+	public:
+		List();
+		~List();
+		Node* getHead(){return head;};
+		bool isEmpty();
+		void add (Item* value);
+		void removeItem(Item* item);
+		string listAll();
+		int find (Item* value);
+		Item* findName(string value);
+		int getSize();
+};
+
 class Player {
 
 private:
@@ -48,38 +83,5 @@ public:
 		void listAllItems();
 };
 
-class Item{
-	protected:
-		string itemName;
-		string itemInfo;
-	public:
-		Item(){}
-		Item(string item, string info){itemName = setName(thing); itemInfo = setInfo(info);}
-		virtual ~Item(){};
 
-		string getName(){return itemName;} void setName(string thing){itemName = thing;}
-		string getInfo(){return itemInfo;} void setInfo(string info){itemInfo = info;}
-		virtual bool itemCondition(){return 0;}
-};
 
-struct Node{
-	Item* data;
-	Node* next;
-	Node* prev;
-};
-
-class List{
-private:
-	Node* head;
-public:
-	List();
-	~List();
-	Node* getHead(){return head;};
-	bool isEmpty();
-	void append (Item* value);
-	void removeNth(int n);
-	string listAll();
-	int find (Item* value);
-	Item* findByName(string value);
-	int getSize();
-	};
