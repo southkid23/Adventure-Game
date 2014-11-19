@@ -8,11 +8,11 @@ class Item{
 		string itemInfo;
 	public:
 		Item(){}
-		Item(string thing, string info){getName(thing);}
+		Item(string item, string info){itemName = setName(thing); itemInfo = setInfo(info);}
 		virtual ~Item(){};
 
-		string getName(){return itemName;} void getName(string thing){itemName = thing;}
-		string getInfo(){return itemInfo;} void getInfo(string info){itemInfo = info;}
+		string getName(){return itemName;} void setName(string thing){itemName = thing;}
+		string getInfo(){return itemInfo;} void setInfo(string info){itemInfo = info;}
 		virtual bool itemCondition(){return 0;}
 };
 

@@ -11,8 +11,8 @@ The player will wake up in a room. In the room is a little girl that tells the p
 She tells him that there was a recent fire in the village and that she managed to save him. In this room there is an apple,
 a butter knife, and a journal. The door leads to outside.
 
-You wake up in a shack. In front of you is a little girl that tells you how she dragged you from outside. She tells you that there was a recent
- fire in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.
+You wake up in a shack. In front of you is a little girl that tells you how she dragged you from outside. She tells you that there was a fire last night
+in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.
 
 Village Center------------------------------------------------------------------
 In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He

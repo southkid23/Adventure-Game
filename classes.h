@@ -35,7 +35,7 @@ class Player {
 
 private:
 		Room* r;
-		//List* invItems;
+		List* inventory;
 
 public:
 		Player(Room* lo){r=lo;}
@@ -45,4 +45,41 @@ public:
 		Room* currentR(){return r;}
 		void currentR(Room* nw){r=nw;}
 		void doAction(string verb, string noun);
+		void listAllItems();
 };
+
+class Item{
+	protected:
+		string itemName;
+		string itemInfo;
+	public:
+		Item(){}
+		Item(string item, string info){itemName = setName(thing); itemInfo = setInfo(info);}
+		virtual ~Item(){};
+
+		string getName(){return itemName;} void setName(string thing){itemName = thing;}
+		string getInfo(){return itemInfo;} void setInfo(string info){itemInfo = info;}
+		virtual bool itemCondition(){return 0;}
+};
+
+struct Node{
+	Item* data;
+	Node* next;
+	Node* prev;
+};
+
+class List{
+private:
+	Node* head;
+public:
+	List();
+	~List();
+	Node* getHead(){return head;};
+	bool isEmpty();
+	void append (Item* value);
+	void removeNth(int n);
+	string listAll();
+	int find (Item* value);
+	Item* findByName(string value);
+	int getSize();
+	};
