@@ -59,7 +59,7 @@ void Player::doAction(string verb, string noun)
 	{
 		if(noun == "NORTH")
 		{
-			if (getNorth() != NULL)
+			if (currentR()->getNorth() != NULL)
 			{
 				currentR(currentR()->getNorth());
 				cout << "You moved North.\n" << endl << currentR()->getDescription() << endl << endl;
@@ -69,7 +69,7 @@ void Player::doAction(string verb, string noun)
 		}
 		else if(noun == "SOUTH")
 		{
-			if (getSouth() != NULL)
+			if (currentR()->getSouth() != NULL)
 			{
 				currentR(currentR()->getSouth());
 				cout << "You moved South.\n" << endl; //<< currentR()->getDescription() << endl;
@@ -79,7 +79,7 @@ void Player::doAction(string verb, string noun)
 		}
 		else if(noun == "EAST")
 		{
-			if (getEast() != NULL)
+			if (currentR()->getEast() != NULL)
 			{
 				currentR(currentR()->getEast());
 				cout << "You moved East.\n" << endl << currentR()->getDescription() << endl << endl;
@@ -89,7 +89,7 @@ void Player::doAction(string verb, string noun)
 		}
 		else
 		{
-			if (getWest() != NULL)
+			if (currentR()->getWest() != NULL)
 			{
 				currentR(currentR()->getWest()); 
 				cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
