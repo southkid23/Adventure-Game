@@ -57,28 +57,32 @@ void Player::doAction(string verb, string noun)
 {
 	if(verb == "GO")
 	{
-		cout << verb << " ";
 		if(noun == "NORTH")
 		{
-			cout << noun;
-			r = r->getDoors()[0];
-			cout << "You moved North.\n" << endl;
+			cout << currentR()->getDoors()->getDescription() << endl;
+			currentR(currentR()->getDoors()[0]);
+			cout << currentR()->getDoors() << endl;
+			cout << "You moved North.\n" << endl; //<< currentR()->getDescription() << endl;
 		}
 		else if(noun == "SOUTH")
 		{
 			r = currentR()->getDoors()[2];
-			cout << "You moved South./n" << endl << currentR()->getDescription() << endl;
+			cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
 		}
 		else if(noun == "EAST")
 		{
 			r = currentR()->getDoors()[1];
-			cout << "You moved East./n" << endl << currentR()->getDescription() << endl;
+			cout << "You moved East.\n" << endl << currentR()->getDescription() << endl;
 		}
 		else
 		{
 			r = currentR()->getDoors()[3];
-			cout << "You moved West./n" << endl << currentR()->getDescription() << endl;
+			cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
 		}
+	}
+	else if (verb == "Help")
+	{
+		cout << "You don't get any help. Help yourself."  << endl;
 	}
 	else
 		cout << "Sorry but I don't understand." << endl;

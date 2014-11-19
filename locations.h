@@ -94,10 +94,8 @@ void Player::doAction(string verb, string noun)
 {
 	if(verb == "GO")
 	{
-		cout << verb << " ";
 		if(noun == "NORTH")
 		{
-			cout << noun;
 			r = r->getDoors(0);
 			cout << "You moved North.\n" << endl << r->getDescription() << endl;
 		}

@@ -20,6 +20,7 @@ public:
 	//virtual void enter();//When player enters the room
 	string getDescription(){return description;}
 	Room** getDoors(){return doors;}
+	string getName(){return name;}
 
 };
 
