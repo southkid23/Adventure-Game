@@ -107,6 +107,13 @@ void Player::doAction(string verb, string noun)
 		cout << "Sorry but I don't understand." << endl;
 }
 
+
+bool Item::worksOn(Item* t)
+{
+	return t == target;
+}
+
+
 List::List(){
 	head = NULL;
 }

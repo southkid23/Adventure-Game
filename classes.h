@@ -31,18 +31,24 @@ public:
 };
 
 class Item{
-	protected:
-		string itemName;
-		string itemInfo;
-	public:
-		Item(){}
-		Item(string thing, string info){itemName = thing; itemInfo = info;}
-		virtual ~Item(){};
+private:
+	string itemName;
+	string itemInfo;
+	Item* target;
+	bool isEnvItem;
 
-		string getName(){return itemName;} void setName(string thing){itemName = thing;}
-		string getInfo(){return itemInfo;} void setInfo(string info){itemInfo = info;}
-		virtual bool itemCondition(){return 0;}
+public:
+	Item(){}
+	Item(string thing, string info, Item* t, bool isE){itemName = thing; itemInfo = info; target = t; isEnvItem = isE;}
+	virtual ~Item(){};
+	string getName(){return itemName;} 
+	string getInfo(){return itemInfo;} 
+	void setName(string thing){itemName = thing;}
+	void setInfo(string info){itemInfo = info;}
+	virtual bool itemCondition(){return 0;}
+	bool worksOn(Item* t);
 };
+
 
 struct Node{
 	Item* data;
