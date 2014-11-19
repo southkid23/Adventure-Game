@@ -72,7 +72,7 @@ void Player::doAction(string verb, string noun)
 			if (currentR()->getSouth() != NULL)
 			{
 				currentR(currentR()->getSouth());
-				cout << "You moved South.\n" << endl; //<< currentR()->getDescription() << endl;
+				cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
 			}
 			else
 				cout << "You can't go there." << endl << endl;
@@ -99,7 +99,7 @@ void Player::doAction(string verb, string noun)
 		}
 	
 	}
-	else if (verb == "Help")
+	else if (verb == "HELP")
 	{
 		cout << "You don't get any help. Help yourself."  << endl;
 	}

@@ -1,4 +1,5 @@
 #include "definitions.cpp"
+#include "list.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -22,11 +23,15 @@ int main()
 	Graveyard = new Room("Graveyard",/*GraveLocs,*/"You just had a weird vision about the village being on fire.\n The villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
 	LargeHouse = new Room("Mansion",/*MansionLocs,*/"I have no description yet");
 
+	// Setting the room connections
 	Shack->setNorth(VillageCent); Shack->setSouth(NULL); Shack->setEast(NULL); Shack->setWest(NULL);
 	VillageCent->setNorth(LargeHouse); VillageCent->setSouth(Shack); VillageCent->setEast(Graveyard); VillageCent->setWest(Bank);
+	Graveyard->setNorth(NULL); Graveyard->setSouth(NULL); Graveyard->setEast(VillageCent); Graveyard->setWest(NULL);
+	Bank->setNorth(NULL); Bank->setSouth(NULL); Bank->setEast(VillageCent); Bank->setWest(NULL);
+	LargeHouse->setNorth(NULL); LargeHouse->setSouth(VillageCent); LargeHouse->setEast(NULL); LargeHouse->setWest(NULL);
 	
+	// placing the player in the Shack
 	Player* player = new Player(Shack);
-	//Player* player = new Player(VillageCent);
 
 	cout << "Welcome to the ISA Aventure Game." << endl << endl;
 
