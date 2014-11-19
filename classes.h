@@ -36,6 +36,7 @@ private:
 	string itemInfo;
 	Item* target;
 	bool isEnvItem;
+	string book;
 
 public:
 	Item(){}
@@ -47,6 +48,8 @@ public:
 	void setInfo(string info){itemInfo = info;}
 	virtual bool itemCondition(){return 0;}
 	bool worksOn(Item* t);
+	string read(){return book;}
+	Item* getTarget(){return target;}
 };
 
 
@@ -84,6 +87,7 @@ public:
 		//List* inventory(){return invItems;}
 		//void inventory(List* items){invItems=items;}
 		Room* currentR(){return r;}
+		List* getInventory(){return inventory;}
 		void currentR(Room* nw){r=nw;}
 		void doAction(string verb, string noun);
 		void listAllItems();

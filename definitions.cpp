@@ -99,6 +99,29 @@ void Player::doAction(string verb, string noun)
 		}
 	
 	}
+	else if(verb == "EXAMINE")
+	{
+		Item* it = getInventory()->findName(noun);
+		cout << it->getDescription() << endl << endl;
+	}
+	else if(verb == "READ")
+	{
+		item* it = getInventory()->findName(noun);
+		cout << it->read();
+	}
+	else if(verb == "USE")
+	{
+		if(getInventory()->findName(noun)->getTarget() != NULL)
+		{
+			cout << endl << endl << "On?" << endl << endl;
+			string target; cin >> target;
+			if(getInventory()->findName(noun)->getTarget() == target)
+			{
+				
+			}
+
+		}
+	}
 	else if (verb == "HELP")
 	{
 		cout << "You don't get any help. Help yourself."  << endl;
