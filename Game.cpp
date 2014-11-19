@@ -10,19 +10,23 @@ int main()
 
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
 	////////////////////////////////////////////////////////////////////////
-	Room* VillageCentLocs[4] = {LargeHouse,Graveyard,Shack,Bank};
-	Room* ShackLocs[4] = {VillageCent,NULL,NULL,NULL};
-	Room* BankLocs[4] = {NULL,VillageCent,NULL,NULL};
-	Room* MansionLocs[4] = {NULL,NULL,VillageCent,NULL};
-	Room* GraveLocs[4] = {NULL,NULL,NULL,VillageCent};
+	/*Room* VillageCentLocs[] = new *Room{LargeHouse,Graveyard,Shack,Bank};
+	Room* ShackLocs[] = new *Room{VillageCent,NULL,NULL,NULL};
+	Room* BankLocs[] = new *Room{NULL,VillageCent,NULL,NULL};
+	Room* MansionLocs[] = new *Room{NULL,NULL,VillageCent,NULL};
+	Room* GraveLocs[] = new *Room{NULL,NULL,NULL,VillageCent};*/
 	/////////////////////////////////////////////////////////////////////
-	VillageCent = new Room("Village Center",VillageCentLocs,"In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the East is a fenced graveyard. To the West is a bank. To the North is a large house.");
-	Shack = new Room("Shack",ShackLocs,"You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.");
-	Bank = new Room("Bank",BankLocs,"The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
-	Graveyard = new Room("Graveyard",GraveLocs,"You just had a weird vision about the village being on fire.\n The villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
-	LargeHouse = new Room("Mansion",MansionLocs,"I have no description yet");
+	VillageCent = new Room("Village Center"/*,VillageCentLocs*/,"In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the East is a fenced graveyard. To the West is a bank. To the North is a large house.");
+	Shack = new Room("Shack"/*,ShackLocs*/,"You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.");
+	Bank = new Room("Bank",/*BankLocs,*/"The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
+	Graveyard = new Room("Graveyard",/*GraveLocs,*/"You just had a weird vision about the village being on fire.\n The villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
+	LargeHouse = new Room("Mansion",/*MansionLocs,*/"I have no description yet");
 
+	Shack->setNorth(VillageCent); Shack->setSouth(NULL); Shack->setEast(NULL); Shack->setWest(NULL);
+	VillageCent->setNorth(LargeHouse); VillageCent->setSouth(Shack); VillageCent->setEast(Graveyard); VillageCent->setWest(Bank);
+	
 	Player* player = new Player(Shack);
+	//Player* player = new Player(VillageCent);
 
 	cout << "Welcome to the ISA Aventure Game." << endl << endl;
 

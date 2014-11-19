@@ -3,11 +3,11 @@
 #include <string>
 using namespace std;
 
-Room::Room(string n,Room** listr/*,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr)
+Room::Room(string n/*,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr)
 {
 	//hasBeen = false;
 	name = n;
-	doors = listr;
+	
 	/*nDoors = room;
 	listItems = listi;
 	nItems = items;
@@ -59,26 +59,45 @@ void Player::doAction(string verb, string noun)
 	{
 		if(noun == "NORTH")
 		{
-			cout << currentR()->getDoors()->getDescription() << endl;
-			currentR(currentR()->getDoors()[0]);
-			cout << currentR()->getDoors() << endl;
-			cout << "You moved North.\n" << endl; //<< currentR()->getDescription() << endl;
+			if (getNorth() != NULL)
+			{
+				currentR(currentR()->getNorth());
+				cout << "You moved North.\n" << endl << currentR()->getDescription() << endl << endl;
+			}
+			else
+				cout << "You can't go there." << endl << endl;
 		}
 		else if(noun == "SOUTH")
 		{
-			r = currentR()->getDoors()[2];
-			cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
+			if (getSouth() != NULL)
+			{
+				currentR(currentR()->getSouth());
+				cout << "You moved South.\n" << endl; //<< currentR()->getDescription() << endl;
+			}
+			else
+				cout << "You can't go there." << endl << endl;
 		}
 		else if(noun == "EAST")
 		{
-			r = currentR()->getDoors()[1];
-			cout << "You moved East.\n" << endl << currentR()->getDescription() << endl;
+			if (getEast() != NULL)
+			{
+				currentR(currentR()->getEast());
+				cout << "You moved East.\n" << endl << currentR()->getDescription() << endl << endl;
+			}
+			else
+				cout << "You can't go there." << endl << endl;
 		}
 		else
 		{
-			r = currentR()->getDoors()[3];
-			cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
+			if (getWest() != NULL)
+			{
+				currentR(currentR()->getWest()); 
+				cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
+			}
+			else
+				cout << "You can't go there." << endl << endl;
 		}
+	
 	}
 	else if (verb == "Help")
 	{
