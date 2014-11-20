@@ -3,11 +3,11 @@
 #include <string>
 using namespace std;
 
-Room::Room(string n/*,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr)
+Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr)
 {
 	//hasBeen = false;
 	name = n;
-	
+	rItems = rIt;
 	/*nDoors = room;
 	listItems = listi;
 	nItems = items;
@@ -102,11 +102,11 @@ void Player::doAction(string verb, string noun)
 	else if(verb == "EXAMINE")
 	{
 		Item* it = getInventory()->findName(noun);
-		cout << it->getDescription() << endl << endl;
+		cout << it->getInfo() << endl << endl;
 	}
 	else if(verb == "READ")
 	{
-		item* it = getInventory()->findName(noun);
+		Item* it = getInventory()->findName(noun);
 		cout << it->read();
 	}
 	else if(verb == "USE")
@@ -115,9 +115,9 @@ void Player::doAction(string verb, string noun)
 		{
 			cout << endl << endl << "On?" << endl << endl;
 			string target; cin >> target;
-			if(getInventory()->findName(noun)->getTarget() == target)
+			if(getInventory()->findName(noun)->getTarget() == currentR()->getrItems()->findName(target))
 			{
-				
+				cout << currentR()->getrItems()->findName(target)->getOccur() << endl << endl;
 			}
 
 		}

@@ -3,32 +3,6 @@
 #include <string>
 using namespace std;
 
-class Room
-{
-private:
-	Room* North; Room* South; Room* West; Room* East;//int nDoors;//rooms adjoining with current
-	string name,inHouse,description;//description & name of building
-	//Item** listItems;int nItems;//list of uncollected/unusable items
-	//NPC** listNPC;int nNPC;//list of live/unkillable NPC in room
-	//bool hasBeen;
-public:
-	Room(string n/*,Room** listr,int room,Item* listi[],int items,NPC* listn[],int NPC*/,string descr);//Room constructor. Should Create room
-	//ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
-	//ostream& roomNPC(ostream&);//List of non-playable characters in room
-	//bool entered();//Check if room has been discovered
-	//virtual void enter();//When player enters the room
-	string getDescription(){return description;}
-	//Room** getDoors(){return doors;}
-	string getName(){return name;}
-	void setNorth(Room* room){North=room;}
-	void setSouth(Room* room){South=room;}
-	void setEast(Room* room){East=room;}
-	void setWest(Room* room){West=room;}
-	Room* getNorth(){return North;}
-	Room* getSouth(){return South;}
-	Room* getEast(){return East;}
-	Room* getWest(){return West;}
-};
 
 class Item{
 private:
@@ -37,10 +11,11 @@ private:
 	Item* target;
 	bool isEnvItem;
 	string book;
+	string occur;
 
 public:
 	Item(){}
-	Item(string thing, string info, Item* t, bool isE){itemName = thing; itemInfo = info; target = t; isEnvItem = isE;}
+	Item(string thing, string info, Item* t, bool isE, string occ){itemName = thing; itemInfo = info; target = t; isEnvItem = isE; occur = occ;}
 	virtual ~Item(){};
 	string getName(){return itemName;} 
 	string getInfo(){return itemInfo;} 
@@ -50,6 +25,7 @@ public:
 	bool worksOn(Item* t);
 	string read(){return book;}
 	Item* getTarget(){return target;}
+	string getOccur(){return occur;}
 };
 
 
@@ -73,6 +49,34 @@ class List{
 		int find (Item* value);
 		Item* findName(string value);
 		int getSize();
+};
+
+class Room
+{
+private:
+	Room* North; Room* South; Room* West; Room* East;//int nDoors;//rooms adjoining with current
+	string name,inHouse,description;//description & name of building
+	List* rItems;//list of uncollected/unusable items
+	//NPC** listNPC;int nNPC;//list of live/unkillable NPC in room
+	//bool hasBeen;
+public:
+	Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr);//Room constructor. Should Create room
+	//ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
+	//ostream& roomNPC(ostream&);//List of non-playable characters in room
+	//bool entered();//Check if room has been discovered
+	//virtual void enter();//When player enters the room
+	string getDescription(){return description;}
+	//Room** getDoors(){return doors;}
+	string getName(){return name;}
+	void setNorth(Room* room){North=room;}
+	void setSouth(Room* room){South=room;}
+	void setEast(Room* room){East=room;}
+	void setWest(Room* room){West=room;}
+	Room* getNorth(){return North;}
+	Room* getSouth(){return South;}
+	Room* getEast(){return East;}
+	Room* getWest(){return West;}
+	List* getrItems(){return rItems;}
 };
 
 class Player {
