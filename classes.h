@@ -15,10 +15,11 @@ private:
 
 public:
 	Item(){}
-	Item(string thing, string info, Item* t, bool isE, string occ){itemName = thing; itemInfo = info; target = t; isEnvItem = isE; occur = occ;}//Item Constructor
+	Item(string thing, string info, bool isE){itemName = thing; itemInfo = info; isEnvItem = isE;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
+	void setOccur(string occ){occur = occ;}
 	string getName()const{return itemName;}//Gets name of item
 	string getInfo()const{return itemInfo;}//Gets item description
 	string read()const{return book;}//outputs when item is to be read

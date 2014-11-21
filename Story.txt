@@ -7,9 +7,9 @@ who roams around the village.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 FIRST ROOM---------------------------------------------------------------------
-The player will wake up in a room. In the room is a little girl that tells the player how she dragged him from the outside.
-She tells him that there was a recent fire in the village and that she managed to save him. In this room there is an apple,
-a butter knife, and a journal. The door leads to outside.
+The player will wake up in a room. In the room is a little girl that tells the player how she dragged him from the outside. She tells him that there was a recent fire in the village and that she managed to save him. The door seems to be locked from the outside.
+
+In this room there is an crowbar, a butter knife, and a journal.
 
 You wake up in a shack. In front of you is a little girl that tells you how she dragged you from outside. She tells you that there was a fire last night
 in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.
@@ -42,23 +42,25 @@ After Shovel: It appears to have a wooden door under those sand.
 
 (Open)
 
-Stairs From St. Shawn's Tomb(Leading kinda Northward)-------------------------------------
+Stairs From St. Shawn's Tomb(Leading kinda Northward)---------------------------------------------------------------------------------------------------------------
 A dark and misty room. There are cobwebs everywhere and there is a cold but dusty air. In the room is an old wooden box. In this
 wooden box is a talisman with an ancient symbol carved on it. There should also be a bit of gold.
 
-Mansion House(North of the Village Center)---------------------------------------------
+Mansion House(North of the Village Center)--------------------------------------------------------------------------------------------------------------------------
 The door to the house is locked. Having a key would be the only way in.
 
 After key is used: The House is accesible. The house looks really fancy.  Would look better
 if not for the dust that had collected over the months.There's a beautiful backyard at the back of the house. The living room seems to have a weird symbol.
 One of the windows seems to be unlocked. 
 
-Once unlocked the player jump out of the window and to be backyard. 
+Once unlocked the player jump out of the window and to be backyard.
+
+Backyard------------------------------------------------------------------------------------------------------------------------------------------------------------
+The backyard was a green and flourishing work of nature. Plants of all color and variation were planted all over the area. There is a huge oak tree stump in the middle of the garden. Near the stump you see a dark patch of freshly moved dirt.
+
 (Vision)
-Something that reminds him that this was once his house. and then something something that makes him go back to the starting room to find the secret
+Something that reminds him that this was once his house. and then something that makes him go back to the starting room to find the secret
 about himself.
 
- For the sake of finishing this stupid
-story, you somehow get lead to the backyard.
 
 Room -> Center -> Graveyard -> Under the Tomb -> Bank -> Mansion
