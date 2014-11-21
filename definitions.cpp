@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr)
+Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr)//constructor
 {
 	//hasBeen = false;
 	name = n;
@@ -57,15 +57,15 @@ void Player::doAction(string verb, string noun)
 {
 	if(verb == "GO")
 	{
-		if(noun == "NORTH")
+		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
-			if (currentR()->getNorth() != NULL)
+			if (currentR()->getNorth() != NULL)//Check if NULL
 			{
-				currentR(currentR()->getNorth());
+				currentR(currentR()->getNorth());//Sets current player location to north location
 				cout << "You moved North.\n" << endl << currentR()->getDescription() << endl << endl;
 			}
-			else
-				cout << "You can't go there." << endl << endl;
+			else//If no location!
+				cout << "There's nothing there." << endl << endl;
 		}
 		else if(noun == "SOUTH")
 		{
@@ -75,7 +75,7 @@ void Player::doAction(string verb, string noun)
 				cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
 			}
 			else
-				cout << "You can't go there." << endl << endl;
+				cout << "There's nothing there." << endl << endl;
 		}
 		else if(noun == "EAST")
 		{
@@ -85,7 +85,7 @@ void Player::doAction(string verb, string noun)
 				cout << "You moved East.\n" << endl << currentR()->getDescription() << endl << endl;
 			}
 			else
-				cout << "You can't go there." << endl << endl;
+				cout << "There's nothing there." << endl << endl;
 		}
 		else
 		{
@@ -95,21 +95,21 @@ void Player::doAction(string verb, string noun)
 				cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
 			}
 			else
-				cout << "You can't go there." << endl << endl;
+				cout << "There's nothing there." << endl << endl;
 		}
 	
 	}
-	else if(verb == "EXAMINE")
+	else if(verb == "EXAMINE")//Examine returns an item description
 	{
 		Item* it = getInventory()->findName(noun);
 		cout << it->getInfo() << endl << endl;
 	}
-	else if(verb == "READ")
+	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
 		Item* it = getInventory()->findName(noun);
 		cout << it->read();
 	}
-	else if(verb == "USE")
+	else if(verb == "USE")//Used to carry out actions on targets
 	{
 		if(getInventory()->findName(noun)->getTarget() != NULL)
 		{
@@ -122,7 +122,7 @@ void Player::doAction(string verb, string noun)
 
 		}
 	}
-	else if (verb == "HELP")
+	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "You don't get any help. Help yourself."  << endl;
 	}
@@ -131,17 +131,13 @@ void Player::doAction(string verb, string noun)
 }
 
 
-bool Item::worksOn(Item* t)
+List::List()//Constructor
 {
-	return t == target;
-}
-
-
-List::List(){
 	head = NULL;
 }
 
-List::~List(){
+List::~List()//Deconstructor
+{
 	Node* walker = head;
     while(walker!=NULL){
         head=walker;
@@ -152,11 +148,13 @@ List::~List(){
     head=NULL;
 }
 
-bool List::isEmpty(){
+bool List::isEmpty()//Checks if List is empty
+{
 	return (head == NULL);
 }
 
-void List::add(Item* item){
+void List::add(Item* item)//Adds item to List
+{
     Node* walker=head;
     Node* n=new Node;
     n->data=item;
@@ -175,7 +173,8 @@ void List::add(Item* item){
     }
 }
 
-int List::find(Item* value){
+int List::find(Item* value)
+{
 	int count=0;
     Node* walker=head;
     if (head==NULL) {
@@ -194,7 +193,8 @@ int List::find(Item* value){
     return count;
 }
 
-Item* List::findName(string value){
+Item* List::findName(string value)
+{
     Node* walker=head;
     if (head==NULL) {
         return NULL;
@@ -212,7 +212,8 @@ Item* List::findName(string value){
 }
 
 
-std::string List::listAll(){
+std::string List::listAll()//Lists all item in list
+{
 	std::string all ="";
 	Node* walker = head;
     while (walker!=NULL) {
