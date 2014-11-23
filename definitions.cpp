@@ -3,6 +3,18 @@
 #include <string>
 using namespace std;
 
+void toUpper(string& input)
+{
+	int j = 0; char c;
+	while ( input[j] )
+	{
+		c = input[j];
+		c = toupper(c);
+		input[j] = c;
+		j++;
+	}
+}
+
 Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr)//constructor
 {
 	//hasBeen = false;
@@ -55,11 +67,16 @@ void Room::enter()
 
 void Player::doAction(string verb, string noun)
 {
-	if(verb == "GO")
+	//cout << "verb is " << verb << endl << "Noun is " << noun << endl;
+	if(verb == "GO" || verb == "MOVE")
 	{
+
 		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
-			if (currentR()->getNorth() != NULL)//Check if NULL
+			
+			if(currentR()->getObstacle()->prevent() == "NORTH")
+				cout << currentR()->getObstacle()->getpInfo() << endl << endl;
+			else if (currentR()->getNorth() != NULL)//Check if NULL
 			{
 				currentR(currentR()->getNorth());//Sets current player location to north location
 				cout << "You moved North.\n" << endl << currentR()->getDescription() << endl << endl;
@@ -111,15 +128,41 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "USE")//Used to carry out actions on targets
 	{
-		if(getInventory()->findName(noun)->getTarget() != NULL)
-		{
-			cout << endl << endl << "On?" << endl << endl;
-			string target; cin >> target;
-			if(getInventory()->findName(noun)->getTarget() == currentR()->getrItems()->findName(target))
+		if(getInventory()->findName(noun) != NULL)
+		{	
+			if(getInventory()->findName(noun)->getTarget() != NULL)
 			{
-				cout << currentR()->getrItems()->findName(target)->getOccur() << endl << endl;
-			}
+				cout << "On? ";
+				string target = ""; cin >> target; cout << endl; 
+				toUpper(target);
+				if(getInventory()->findName(noun)->getTarget()->getName() == target)
+				{
+					cout << currentR()->getObstacle()->getOccur() << endl;
+					currentR()->getObstacle()->prevent("nothing");
+				}
+				else
+				{
+					cout << "Cannot use " << noun << " on " << target << ".\n\n";
+				}
 
+			}
+			else
+				cout << noun << " cannot be used." << ".\n\n";
+		}
+		else
+			cout << "You do not have a " << noun << " to use.\n\n";
+	}
+	else if(verb == "TAKE" || verb == "GET") // takes an item
+	{
+		if(currentR()->getrItems()->findName(noun) == NULL /*|| currentR()->getrItems()->findName(noun)->isTak()*/)
+		{
+			cout << "There is no such item in the room or cannot be taken." << endl << endl;
+		}
+		else
+		{	
+			getInventory()->add(currentR()->getrItems()->findName(noun));
+			currentR()->getrItems()->removeItem(currentR()->getrItems()->findName(noun));
+			cout << noun << " is now in your Inventory." << endl << endl;
 		}
 	}
 	else if (verb == "HELP")//Gives extremely useful advice
@@ -160,7 +203,6 @@ void List::add(Item* item)//Adds item to List
     n->data=item;
     if (head==NULL) {
         head=n;
-        head->prev=NULL;
         head->next=NULL;
     }
     else{
@@ -168,7 +210,6 @@ void List::add(Item* item)//Adds item to List
             walker=walker->next;
         }
         walker->next=n;
-        n->prev=walker;
         n->next=NULL;
     }
 }
@@ -212,7 +253,7 @@ Item* List::findName(string value)
 }
 
 
-std::string List::listAll()//Lists all item in list
+/*std::string List::listAll()//Lists all item in list
 {
 	std::string all ="";
 	Node* walker = head;
@@ -234,16 +275,28 @@ std::string List::listAll()//Lists all item in list
 		walker=walker->next;
 	}
     return all;
-}
+}*/
 
-void List::removeItem(Item* item){    // needs work
+void List::removeItem(Item* item){    // maybe works?
     Node* walker = head;
-    while(walker->data != item)
+    Node* walker2 = head;
+    if(walker->data == item)
     {
-    	walker = walker->next;
+    	Node* del = walker;
+    	head = walker->next;
+    	delete del;
     }
-    Node* del = walker;
-    walker->next->prev = walker->prev;
-    walker->prev->next = walker->next;
-    delete del;
+    else
+    {
+	    walker = walker->next;
+	    while(walker->data != item)
+	    {
+	    	walker2 = walker;
+	    	walker = walker->next;
+	    	
+	    }
+	    Node* del = walker;
+	    walker2->next = walker->next;
+	    delete del;
+	}
 }

@@ -4,35 +4,52 @@
 using namespace std;
 
 
+class Obstacle{
+private:
+	string name;
+	string occur;//When Item has been unlocked
+	string prevents;
+	string pInfo;
+
+public:
+	Obstacle(string n){name=n;}
+	~Obstacle(){}
+	void setName(string n){name=n;}
+	void prevent(string s){prevents = s;}
+	void setpInfo(string s){pInfo=s;}
+	void setOccur(string occ){occur = occ;}
+	string getName()const{return name;}
+	string prevent()const{return prevents;}
+	string getpInfo()const{return pInfo;}
+	string getOccur()const{return occur;}//outputs when item has been unlocked
+};
+
 class Item{
 private:
 	string itemName;//Item name
 	string itemInfo;//Item Description
-	Item* target;//what Item can be used on
-	bool isEnvItem;//If an enviromental item
+	Obstacle* target;//what Item can be used on
+	bool isTakeable;//If an item is pickable
 	string book;//When item is read(if book)
-	string occur;//When Item has been unlocked
 
 public:
 	Item(){}
-	Item(string thing, string info, bool isE){itemName = thing; itemInfo = info; isEnvItem = isE;}//Item Constructor
+	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
-	void setOccur(string occ){occur = occ;}
+	void setTarget(Obstacle* o){target = o;}
 	string getName()const{return itemName;}//Gets name of item
 	string getInfo()const{return itemInfo;}//Gets item description
 	string read()const{return book;}//outputs when item is to be read
-	string getOccur()const{return occur;}//outputs when item has been unlocked
-	Item* getTarget()const{return target;}//Gets what item current can be used on
-	virtual bool itemCondition()const{return 0;}//
-	bool worksOn(Item* t)const{return t == target;}//check if item is used on another item
+	Obstacle* getTarget()const{return target;}//Gets what item current can be used on
+	virtual bool isTak()const{return isTakeable;}// returns if takeable or not
+	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
 
 struct Node{
 	Item* data;
 	Node* next;
-	Node* prev;
 };
 
 class List{
@@ -43,9 +60,9 @@ class List{
 		~List();
 		Node* getHead(){return head;};
 		bool isEmpty();
-		void add (Item* value);
+		void add (Item* item);
 		void removeItem(Item* item);
-		string listAll();
+		//string listAll();
 		int find (Item* value);
 		Item* findName(string value);
 		int getSize();
@@ -58,6 +75,7 @@ private:
 	Room* North; Room* South; Room* West; Room* East;//rooms adjoining with current
 	string name,inHouse,description;//description & name of building
 	List* rItems;//list of uncollected/unusable items
+	Obstacle* obst;
 	//NPC** listNPC;int nNPC;//list of live/unkillable NPC in room
 	//bool hasBeen;
 public:
@@ -74,10 +92,12 @@ public:
 	Room* getSouth()const{return South;}//Get South Location
 	Room* getEast()const{return East;}//Get East location
 	Room* getWest()const{return West;}//Get west location
+	Obstacle* getObstacle()const{return obst;}
 	void setNorth(Room* room){North=room;}//Set North Location
 	void setSouth(Room* room){South=room;}//Set South location
 	void setEast(Room* room){East=room;}//Set East Location
 	void setWest(Room* room){West=room;}//Set West Location
+	void setObstacle(Obstacle* obs){obst=obs;}
 };
 
 class Player {
@@ -87,7 +107,7 @@ private:
 		List* inventory;//List of items in inventory
 
 public:
-		Player(Room* lo){r=lo;}//Constructor with starting room
+		Player(Room* lo){r=lo; inventory = new List();}//Constructor with starting room
 		~Player(){}
 		//List* inventory(){return invItems;}
 		//void inventory(List* items){invItems=items;}
