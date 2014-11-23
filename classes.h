@@ -75,11 +75,12 @@ private:
 	Room* North; Room* South; Room* West; Room* East;//rooms adjoining with current
 	string name,inHouse,description;//description & name of building
 	List* rItems;//list of uncollected/unusable items
-	Obstacle* obst;
-	//NPC** listNPC;int nNPC;//list of live/unkillable NPC in room
+	Obstacle** obst;
+	//NPC* npc;//list of live/unkillable NPC in room
 	//bool hasBeen;
 public:
-	Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/,string descr);//Room constructor. Should Create room
+	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
+	~Room(){delete [] obst;}
 	//ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
 	//ostream& roomNPC(ostream&);//List of non-playable characters in room
 	//bool entered();//Check if room has been discovered
@@ -92,23 +93,31 @@ public:
 	Room* getSouth()const{return South;}//Get South Location
 	Room* getEast()const{return East;}//Get East location
 	Room* getWest()const{return West;}//Get west location
-	Obstacle* getObstacle()const{return obst;}
+	Obstacle* getObstacleN()const{return obst[0];}
+	Obstacle* getObstacleE()const{return obst[1];}
+	Obstacle* getObstacleS()const{return obst[2];}
+	Obstacle* getObstacleW()const{return obst[3];}
+	//NPC* getNPC()const{return npc;}
 	void setNorth(Room* room){North=room;}//Set North Location
 	void setSouth(Room* room){South=room;}//Set South location
 	void setEast(Room* room){East=room;}//Set East Location
 	void setWest(Room* room){West=room;}//Set West Location
-	void setObstacle(Obstacle* obs){obst=obs;}
+	void setObstacleN(Obstacle* obs){obst[0]=obs;}
+	void setObstacleE(Obstacle* obs){obst[1]=obs;}
+	void setObstacleS(Obstacle* obs){obst[2]=obs;}
+	void setObstacleW(Obstacle* obs){obst[3]=obs;}
+	//void setNPC(NPC* n){npc=n;}
 };
 
 class Player {
 
-private:
+protected:
 		Room* r;//Current room
 		List* inventory;//List of items in inventory
 
 public:
 		Player(Room* lo){r=lo; inventory = new List();}//Constructor with starting room
-		~Player(){}
+		virtual ~Player(){delete inventory;}
 		//List* inventory(){return invItems;}
 		//void inventory(List* items){invItems=items;}
 		Room* currentR()const{return r;}//Get current room
@@ -118,4 +127,18 @@ public:
 		void listAllItems();//Lists all items
 };
 
+/*class NPC:public Player {
 
+private:
+	string name;
+	string firstT;
+	string afterT;
+	bool talked;
+
+public:
+	NPC(string n, string ft, string at):Player(r){name=n; firstT=ft;afterT; talked=false;}
+	~NPC(){delete inventory;}
+	string talk();
+	string getName()const{return name;}
+};
+*/

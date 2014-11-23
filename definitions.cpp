@@ -26,6 +26,7 @@ Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/
 	listNPC = listn;
 	nNPC = NPC;*/
 	description = descr;
+	obst = new Obstacle*[4];
 }
 
 /*ostream& Room::roomitems(ostream& out)
@@ -74,8 +75,8 @@ void Player::doAction(string verb, string noun)
 		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
 			
-			if(currentR()->getObstacle()->prevent() == "NORTH")
-				cout << currentR()->getObstacle()->getpInfo() << endl << endl;
+			if(currentR()->getObstacleN()->prevent() == "NORTH")
+				cout << currentR()->getObstacleN()->getpInfo() << endl << endl;
 			else if (currentR()->getNorth() != NULL)//Check if NULL
 			{
 				currentR(currentR()->getNorth());//Sets current player location to north location
@@ -86,7 +87,9 @@ void Player::doAction(string verb, string noun)
 		}
 		else if(noun == "SOUTH")
 		{
-			if (currentR()->getSouth() != NULL)
+			if(currentR()->getObstacleS()->prevent() == "SOUTH")
+				cout << currentR()->getObstacleS()->getpInfo() << endl << endl;
+			else if (currentR()->getSouth() != NULL)
 			{
 				currentR(currentR()->getSouth());
 				cout << "You moved South.\n" << endl << currentR()->getDescription() << endl;
@@ -96,7 +99,9 @@ void Player::doAction(string verb, string noun)
 		}
 		else if(noun == "EAST")
 		{
-			if (currentR()->getEast() != NULL)
+			if(currentR()->getObstacleE()->prevent() == "EAST")
+				cout << currentR()->getObstacleE()->getpInfo() << endl << endl;
+			else if (currentR()->getEast() != NULL)
 			{
 				currentR(currentR()->getEast());
 				cout << "You moved East.\n" << endl << currentR()->getDescription() << endl << endl;
@@ -106,7 +111,9 @@ void Player::doAction(string verb, string noun)
 		}
 		else
 		{
-			if (currentR()->getWest() != NULL)
+			if(currentR()->getObstacleW()->prevent() == "WEST")
+				cout << currentR()->getObstacleW()->getpInfo() << endl << endl;
+			else if (currentR()->getWest() != NULL)
 			{
 				currentR(currentR()->getWest()); 
 				cout << "You moved West.\n" << endl << currentR()->getDescription() << endl;
@@ -135,10 +142,25 @@ void Player::doAction(string verb, string noun)
 				cout << "On? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(getInventory()->findName(noun)->getTarget()->getName() == target)
+				if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleN()->getName())
 				{
-					cout << currentR()->getObstacle()->getOccur() << endl;
-					currentR()->getObstacle()->prevent("nothing");
+					cout << currentR()->getObstacleN()->getOccur() << endl;
+					currentR()->getObstacleN()->prevent("nothing");
+				}
+				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleE()->getName())
+				{
+					cout << currentR()->getObstacleE()->getOccur() << endl;
+					currentR()->getObstacleE()->prevent("nothing");
+				}
+				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleS()->getName())
+				{
+					cout << currentR()->getObstacleS()->getOccur() << endl;
+					currentR()->getObstacleS()->prevent("nothing");
+				}
+				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleW()->getName())
+				{
+					cout << currentR()->getObstacleW()->getOccur() << endl;
+					currentR()->getObstacleW()->prevent("nothing");
 				}
 				else
 				{
@@ -165,6 +187,24 @@ void Player::doAction(string verb, string noun)
 			cout << noun << " is now in your Inventory." << endl << endl;
 		}
 	}
+	/*else if(verb == "TALK")
+	{
+		if(currentR()->getNPC() != NULL)
+		{
+			if(currentR()->getNPC()->getName() == noun)
+			{
+				cout << currentR()->getNPC()->talk() << endl << endl;
+			}
+			else
+			{
+				cout << "There is no one by the name of " << noun << " in here.\n\n";
+			}
+		}
+		else
+		{
+			cout << "There is no one to speak to.\n\n";
+		}
+	}*/
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "You don't get any help. Help yourself."  << endl;
@@ -300,3 +340,11 @@ void List::removeItem(Item* item){    // maybe works?
 	    delete del;
 	}
 }
+
+/*string NPC::talk()
+{
+	if(talked == false)
+		return firstT;
+	else
+		return afterT;
+}*/

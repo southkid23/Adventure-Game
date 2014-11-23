@@ -10,13 +10,18 @@ int main()
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	
-	Shack = new Room("Shack", sItems, "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you. In this room there is an apple, a butter knife, and a journal. The door leads to outside.\n");
+	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.\n");
 	Obstacle* door = new Obstacle("DOOR"); door->prevent("NORTH"); door->setpInfo("Door is locked."); door->setOccur("Door gets broken down.");
 	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); crowbar->setTarget(door);
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true); apple->setTarget(NULL);
-	Shack->setObstacle(door); sItems->add(crowbar); sItems->add(apple);
+	Shack->setObstacleN(door); sItems->add(crowbar); sItems->add(apple);
 
-	VillageCent = new Room("Village Center", vItems, "In the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise and very lost. To the south of the center is the small shack from where the player came from. To the East is a fenced graveyard. To the West is a bank. To the North is a large house.");
+	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
+	Obstacle* guard = new Obstacle("GUARD"); guard->prevent("WEST"); guard->setpInfo("A Guard is preventing you from entering the Bank."); guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
+	Obstacle* window = new Obstacle("WINDOW"); window->prevent("NORTH"); window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); window->setOccur("The Window breaks.");
+	Obstacle* key = new Obstacle("KEY"); key->prevent("EAST"); key->setpInfo("The gate to the graveyard is firmly locked."); key->setOccur("The gate makes a creaking sound as it opens.");
+	VillageCent->setObstacleN(window); VillageCent->setObstacleW(guard); VillageCent->setObstacleE(key);
+
 	Bank = new Room("Bank", bItems, "The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
 	Graveyard = new Room("Graveyard", gItems, "You just had a weird vision about the village being on fire.\nThe villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
 	LargeHouse = new Room("Mansion", lItems, "The house looks really fancy. Would look better if not for the dust that had collected over the months. There's a beautiful backyard at the back of the house. The living room seems to have a weird symbol.One of the windows seems to be unlocked.");
@@ -32,7 +37,10 @@ int main()
 	Player* player = new Player(Shack);
 
 	cout << "Welcome to the ISA Aventure Game." << endl << endl;
+	cout << "If you need help or instructions on how to play the game, type HELP.\n\n"; 
 
+	cout << "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you.\n\n";
+	cout << Shack->getDescription() << endl << endl;
 	while(true)
 	{
 		string line;
