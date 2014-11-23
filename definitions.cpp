@@ -207,7 +207,10 @@ void Player::doAction(string verb, string noun)
 	}*/
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
-		cout << "You don't get any help. Help yourself."  << endl;
+		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";
+		cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' or \'get\' or \'drop\' followed by the name of the item. "; 
+		cout << "To interact an item with and object just type \'use\' and then follwed by the name of the item. ";
+		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
 	}
 	else
 		cout << "Sorry but I don't understand." << endl;

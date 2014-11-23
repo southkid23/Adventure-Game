@@ -36,8 +36,7 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 
-	cout << "Welcome to the ISA Aventure Game." << endl << endl;
-	cout << "If you need help or instructions on how to play the game, type HELP.\n\n"; 
+	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \'help\'" << endl << endl;
 
 	cout << "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you.\n\n";
 	cout << Shack->getDescription() << endl << endl;
