@@ -43,7 +43,6 @@ int main()
 	
 	sItems->add(crowbar);
 	sItems->add(apple);
-	vItems->add(key);
 
 
 	//Defining Rooms
