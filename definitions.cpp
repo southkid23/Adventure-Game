@@ -168,7 +168,7 @@ void Player::doAction(string verb, string noun)
 
 				else
 				{
-					cout << "Cannot use " << noun << " onB " << target << ".\n\n";
+					cout << "Cannot use " << noun << " on " << target << ".\n\n";
 				}
 
 			}
@@ -202,7 +202,7 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "TAKE" || verb == "GET") // takes an item
 	{
-		if(currentR()->getrItems()->findName(noun) == NULL /*|| currentR()->getrItems()->findName(noun)->isTak()*/)
+		if(currentR()->getrItems()->findName(noun) == NULL || currentR()->getrItems()->findName(noun)->isTak())
 		{
 			cout << "There is no such item in the room or cannot be taken." << endl << endl;
 		}

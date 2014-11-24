@@ -18,9 +18,9 @@ int main()
 	guard->setpInfo("A Guard is preventing you from entering the Bank.");
 	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	
-	Obstacle* door = new Obstacle("DOOR"); 
+	/*Obstacle* door = new Obstacle("DOOR"); 
 	door->prevent("NORTH"); door->setpInfo("Door is locked.");
-	door->setOccur("Door gets broken down.");
+	door->setOccur("Door gets broken down.");*/
 
 	Obstacle* window = new Obstacle("WINDOW");
 	window->prevent("NORTH");
@@ -32,27 +32,35 @@ int main()
 	gate->setpInfo("The gate to the graveyard is firmly locked."); 
 	gate->setOccur("The gate makes a creaking sound as it opens.");
 
+	Obstacle* tomb = new Obstacle("TOMB");
+	grave->prevent("SOUTH");
+	grave->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A LITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
+
 	//Items
 	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
-	crowbar->setTarget(door);
+	crowbar->setTarget(gate);
 	
+	Item* bananaskin = new Item("BANANA_SKIN", "USELESS...", true);
+
+	Item* pStone = new Item("PHILOSOPHER'S_STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
+	pStone->setiTarget(bananaskin); pStone->setProduct(crowbar);
+
 	Item* key = new Item("KEY","I wonder what this unlocks...",true);
 	key->setTarget(gate);
 
-	Item* map = new Item("MAP", "Looks overused.", true);
+	Item* fbook = new Item("FOREIGN_BOOK", "SEEMS LIKE IT IS FROM ANOTHER COUNTRY.", true);
 
-	Item* chest = new Item("CHEST", "Looks fancy", true);
+	Item* lchest = new Item("LIGHT_CHEST", "DOESN'T SEEM LIKE IT CAN CARRY MUCH.", false);
 	
-	Item* ckey = new Item("CHESTKEY", "Looks like a key for chest.", true);
-	ckey->setiTarget(chest);ckey->setProduct(map);
+	Item* ckey = new Item("CHEST_KEY", "Looks like a key for chest.", true);
+	ckey->setiTarget(lchest);ckey->setProduct(fbook);
 
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
 
 	
-	sItems->add(crowbar);
 	sItems->add(apple);
 	sItems->add(ckey);
-	sItems->add(chest);
+	sItems->add(lchest);
 
 
 	//Defining Rooms
@@ -67,7 +75,7 @@ int main()
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 
 	Shack->setWest(NULL);
-	Shack->setObstacleN(door);
+	//Shack->setObstacleN(door);
 
 	VillageCent->setNorth(LargeHouse);
 	VillageCent->setSouth(Shack);
@@ -95,13 +103,16 @@ int main()
 
 	
 	// placing NPCs
-	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL", "KEY");
-	lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.");
-	lilgirl->setAT("I'm hungry.");
+	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
+	lilgirl->setFT("'Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.'");
+	lilgirl->setAT("'I'm hungry.'");
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!\n\nShe gives you a key.\n\n");
+	lilgirl->setOccur("'Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!\n\nShe gives you a key.'\n\n");
+
+	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "PHILOSOPHER'S_STONE");
+	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. YOU WOULDN'T HAPPEN TO HAVE ANY KIND OF ")
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
@@ -109,7 +120,7 @@ int main()
 	cout << "WELCOME TO THE ISA AVENTURE GAME. IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\"" << endl;
 	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)" << endl << endl << endl << endl << endl;
 
-	cout << "YOU WAKE UP IN A SHACK. A LITTLE GIRL THAT TELLS YOU HOW SHE DRAGGED YOU FROM\nOUTSIDE. SHE TELLS YOU THAT THERE WAS A RECENT FIRE IN THE VILLAGE AND THAT SHE MANAGED TO SAVE YOU.\n\n";
+	cout << "YOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING ABOUT YOUR PAST. YOU LOOK AROUND.\n\n";
 	Shack->enter();
 	while(true)
 	{
