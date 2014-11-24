@@ -41,10 +41,10 @@ int main()
 
 	Item* map = new Item("MAP", "Looks overused.", true);
 
-	Item* ckey = new Item("CHESTKEY", "Looks like a key for chest.", true);
-
 	Item* chest = new Item("CHEST", "Looks fancy", true);
-	chest->setiTarget(ckey);chest->setProduct(map);
+	
+	Item* ckey = new Item("CHESTKEY", "Looks like a key for chest.", true);
+	ckey->setiTarget(chest);ckey->setProduct(map);
 
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
 

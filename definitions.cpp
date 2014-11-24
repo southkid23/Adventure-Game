@@ -36,7 +36,7 @@ void Room::enter()
 	if(!entered())
 		cout << getDescription() << endl << endl;
 	else
-		cout << "YOU ARE BACK TO " << getName() << endl;
+		cout << "YOU ARE BACK TO THE " << getName() << endl << endl;
 	roomitems(cout);cout << "" << endl << endl;
 	hasBeen = true;
 }
@@ -143,50 +143,32 @@ void Player::doAction(string verb, string noun)
 				cout << "USE " << noun << " ON WHAT? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(currentR()->getObstacleN() != NULL)
-				{	
-					if(currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
-					{
-						cout << currentR()->getObstacleN()->getOccur() << endl;
-						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
-					}
-					else
-						cout << "Cannot use " << noun << " on " << target << ".\n";
-				}
-				else if(currentR()->getObstacleE() != NULL)	
+	
+				if(currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
 				{
-					if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
-					{
-						cout << currentR()->getObstacleE()->getOccur() << endl;
-						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
-					}
-					else
-						cout << "Cannot use " << noun << " on " << target << ".\n";
+					cout << currentR()->getObstacleN()->getOccur() << endl;
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
-				else if(currentR()->getObstacleS() != NULL)
-				{	
-					if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
-					{
-						cout << currentR()->getObstacleS()->getOccur() << endl;
-						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
-					}
-					else
-							cout << "Cannot use " << noun << " on " << target << ".\n";
+				else if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				{
+					cout << currentR()->getObstacleE()->getOccur() << endl;
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
-				else if(currentR()->getObstacleW() != NULL)
-				{	
-					if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
-					{
-						cout << currentR()->getObstacleW()->getOccur() << endl;
-						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
-					}
-					else
-							cout << "Cannot use " << noun << " on " << target << ".\n";
+				else if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				{
+					cout << currentR()->getObstacleS()->getOccur() << endl;
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
+
+				else if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				{
+					cout << currentR()->getObstacleW()->getOccur() << endl;
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+				}		
 
 				else
 				{
-					cout << "Cannot use " << noun << " on " << target << ".\n\n";
+					cout << "Cannot use " << noun << " onB " << target << ".\n\n";
 				}
 
 			}
@@ -251,7 +233,7 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "GIVE")
 	{
-		if(getInventory()->findName(noun) != NULL)
+		if(getInventory()->find(noun) != 0)
 		{
 			if(getInventory()->findName(noun)->getnTarget() != NULL)
 			{
