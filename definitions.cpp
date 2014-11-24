@@ -229,6 +229,30 @@ void Player::doAction(string verb, string noun)
 			cout << "There is no one to speak to.\n\n";
 		}
 	}
+	else if(verb == "GIVE")
+	{
+		if(getInventory()->findName(noun) != NULL)
+		{
+			if(getInventory()->findName(noun)->getnTarget() != NULL)
+			{
+				cout << "To? ";
+				string target = ""; cin >> target; cout << endl; 
+				toUpper(target);
+				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
+				{
+					cout << currentR()->getNPC()->getOccur(); cout << noun;
+					getInventory()->removeItem(getInventory()->findName(noun));
+					getInventory()->add(currentR()->getNPC()->getHas());
+				}
+				else
+				cout << "Cannot give " << noun << " to " << target << ".\n\n";
+			}
+			else
+				cout << noun << " cannot be given.\n\n";
+		}
+		else
+			cout << "You do not have a " << noun << " to give.\n\n";
+	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";
