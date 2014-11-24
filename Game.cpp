@@ -35,9 +35,16 @@ int main()
 	//Items
 	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
 	crowbar->setTarget(door);
+
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
 	apple->setTarget(NULL);
+
+	Item* key = new Item("KEY","I wonder what this unlocks...",true);
+	key->setTarget(gate);
 	
+	sItems->add(crowbar);
+	sItems->add(apple);
+
 	//Defining Rooms
 	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.\n");
 	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
@@ -49,8 +56,6 @@ int main()
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 
 	Shack->setWest(NULL);
-	sItems->add(crowbar);
-	sItems->add(apple);
 	Shack->setObstacleN(door);
 
 	VillageCent->setNorth(LargeHouse);
