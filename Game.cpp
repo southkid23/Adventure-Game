@@ -18,26 +18,28 @@ int main()
 	guard->setpInfo("A Guard is preventing you from entering the Bank.");
 	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	
+
 	/*Obstacle* door = new Obstacle("DOOR"); 
-	door->prevent("NORTH"); door->setpInfo("Door is locked.");
-	door->setOccur("Door gets broken down.");*/
+	door->prevent("NORTH"); door->setpInfo("DOOR IS LOCKED.");
+	door->setOccur("DOOR GETS BROKEN DOWN.");*/
+
 
 	Obstacle* window = new Obstacle("WINDOW");
 	window->prevent("NORTH");
-	window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); 
-	window->setOccur("The Window breaks.");
+	window->setpInfo("THERE ARE SEVERAL PLANKS OF WOOD NAILED TO THE DOOR. THE WINDOW NEXT TO THE DOOR IS A LITTLE CRACKED."); 
+	window->setOccur("THE WINDOW BREAKS.");
 	
 	Obstacle* gate = new Obstacle("GATE");
 	gate->prevent("EAST");
-	gate->setpInfo("The gate to the graveyard is firmly locked."); 
-	gate->setOccur("The gate makes a creaking sound as it opens.");
+	gate->setpInfo("THE GATE TO THE GRAVEYARD IS FIRMLY LOCKED."); 
+	gate->setOccur("THE GATE MAKES A CREAKING SOUND AS IT OPENS.");
 
 	Obstacle* tomb = new Obstacle("TOMB");
 	tomb->prevent("SOUTH");
 	tomb->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A LITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
 
 	//Items
-	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
+	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true); 
 	crowbar->setTarget(gate);
 	
 	Item* bananaskin = new Item("BANANA_SKIN", "USELESS...", true);
@@ -45,17 +47,17 @@ int main()
 	Item* pStone = new Item("PHILOSOPHER'S_STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
 	pStone->setiTarget(bananaskin); pStone->setProduct(crowbar);
 
-	Item* key = new Item("KEY","I wonder what this unlocks...",true);
+	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
 	key->setTarget(gate);
 
 	Item* fbook = new Item("FOREIGN_BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("LIGHT_CHEST", "DOESN'T SEEM LIKE IT CAN CARRY MUCH.", true);
+	Item* lchest = new Item("LIGHT_CHEST", "WONDER WHAT'S INSIDE...", true);
 	
-	Item* ckey = new Item("CHEST_KEY", "Looks like a key for chest.", true);
+	Item* ckey = new Item("CHEST_KEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest);ckey->setProduct(fbook);
 
-	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
+	Item* apple = new Item("APPLE", "A SHINY JUICY APPLE.", true);
 
 	
 	sItems->add(apple);
@@ -105,12 +107,12 @@ int main()
 	
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
-	lilgirl->setFT("'Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. Pulling you sure made me pretty hungry.'");
-	lilgirl->setAT("'I'm hungry.'");
+	lilgirl->setFT("'HELLO MISTER. IT LOOKS YOU ARE FINALLY AWAKE. SORRY IF YOU ARE HURT BUT I HAD TO DRAG YOU INSIDE THIS SHACK. I'VE BEEN LIVING FOR A COUPLE DAYS IN THIS ABANDONED PLACE. THERE WAS A FIRE LAST NIGHT AND I FOUND YOU WITH YOUR CLOTHES HALF-BURNT. PULLING YOU SURE MADE ME HUNGRY.'");
+	lilgirl->setAT("'I'M HUNGRY'");
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("'Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!'\n\nShe gives you a key.\n\n");
+	lilgirl->setOccur("'THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN... OH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\n\nSHE GIVES YOU A KEY.\n\n");
 
 	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "PHILOSOPHER'S_STONE");
 	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE.'");
