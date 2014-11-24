@@ -45,12 +45,14 @@ int main()
 	sItems->add(apple);
 	vItems->add(key);
 
+
 	//Defining Rooms
 	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR\nOVERUSED. THE DOOR TO THE NORTH LEADS TO OUTSIDE.");
 	VillageCent = new Room("VILLAGE CENTER", vItems, "YOU ARE IN THE CENTER OF THE VILLAGE THERE IS A SMALL WELL. NEXT TO THE WELL IS AN OLD MAN WITH A LONG BEARD AND A LONG STAFF. HE APPEARS TO BE VERY WISE, YET VERY CONFUSED. YOU TRY TALKING TO HIM BUT ALL HE DOES IS MUMBLE. TO THE SOUTH OF THE CENTER IS THE SHACK. TO THE EAST IS A FENCED GRAVEYARD. TO THE WEST IS A BANK. TO THE NORTH IS A MANSION.");
 	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES.IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
 	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE BEING ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY.");
 	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
+
 
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
@@ -65,6 +67,7 @@ int main()
 	VillageCent->setObstacleN(window); 
 	VillageCent->setObstacleW(guard); 
 	VillageCent->setObstacleE(gate);
+	VillageCent->setObstacleS(NULL);
 	
 	Graveyard->setNorth(NULL);
 	Graveyard->setSouth(NULL); 
@@ -82,7 +85,11 @@ int main()
 	LargeHouse->setWest(NULL);
 
 	
-	
+	// placing NPCs
+	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL");
+	lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.");
+	lilgirl->setAT("I'm hungry.");
+
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);

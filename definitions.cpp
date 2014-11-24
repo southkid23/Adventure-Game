@@ -26,6 +26,7 @@ Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/
 	listNPC = listn;
 	nNPC = NPC;*/
 	description = descr;
+	obst = new Obstacle*[4];
 	setObstacleE(NULL);setObstacleN(NULL);setObstacleS(NULL);setObstacleW(NULL);
 	hasBeen = false;
 }
@@ -139,7 +140,7 @@ void Player::doAction(string verb, string noun)
 				if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleN()->getName())
 				{
 					cout << currentR()->getObstacleN()->getOccur() << endl;
-					currentR()->getObstacleN()->prevent("nothing");
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
 				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleE()->getName())
 				{
@@ -186,7 +187,7 @@ void Player::doAction(string verb, string noun)
 			cout << noun << " is now in your Inventory." << endl << endl;
 		}
 	}
-	/*else if(verb == "TALK")
+	else if(verb == "TALK")
 	{
 		if(currentR()->getNPC() != NULL)
 		{
@@ -203,12 +204,12 @@ void Player::doAction(string verb, string noun)
 		{
 			cout << "There is no one to speak to.\n\n";
 		}
-	}*/
+	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";
 		cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' or \'get\' or \'drop\' followed by the name of the item. "; 
-		cout << "To interact an item with and object just type \'use\' and then follwed by the name of the item. ";
+		cout << "To interact an item with and object just type \'use\' and then followed by the name of the item. ";
 		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
 	}
 	else
@@ -336,10 +337,13 @@ void List::removeItem(Item* item)
 	}
 }
 
-/*string NPC::talk()
+string NPC::talk()
 {
 	if(talked == false)
+	{
 		return firstT;
+		talked=true;
+	}
 	else
 		return afterT;
-}*/
+}
