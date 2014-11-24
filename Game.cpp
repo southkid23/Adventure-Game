@@ -53,7 +53,7 @@ int main()
 
 	Item* fbook = new Item("BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", true);
+	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", false);
 	
 	Item* ckey = new Item("CKEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest);ckey->setProduct(fbook);
@@ -109,7 +109,7 @@ int main()
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
 	lilgirl->setFT("\"HELLO MISTER. IT LOOKS YOU ARE FINALLY AWAKE. SORRY IF YOU ARE HURT BUT I HAD\nTO DRAG YOU INSIDE THIS SHACK. I'VE BEEN LIVING FOR A COUPLE DAYS IN THIS\nABANDONED PLACE. THERE WAS A FIRE LAST NIGHT AND I FOUND YOU WITH YOUR CLOTHES\nHALF-BURNT. PULLING YOU SURE MADE ME HUNGRY.\"");
-	lilgirl->setAT("'I'M HUNGRY\"");
+	lilgirl->setAT("\"I'M HUNGRY\"");
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
