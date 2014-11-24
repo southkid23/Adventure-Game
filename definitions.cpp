@@ -207,15 +207,12 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "TAKE") // takes an item
 	{
-<<<<<<< HEAD
-		if(currentR()->getrItems()->findName(noun) == NULL || !currentR()->getrItems()->findName(noun)->isTak())
-=======
+
 		if(noun == "")
 		{
 			cout << "TAKE WHAT?\n\n";cin >> noun;toUpper(noun);
 		}
 		if(currentR()->getrItems()->findName(noun) == NULL /*|| currentR()->getrItems()->findName(noun)->isTak()*/)
->>>>>>> story
 		{
 			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl << endl;
 		}
