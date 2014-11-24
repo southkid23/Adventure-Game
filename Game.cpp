@@ -19,34 +19,34 @@ int main()
 	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	
 	Obstacle* door = new Obstacle("DOOR"); 
-	door->prevent("NORTH"); door->setpInfo("Door is locked.");
-	door->setOccur("Door gets broken down.");
+	door->prevent("NORTH"); door->setpInfo("DOOR IS LOCKED.");
+	door->setOccur("DOOR GETS BROKEN DOWN.");
 
 	Obstacle* window = new Obstacle("WINDOW");
 	window->prevent("NORTH");
-	window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); 
-	window->setOccur("The Window breaks.");
+	window->setpInfo("THERE ARE SEVERAL PLANKS OF WOOD NAILED TO THE DOOR. THE WINDOW NEXT TO THE DOOR IS A LITTLE CRACKED."); 
+	window->setOccur("THE WINDOW BREAKS.");
 	
 	Obstacle* gate = new Obstacle("GATE");
 	gate->prevent("EAST");
-	gate->setpInfo("The gate to the graveyard is firmly locked."); 
-	gate->setOccur("The gate makes a creaking sound as it opens.");
+	gate->setpInfo("THE GATE TO THE GRAVEYARD IS FIRMLY LOCKED."); 
+	gate->setOccur("THE GATE MAKES A CREAKING SOUND AS IT OPENS.");
 
 	//Items
-	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
+	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true); 
 	crowbar->setTarget(door);
 	
-	Item* key = new Item("KEY","I wonder what this unlocks...",true);
+	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
 	key->setTarget(gate);
 
-	Item* map = new Item("MAP", "Looks overused.", true);
+	Item* map = new Item("MAP", "HIDDEN TREASURE...", true);
 
-	Item* chest = new Item("CHEST", "Looks fancy", true);
+	Item* chest = new Item("CHEST", "WONDER WHAT'S INSIDE...", true);
 	
-	Item* ckey = new Item("CHESTKEY", "Looks like a key for chest.", true);
+	Item* ckey = new Item("KEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(chest);ckey->setProduct(map);
 
-	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
+	Item* apple = new Item("APPLE", "A SHINY JUICY APPLE.", true);
 
 	
 	sItems->add(crowbar);
@@ -96,12 +96,12 @@ int main()
 	
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL", "KEY");
-	lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.");
-	lilgirl->setAT("I'm hungry.");
+	lilgirl->setFT("HELLO MISTER. IT LOOKS YOU ARE FINALLY AWAKE. SORRY IF YOU ARE HURT BUT I HAD TO DRAG YOU INSIDE THIS SHACK. I'VE BEEN LIVING FOR A COUPLE DAYS IN THIS ABANDONED PLACE. THERE WAS A FIRE LAST NIGHT AND I FOUND YOU WITH YOUR CLOTHES HALF-BURNT. I'M PRETTY HUNGRY.");
+	lilgirl->setAT("I'M HUNGRY");
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!\n\nShe gives you a key.\n\n");
+	lilgirl->setOccur("THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN... OH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\n\nSHE GIVES YOU A KEY.\n\n");
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);

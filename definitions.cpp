@@ -37,28 +37,33 @@ void Room::enter()
 		cout << getDescription() << endl << endl;
 	else
 		cout << "YOU ARE BACK TO THE " << getName() << endl << endl;
-	roomitems(cout);cout << "" << endl << endl;
+	roomitems(cout);cout << "" << endl;
+	roomNPC(cout);cout << "" << endl << endl;
 	hasBeen = true;
+}
+
+ostream& Room::roomNPC(ostream& out)
+{
+	if(npc == NULL)
+		out << "THERE IS NO-ONE IN THIS ROOM";
+	else
+	{
+		out << "PEOPLE IN THIS  ROOM:\n" << npc->getName();
+	}
+	return out;
 }
 
 ostream& Room::roomitems(ostream& out)
 {
-	out << "ITEMS IN ROOM:\n";
-	rItems->listAll(out);out << "";
+	if(!rItems->isEmpty())
+	{
+		out << "ITEM(S) IN ROOM:\n";
+		rItems->listAll(out);out << "";
+	}
+	else
+		out << "THERE IS NOTHING IN THIS ROOM.";
 	return out;
 }
-/*
-ostream& Room::roomNPC(ostream& out)
-{
-	out << "People in the room:";
-	for(int i = 0;i < nItems;i++)
-	{
-		listNPC[i]->render(out);out<<"";
-		out << "(" << i << ")" << endl;
-	}
-}
-
-*/
 
 void Player::doAction(string verb, string noun)
 {
@@ -200,11 +205,15 @@ void Player::doAction(string verb, string noun)
 		else
 			cout << "You do not have a " << noun << " to use.\n\n";
 	}
-	else if(verb == "TAKE" || verb == "GET") // takes an item
+	else if(verb == "TAKE") // takes an item
 	{
+		if(noun == "")
+		{
+			cout << "TAKE WHAT?\n\n";cin >> noun;toUpper(noun);
+		}
 		if(currentR()->getrItems()->findName(noun) == NULL /*|| currentR()->getrItems()->findName(noun)->isTak()*/)
 		{
-			cout << "There is no such item in the room or cannot be taken." << endl << endl;
+			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl << endl;
 		}
 		else
 		{	
@@ -215,6 +224,10 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "TALK")
 	{
+		if(noun == "")
+		{
+			cout << "TALK TO WHO?\n\n";cin >> noun;toUpper(noun);
+		}
 		if(currentR()->getNPC() != NULL)
 		{
 			if(currentR()->getNPC()->getName() == noun)
@@ -255,6 +268,8 @@ void Player::doAction(string verb, string noun)
 		else
 			cout << "You do not have a " << noun << " to give.\n\n";
 	}
+	else if(verb == "LIST" || "INVENTORY")
+		listAllItems();
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";

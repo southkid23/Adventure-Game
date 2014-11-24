@@ -95,6 +95,7 @@ public:
 	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
 	~Room(){delete [] obst;}
 	ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
+	ostream& roomNPC(ostream&);//List of non-playable characters in room
 	bool entered(){return hasBeen;};//Check if room has been discovered
 	void enter();//When player enters the room
 	string getDescription()const{return description;}//Get room description
@@ -118,7 +119,6 @@ public:
 	void setObstacleS(Obstacle* obs){obst[2]=obs;}
 	void setObstacleW(Obstacle* obs){obst[3]=obs;}
 	void setNPC(NPC* n){npc=n;}
-	//ostream& roomNPC(ostream&);//List of non-playable characters in room
 };
 
 
@@ -137,7 +137,7 @@ public:
 		List* getInventory()const{return inventory;}//Returns List of inventory items
 		void currentR(Room* nw){r=nw;}//Changes current room
 		void doAction(string verb, string noun);//Carries out specified action
-		void listAllItems();//Lists all items
+		void listAllItems(){inventory->listAll(cout);cout << "\n";}//Lists all items
 };
 
 class NPC:public Player{
