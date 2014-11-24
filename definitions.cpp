@@ -212,7 +212,7 @@ void Player::doAction(string verb, string noun)
 		{
 			cout << "TAKE WHAT?\n\n";cin >> noun;toUpper(noun);
 		}
-		if(currentR()->getrItems()->findName(noun) == NULL /*|| currentR()->getrItems()->findName(noun)->isTak()*/)
+		if(currentR()->getrItems()->findName(noun) == NULL || !currentR()->getrItems()->findName(noun)->isTak())
 		{
 			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl << endl;
 		}

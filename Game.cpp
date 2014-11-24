@@ -52,7 +52,7 @@ int main()
 
 	Item* fbook = new Item("FOREIGN_BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("LIGHT_CHEST", "WONDER WHAT'S INSIDE...", true);
+	Item* lchest = new Item("LIGHT_CHEST", "WONDER WHAT'S INSIDE...", false);
 	
 	Item* ckey = new Item("CHEST_KEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest);ckey->setProduct(fbook);
