@@ -182,8 +182,8 @@ void Player::doAction(string verb, string noun)
 				cout << "USE " << noun << " ON WHAT? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(getInventory()->find(target) == 0)
-					cout << target << " IS NOT IN YOUR INVENTORY" << endl << endl;
+				if(getInventory()->find(target) == 0 && currentR()->getrItems()->find(target) == 0)
+					cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
 				else
 				{
 					if(target == getInventory()->findName(noun)->getiTarget()->getName())
@@ -196,8 +196,6 @@ void Player::doAction(string verb, string noun)
 					else
 						cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
 				}
-				//if(getInventory()->find(getInventory()->findName(noun)->getiTarget()) == 0
-				//if(getInventory()->findName(noun)->getiTarget()->getName() == 
 			}
 			else
 				cout << noun << " cannot be used." << ".\n\n";
