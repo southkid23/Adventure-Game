@@ -26,7 +26,7 @@ Room::Room(string n/*,Room** listr,int room*/,List* rIt/*,NPC* listn[],int NPC*/
 	listNPC = listn;
 	nNPC = NPC;*/
 	description = descr;
-	obst = new Obstacle*[4];
+	setObstacleE(NULL);setObstacleN(NULL);setObstacleS(NULL);setObstacleW(NULL);
 	hasBeen = false;
 }
 
@@ -34,21 +34,18 @@ void Room::enter()
 {
 	if(!entered())
 		cout << getDescription() << endl << endl;
-	cout << "This room contains:\n"; 
-	rItems->listAll(cout);cout << "" << endl << endl;
+	else
+		cout << "YOU ARE BACK TO " << getName() << endl;
+	roomitems(cout);cout << "" << endl << endl;
 	hasBeen = true;
 }
 
-/*ostream& Room::roomitems(ostream& out)
+ostream& Room::roomitems(ostream& out)
 {
-	out << "Items in the room:";
-	for(int i = 0;i < nItems;i++)
-	{
-		listItems[i]->render(out);out<<"";
-		out << "(" << i << ")" << endl;
-	}
+	out << "ITEMS IN ROOM:\n";
+	rItems->listAll(out);out << "";
 }
-
+/*
 ostream& Room::roomNPC(ostream& out)
 {
 	out << "People in the room:";
@@ -59,21 +56,6 @@ ostream& Room::roomNPC(ostream& out)
 	}
 }
 
-bool Room::entered()
-{
-	return hasBeen;
-}
-
-void Room::enter()
-{
-	if(!entered)
-	{
-		cout << "You are in " << name << ". " << description << endl << roomNPC(cout) << roomitems(cout);
-		hasBeen = true;
-	}
-	else
-		cout << "You are back in " << name << "." << endl << roomNPC(cout) << roomitems(cout);
-}
 */
 
 void Player::doAction(string verb, string noun)
@@ -84,52 +66,54 @@ void Player::doAction(string verb, string noun)
 
 		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
-			
-			if(currentR()->getObstacleN()->prevent() == "NORTH")
+			if(currentR()->getObstacleN() != NULL && currentR()->getObstacleN()->prevent() == "NORTH")
 				cout << currentR()->getObstacleN()->getpInfo() << endl << endl;
+			
 			else if (currentR()->getNorth() != NULL)//Check if NULL
 			{
 				currentR(currentR()->getNorth());//Sets current player location to north location
-				cout << "You moved North.\n" << endl; currentR()->enter();// << endl << endl;
+				cout << "YOU MOVED NORTH.\n" << endl; currentR()->enter();// << endl << endl;
 			}
 			else//If no location!
-				cout << "There's nothing there." << endl << endl;
+				cout << "THERE'S NOTHING THERE." << endl << endl;
 		}
 		else if(noun == "SOUTH")
-		{
-			if(currentR()->getObstacleS()->prevent() == "SOUTH")
+		{ 
+
+			if(currentR()->getObstacleS() != NULL && currentR()->getObstacleS()->prevent() == "SOUTH")
 				cout << currentR()->getObstacleS()->getpInfo() << endl << endl;
+
 			else if (currentR()->getSouth() != NULL)
 			{
 				currentR(currentR()->getSouth());
-				cout << "You moved South.\n" << endl; currentR()->enter();// << endl << endl;
+				cout << "YOU MOVED SOUTH.\n" << endl; currentR()->enter();// << endl << endl;
 			}
 			else
-				cout << "There's nothing there." << endl << endl;
+				cout << "THERE'S NOTHING THERE." << endl << endl;
 		}
 		else if(noun == "EAST")
 		{
-			if(currentR()->getObstacleE()->prevent() == "EAST")
+			if(currentR()->getObstacleE() != NULL && currentR()->getObstacleE()->prevent() == "EAST")
 				cout << currentR()->getObstacleE()->getpInfo() << endl << endl;
 			else if (currentR()->getEast() != NULL)
 			{
 				currentR(currentR()->getEast());
-				cout << "You moved East.\n" << endl; currentR()->enter();
+				cout << "YOU MOVED EAST.\n" << endl; currentR()->enter();
 			}
 			else
-				cout << "There's nothing there." << endl << endl;
+				cout << "THERE'S NOTHING THERE." << endl << endl;
 		}
 		else
 		{
-			if(currentR()->getObstacleW()->prevent() == "WEST")
+			if(currentR()->getObstacleW() != NULL && currentR()->getObstacleW()->prevent() == "WEST")
 				cout << currentR()->getObstacleW()->getpInfo() << endl << endl;
 			else if (currentR()->getWest() != NULL)
 			{
 				currentR(currentR()->getWest()); 
-				cout << "You moved West.\n" << endl; currentR()->enter();
+				cout << "YOU MOVED WEST.\n" << endl; currentR()->enter();
 			}
 			else
-				cout << "There's nothing there." << endl << endl;
+				cout << "THERE'S NOTHING THERE." << endl << endl;
 		}
 	
 	}
@@ -177,6 +161,10 @@ void Player::doAction(string verb, string noun)
 				{
 					cout << "Cannot use " << noun << " on " << target << ".\n\n";
 				}
+
+			}
+			else if(getInventory()->findName(noun)->getiTarget() != NULL)
+			{
 
 			}
 			else
@@ -312,6 +300,11 @@ std::ostream& List::listAll(std::ostream& out)//Lists all item in list
 	Node* walker = head;
 	while(walker != NULL)
 	{
+		if(head == NULL)
+		{
+			out << "THIS ROOM IS EMPTY.\n";
+			break;
+		}
 		out << walker->data->getName() << endl;
 		walker = walker->next;
 	}
