@@ -31,6 +31,8 @@ private:
 	Obstacle* target;//what Item can be used on
 	bool isTakeable;//If an item is pickable
 	string book;//When item is read(if book)
+	//new stuff
+	Item* iTarget;
 
 public:
 	Item(){}
@@ -39,6 +41,7 @@ public:
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
 	void setTarget(Obstacle* o){target = o;}
+	void setiTarget(Item* targ){iTarget = targ;}//If to be used on another item
 	string getName()const{return itemName;}//Gets name of item
 	string getInfo()const{return itemInfo;}//Gets item description
 	string read()const{return book;}//outputs when item is to be read
@@ -62,7 +65,7 @@ class List{
 		bool isEmpty();
 		void add (Item* item);
 		void removeItem(Item* item);
-		//string listAll();
+		std::ostream& listAll(std::ostream& out);
 		int find (Item* value);
 		Item* findName(string value);
 		int getSize();
@@ -77,14 +80,14 @@ private:
 	List* rItems;//list of uncollected/unusable items
 	Obstacle** obst;
 	//NPC* npc;//list of live/unkillable NPC in room
-	//bool hasBeen;
+	bool hasBeen;
 public:
 	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
 	~Room(){delete [] obst;}
 	//ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
 	//ostream& roomNPC(ostream&);//List of non-playable characters in room
-	//bool entered();//Check if room has been discovered
-	//virtual void enter();//When player enters the room
+	bool entered(){return hasBeen;};//Check if room has been discovered
+	void enter();//When player enters the room
 	//Room** getDoors(){return doors;}
 	string getDescription()const{return description;}//Get room description
 	string getName()const{return name;}//Get room name
@@ -108,6 +111,7 @@ public:
 	void setObstacleW(Obstacle* obs){obst[3]=obs;}
 	//void setNPC(NPC* n){npc=n;}
 };
+
 
 class Player {
 

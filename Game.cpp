@@ -46,7 +46,7 @@ int main()
 	sItems->add(apple);
 
 	//Defining Rooms
-	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.\n");
+	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.");
 	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
 	Bank = new Room("Bank", bItems, "The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
 	Graveyard = new Room("Graveyard", gItems, "You just had a weird vision about the village being on fire.\nThe villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
@@ -87,10 +87,10 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 
-	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \'help\'" << endl << endl;
+	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \"help\"" << endl << endl;
 
 	cout << "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you.\n\n";
-	cout << Shack->getDescription() << endl << endl;
+	Shack->enter();//cout << Shack->getDescription() << endl << endl;
 	while(true)
 	{
 		string line;
