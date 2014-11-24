@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 
+
 class NPC;
 
 class Obstacle{
@@ -38,7 +39,7 @@ private:
 
 public:
 	Item(){}
-	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;}//Item Constructor
+	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;target = NULL;iTarget = NULL;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
@@ -50,7 +51,8 @@ public:
 	string read()const{return book;}//outputs when item is to be read
 	Obstacle* getTarget()const{return target;}//Gets what item current can be used on
 	NPC* getnTarget()const{return nTarget;}
-	
+	Item* getiTarget()const{return iTarget;}
+
 	virtual bool isTak()const{return isTakeable;}// returns if takeable or not
 	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
@@ -90,7 +92,7 @@ private:
 public:
 	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
 	~Room(){delete [] obst;}
-	//ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
+	ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
 	//ostream& roomNPC(ostream&);//List of non-playable characters in room
 	bool entered(){return hasBeen;};//Check if room has been discovered
 	void enter();//When player enters the room

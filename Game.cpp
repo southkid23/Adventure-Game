@@ -10,7 +10,7 @@ int main()
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
-	
+	 
 
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
@@ -43,14 +43,16 @@ int main()
 	
 	sItems->add(crowbar);
 	sItems->add(apple);
+	vItems->add(key);
 
 
 	//Defining Rooms
-	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.\n");
-	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
-	Bank = new Room("Bank", bItems, "The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
-	Graveyard = new Room("Graveyard", gItems, "You just had a weird vision about the village being on fire.\nThe villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
-	LargeHouse = new Room("Mansion", lItems, "The house looks really fancy. Would look better if not for the dust that had collected over the months. There's a beautiful backyard at the back of the house. The living room seems to have a weird symbol.One of the windows seems to be unlocked.");
+	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR\nOVERUSED. THE DOOR TO THE NORTH LEADS TO OUTSIDE.");
+	VillageCent = new Room("VILLAGE CENTER", vItems, "YOU ARE IN THE CENTER OF THE VILLAGE THERE IS A SMALL WELL. NEXT TO THE WELL IS AN OLD MAN WITH A LONG BEARD AND A LONG STAFF. HE APPEARS TO BE VERY WISE, YET VERY CONFUSED. YOU TRY TALKING TO HIM BUT ALL HE DOES IS MUMBLE. TO THE SOUTH OF THE CENTER IS THE SHACK. TO THE EAST IS A FENCED GRAVEYARD. TO THE WEST IS A BANK. TO THE NORTH IS A MANSION.");
+	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES.IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
+	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE BEING ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY.");
+	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
+
 
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
@@ -96,10 +98,11 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 
-	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \"help\"" << endl << endl;
+	cout << "WELCOME TO THE ISA AVENTURE GAME. IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\"" << endl;
+	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)" << endl << endl << endl << endl << endl;
 
-	cout << "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you.\n\n";
-	Shack->enter();//cout << Shack->getDescription() << endl << endl;
+	cout << "YOU WAKE UP IN A SHACK. A LITTLE GIRL THAT TELLS YOU HOW SHE DRAGGED YOU FROM\nOUTSIDE. SHE TELLS YOU THAT THERE WAS A RECENT FIRE IN THE VILLAGE AND THAT SHE MANAGED TO SAVE YOU.\n\n";
+	Shack->enter();
 	while(true)
 	{
 		string line;
