@@ -33,8 +33,8 @@ int main()
 	gate->setOccur("The gate makes a creaking sound as it opens.");
 
 	Obstacle* tomb = new Obstacle("TOMB");
-	grave->prevent("SOUTH");
-	grave->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A LITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
+	tomb->prevent("SOUTH");
+	tomb->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A LITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
 
 	//Items
 	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
@@ -109,10 +109,15 @@ int main()
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("'Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!\n\nShe gives you a key.'\n\n");
+	lilgirl->setOccur("'Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!'\n\nShe gives you a key.\n\n");
 
 	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "PHILOSOPHER'S_STONE");
-	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. YOU WOULDN'T HAPPEN TO HAVE ANY KIND OF ")
+	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE.'");
+	oldman->setAT("'KNOWLEDGE IS POWER AND POWER IS FREEDOM!'");
+	VillageCent->setNPC(oldman);
+	fbook->setnTarget(oldman);
+	oldman->getInventory()->add(pStone);
+	oldman->setOccur("'MY GOD! THIS BOOK IS... NOTHING YOU SHOULD BE CONCERNED ABOUT. THIS BOOK WILL BE VERY USEFUL HOWEVER. FOR YOUR TROUBLE, HERE IS SMALL STONE.'\n\nHE GIVES YOU A PHILOSOPHER'S_STONE.\n\n");
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);

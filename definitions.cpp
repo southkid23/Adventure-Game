@@ -184,7 +184,7 @@ void Player::doAction(string verb, string noun)
 					if(target == getInventory()->findName(noun)->getiTarget()->getName())
 					{
 						cout << "YOU USE " << noun << " ON " << target << ".";
-						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".";
+						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
 						getInventory()->add(getInventory()->findName(noun)->getProduct());
 						getInventory()->removeItem(noun);getInventory()->removeItem(target);
 					}
@@ -242,7 +242,7 @@ void Player::doAction(string verb, string noun)
 				toUpper(target);
 				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
 				{
-					cout << currentR()->getNPC()->getOccur();
+					cout << endl << currentR()->getNPC()->getOccur();
 					getInventory()->removeItem(noun);
 					getInventory()->add(currentR()->getNPC()->getHas());
 				}
