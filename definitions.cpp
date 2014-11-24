@@ -140,8 +140,13 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "EXAMINE")//Examine returns an item description
 	{
-		Item* it = getInventory()->findName(noun);
-		cout << it->getInfo() << endl << endl;
+		if(getInventory()->findName(noun) != NULL)
+		{	
+			Item* it = getInventory()->findName(noun);
+			cout << it->getInfo() << endl << endl;
+		}
+		else
+			cout << "No " << noun << " to examine.\n";
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
@@ -157,27 +162,46 @@ void Player::doAction(string verb, string noun)
 				cout << "On? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleN()->getName())
-				{
-					cout << currentR()->getObstacleN()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+				if(currentR()->getObstacleN() != NULL)
+				{	
+					if(currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleN()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+						cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleE()->getName())
+				else if(currentR()->getObstacleE() != NULL)	
 				{
-					cout << currentR()->getObstacleE()->getOccur() << endl;
-					currentR()->getObstacleE()->prevent("nothing");
+					if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleE()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+						cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleS()->getName())
-				{
-					cout << currentR()->getObstacleS()->getOccur() << endl;
-					currentR()->getObstacleS()->prevent("nothing");
+				else if(currentR()->getObstacleS() != NULL)
+				{	
+					if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleS()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+							cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleW()->getName())
-				{
-					cout << currentR()->getObstacleW()->getOccur() << endl;
-					currentR()->getObstacleW()->prevent("nothing");
+				else if(currentR()->getObstacleW() != NULL)
+				{	
+					if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleW()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+							cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-
 				else
 				{
 					cout << "Cannot use " << noun << " on " << target << ".\n\n";
@@ -185,7 +209,7 @@ void Player::doAction(string verb, string noun)
 
 			}
 			else
-				cout << noun << " cannot be used." << ".\n\n";
+				cout << noun << " cannot be used.\n\n";
 		}
 		else
 			cout << "You do not have a " << noun << " to use.\n\n";
@@ -202,6 +226,30 @@ void Player::doAction(string verb, string noun)
 			currentR()->getrItems()->removeItem(currentR()->getrItems()->findName(noun));
 			cout << noun << " is now in your Inventory." << endl << endl;
 		}
+	}
+	else if(verb == "GIVE")
+	{
+		if(getInventory()->findName(noun) != NULL)
+		{
+			if(getInventory()->findName(noun)->getnTarget() != NULL)
+			{
+				cout << "To? ";
+				string target = ""; cin >> target; cout << endl; 
+				toUpper(target);
+				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
+				{
+					cout << currentR()->getNPC()->getOccur(); cout << noun;
+					getInventory()->removeItem(getInventory()->findName(noun));
+					getInventory()->add(currentR()->getNPC()->getHas());
+				}
+				else
+				cout << "Cannot give " << noun << " to " << target << ".\n\n";
+			}
+			else
+				cout << noun << " cannot be given.\n\n";
+		}
+		else
+			cout << "You do not have a " << noun << " to give.\n\n";
 	}
 	else if(verb == "TALK")
 	{
@@ -296,7 +344,7 @@ int List::find(Item* value)
 Item* List::findName(string value)
 {
     Node* walker=head;
-    if (head==NULL) {
+    if (walker==NULL) {
         return NULL;
     }
     while (walker!=NULL) {
@@ -352,8 +400,8 @@ string NPC::talk()
 {
 	if(talked == false)
 	{
-		return firstT;
 		talked=true;
+		return firstT;
 	}
 	else
 		return afterT;

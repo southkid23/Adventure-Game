@@ -37,7 +37,6 @@ int main()
 	crowbar->setTarget(door);
 
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
-	apple->setTarget(NULL);
 
 	Item* key = new Item("KEY","I wonder what this unlocks...",true);
 	key->setTarget(gate);
@@ -85,9 +84,13 @@ int main()
 
 	
 	// placing NPCs
-	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL");
+	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL", "KEY");
 	lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.");
 	lilgirl->setAT("I'm hungry.");
+	Shack->setNPC(lilgirl);
+	apple->setnTarget(lilgirl);
+	lilgirl->getInventory()->add(key);
+	lilgirl->setOccur("Thank you for the apple! Sorry, I don't have anything to give in return... Oh wait! I found this useless key the other day!\n\nShe gives you a key.\n\n");
 
 	
 	// placing the player in the Shack

@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 
+class NPC;
 
 class Obstacle{
 private:
@@ -29,6 +30,7 @@ private:
 	string itemName;//Item name
 	string itemInfo;//Item Description
 	Obstacle* target;//what Item can be used on
+	NPC* nTarget;
 	bool isTakeable;//If an item is pickable
 	string book;//When item is read(if book)
 	//new stuff
@@ -42,10 +44,13 @@ public:
 	void setInfo(string info){itemInfo = info;}//Sets item description
 	void setTarget(Obstacle* o){target = o;}
 	void setiTarget(Item* targ){iTarget = targ;}//If to be used on another item
+	void setnTarget(NPC* t){nTarget = t;}
 	string getName()const{return itemName;}//Gets name of item
 	string getInfo()const{return itemInfo;}//Gets item description
 	string read()const{return book;}//outputs when item is to be read
 	Obstacle* getTarget()const{return target;}//Gets what item current can be used on
+	NPC* getnTarget()const{return nTarget;}
+	
 	virtual bool isTak()const{return isTakeable;}// returns if takeable or not
 	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
@@ -72,7 +77,6 @@ class List{
 };
 
 
-class NPC;
 
 class Room
 {
@@ -139,15 +143,20 @@ private:
 	string name;
 	string firstT;
 	string afterT;
+	string occur;
+	string has;
 	bool talked;
 
 public:
-	NPC(Room* r, string n):Player(r){name=n; talked=false;}
+	NPC(Room* r, string n, string has):Player(r){name=n; talked=false;}
 	~NPC(){delete inventory;}
 	string talk();
 	string getName()const{return name;}
 	string getFT()const{return firstT;}
 	string getAT()const{return afterT;}
+	string getOccur()const{return occur;}
+	Item* getHas()const{return getInventory()->findName(has);}
 	void setFT(string s){firstT=s;}
 	void setAT(string s){afterT=s;}
+	void setOccur(string s){occur=s;}
 };
