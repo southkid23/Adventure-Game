@@ -366,7 +366,7 @@ void List::removeItem(string item)
 		Node* walker3 = head;
 		head = head->next;
 		delete walker3;
-		walker3 = NULL
+		walker3 = NULL;
 	}
 	else
 	{
