@@ -15,12 +15,14 @@ int main()
 	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); crowbar->setTarget(door);
 	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true); apple->setTarget(NULL);
 	Shack->setObstacleN(door); sItems->add(crowbar); sItems->add(apple);
+	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL"); lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry."); lilgirl->setAT("I'm hungry.");
+
 
 	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
 	Obstacle* guard = new Obstacle("GUARD"); guard->prevent("WEST"); guard->setpInfo("A Guard is preventing you from entering the Bank."); guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	Obstacle* window = new Obstacle("WINDOW"); window->prevent("NORTH"); window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); window->setOccur("The Window breaks.");
 	Obstacle* key = new Obstacle("KEY"); key->prevent("EAST"); key->setpInfo("The gate to the graveyard is firmly locked."); key->setOccur("The gate makes a creaking sound as it opens.");
-	VillageCent->setObstacleN(window); VillageCent->setObstacleW(guard); VillageCent->setObstacleE(key);
+	VillageCent->setObstacleN(window); VillageCent->setObstacleW(guard); VillageCent->setObstacleE(key); VillageCent->setObstacleS(NULL);
 
 	Bank = new Room("Bank", bItems, "The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
 	Graveyard = new Room("Graveyard", gItems, "You just had a weird vision about the village being on fire.\nThe villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");

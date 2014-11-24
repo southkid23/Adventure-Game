@@ -69,6 +69,8 @@ class List{
 };
 
 
+class NPC;
+
 class Room
 {
 private:
@@ -76,7 +78,7 @@ private:
 	string name,inHouse,description;//description & name of building
 	List* rItems;//list of uncollected/unusable items
 	Obstacle** obst;
-	//NPC* npc;//list of live/unkillable NPC in room
+	NPC* npc;//list of live/unkillable NPC in room
 	//bool hasBeen;
 public:
 	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
@@ -97,7 +99,7 @@ public:
 	Obstacle* getObstacleE()const{return obst[1];}
 	Obstacle* getObstacleS()const{return obst[2];}
 	Obstacle* getObstacleW()const{return obst[3];}
-	//NPC* getNPC()const{return npc;}
+	NPC* getNPC()const{return npc;}
 	void setNorth(Room* room){North=room;}//Set North Location
 	void setSouth(Room* room){South=room;}//Set South location
 	void setEast(Room* room){East=room;}//Set East Location
@@ -106,7 +108,7 @@ public:
 	void setObstacleE(Obstacle* obs){obst[1]=obs;}
 	void setObstacleS(Obstacle* obs){obst[2]=obs;}
 	void setObstacleW(Obstacle* obs){obst[3]=obs;}
-	//void setNPC(NPC* n){npc=n;}
+	void setNPC(NPC* n){npc=n;}
 };
 
 class Player {
@@ -127,7 +129,7 @@ public:
 		void listAllItems();//Lists all items
 };
 
-/*class NPC:public Player {
+class NPC:public Player{
 
 private:
 	string name;
@@ -136,9 +138,12 @@ private:
 	bool talked;
 
 public:
-	NPC(string n, string ft, string at):Player(r){name=n; firstT=ft;afterT; talked=false;}
+	NPC(Room* r, string n):Player(r){name=n; talked=false;}
 	~NPC(){delete inventory;}
 	string talk();
 	string getName()const{return name;}
+	string getFT()const{return firstT;}
+	string getAT()const{return afterT;}
+	void setFT(string s){firstT=s;}
+	void setAT(string s){afterT=s;}
 };
-*/

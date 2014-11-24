@@ -74,9 +74,11 @@ void Player::doAction(string verb, string noun)
 
 		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
-			
-			if(currentR()->getObstacleN()->prevent() == "NORTH")
-				cout << currentR()->getObstacleN()->getpInfo() << endl << endl;
+			if(currentR()->getObstacleN() != NULL)
+			{	
+				if(currentR()->getObstacleN()->prevent() == "NORTH")
+					cout << currentR()->getObstacleN()->getpInfo() << endl << endl;
+			}	
 			else if (currentR()->getNorth() != NULL)//Check if NULL
 			{
 				currentR(currentR()->getNorth());//Sets current player location to north location
@@ -87,8 +89,11 @@ void Player::doAction(string verb, string noun)
 		}
 		else if(noun == "SOUTH")
 		{
-			if(currentR()->getObstacleS()->prevent() == "SOUTH")
-				cout << currentR()->getObstacleS()->getpInfo() << endl << endl;
+			if(currentR()->getObstacleS() != NULL)
+			{	
+				if(currentR()->getObstacleS()->prevent() == "SOUTH")
+					cout << currentR()->getObstacleS()->getpInfo() << endl << endl;
+			}	
 			else if (currentR()->getSouth() != NULL)
 			{
 				currentR(currentR()->getSouth());
@@ -145,7 +150,7 @@ void Player::doAction(string verb, string noun)
 				if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleN()->getName())
 				{
 					cout << currentR()->getObstacleN()->getOccur() << endl;
-					currentR()->getObstacleN()->prevent("nothing");
+					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
 				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleE()->getName())
 				{
@@ -187,7 +192,7 @@ void Player::doAction(string verb, string noun)
 			cout << noun << " is now in your Inventory." << endl << endl;
 		}
 	}
-	/*else if(verb == "TALK")
+	else if(verb == "TALK")
 	{
 		if(currentR()->getNPC() != NULL)
 		{
@@ -204,12 +209,12 @@ void Player::doAction(string verb, string noun)
 		{
 			cout << "There is no one to speak to.\n\n";
 		}
-	}*/
+	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";
 		cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' or \'get\' or \'drop\' followed by the name of the item. "; 
-		cout << "To interact an item with and object just type \'use\' and then follwed by the name of the item. ";
+		cout << "To interact an item with and object just type \'use\' and then followed by the name of the item. ";
 		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
 	}
 	else
@@ -344,10 +349,13 @@ void List::removeItem(Item* item){    // maybe works?
 	}
 }
 
-/*string NPC::talk()
+string NPC::talk()
 {
 	if(talked == false)
+	{
 		return firstT;
+		talked=true;
+	}
 	else
 		return afterT;
-}*/
+}
