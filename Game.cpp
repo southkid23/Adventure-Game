@@ -48,9 +48,9 @@ int main()
 	Item* key = new Item("KEY","I wonder what this unlocks...",true);
 	key->setTarget(gate);
 
-	Item* fbook = new Item("FOREIGN_BOOK", "SEEMS LIKE IT IS FROM ANOTHER COUNTRY.", true);
+	Item* fbook = new Item("FOREIGN_BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("LIGHT_CHEST", "DOESN'T SEEM LIKE IT CAN CARRY MUCH.", false);
+	Item* lchest = new Item("LIGHT_CHEST", "DOESN'T SEEM LIKE IT CAN CARRY MUCH.", true);
 	
 	Item* ckey = new Item("CHEST_KEY", "Looks like a key for chest.", true);
 	ckey->setiTarget(lchest);ckey->setProduct(fbook);
@@ -60,11 +60,12 @@ int main()
 	
 	sItems->add(apple);
 	sItems->add(ckey);
+	sItems->add(bananaskin);
 	sItems->add(lchest);
 
 
 	//Defining Rooms
-	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR\nOVERUSED. THE DOOR TO THE NORTH LEADS TO OUTSIDE.");
+	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. THERE IS A LITTLE GIRL STRANGELY LOOKING AT YOU. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR\nOVERUSED. THE DOOR TO THE NORTH LEADS TO OUTSIDE.");
 	VillageCent = new Room("VILLAGE CENTER", vItems, "YOU ARE IN THE CENTER OF THE VILLAGE THERE IS A SMALL WELL. NEXT TO THE WELL IS AN OLD MAN WITH A LONG BEARD AND A LONG STAFF. HE APPEARS TO BE VERY WISE, YET VERY CONFUSED. YOU TRY TALKING TO HIM BUT ALL HE DOES IS MUMBLE. TO THE SOUTH OF THE CENTER IS THE SHACK. TO THE EAST IS A FENCED GRAVEYARD. TO THE WEST IS A BANK. TO THE NORTH IS A MANSION.");
 	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES.IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
 	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE BEING ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY.");
@@ -104,7 +105,7 @@ int main()
 	
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
-	lilgirl->setFT("'Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.'");
+	lilgirl->setFT("'Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. Pulling you sure made me pretty hungry.'");
 	lilgirl->setAT("'I'm hungry.'");
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);

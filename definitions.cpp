@@ -152,18 +152,18 @@ void Player::doAction(string verb, string noun)
 				else if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
 				{
 					cout << currentR()->getObstacleE()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					delete currentR()->getObstacleE(); currentR()->setObstacleE(NULL);
 				}
 				else if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
 				{
 					cout << currentR()->getObstacleS()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					delete currentR()->getObstacleS(); currentR()->setObstacleS(NULL);
 				}
 
 				else if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
 				{
 					cout << currentR()->getObstacleW()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					delete currentR()->getObstacleW(); currentR()->setObstacleW(NULL);
 				}		
 
 				else
@@ -263,7 +263,7 @@ void Player::doAction(string verb, string noun)
 		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
 	}
 	else
-		cout << "Sorry but I don't understand." << endl;
+		cout << "Sorry but I don't understand.\n" << endl;
 }
 
 
