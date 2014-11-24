@@ -138,22 +138,22 @@ void Player::doAction(string verb, string noun)
 				cout << "USE " << noun << " ON WHAT? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleN()->getName())
+				if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleN()->getName() == target)
 				{
 					cout << currentR()->getObstacleN()->getOccur() << endl;
 					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleE()->getName())
+				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleE()->getName() == target)
 				{
 					cout << currentR()->getObstacleE()->getOccur() << endl;
 					currentR()->getObstacleE()->prevent("nothing");
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleS()->getName())
+				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleS()->getName() == target)
 				{
 					cout << currentR()->getObstacleS()->getOccur() << endl;
 					currentR()->getObstacleS()->prevent("nothing");
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == currentR()->getObstacleW()->getName())
+				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleW()->getName() == target)
 				{
 					cout << currentR()->getObstacleW()->getOccur() << endl;
 					currentR()->getObstacleW()->prevent("nothing");
