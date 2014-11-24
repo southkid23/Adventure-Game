@@ -8,40 +8,95 @@ using namespace std;
 int main()
 {
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
+	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	
+
+	//Setting Obstacles
+	Obstacle* guard = new Obstacle("GUARD"); 
+	guard->prevent("WEST"); 
+	guard->setpInfo("A Guard is preventing you from entering the Bank.");
+	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
+	
+	Obstacle* door = new Obstacle("DOOR"); 
+	door->prevent("NORTH"); door->setpInfo("Door is locked.");
+	door->setOccur("Door gets broken down.");
+
+	Obstacle* window = new Obstacle("WINDOW");
+	window->prevent("NORTH");
+	window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); 
+	window->setOccur("The Window breaks.");
+	
+	Obstacle* gate = new Obstacle("GATE");
+	gate->prevent("EAST");
+	gate->setpInfo("The gate to the graveyard is firmly locked."); 
+	gate->setOccur("The gate makes a creaking sound as it opens.");
+
+	//Items
+	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); 
+	crowbar->setTarget(door);
+
+	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true);
+	apple->setTarget(NULL);
+
+	Item* key = new Item("KEY","I wonder what this unlocks...",true);
+	key->setTarget(gate);
+	
+	sItems->add(crowbar);
+	sItems->add(apple);
+
+
+	//Defining Rooms
 	Shack = new Room("Shack", sItems,"You are in an old and dusty Shack. Everything seems to be worn out from age or overused. The door to the North leads to outside.\n");
-	Obstacle* door = new Obstacle("DOOR"); door->prevent("NORTH"); door->setpInfo("Door is locked."); door->setOccur("Door gets broken down.");
-	Item* crowbar = new Item("CROWBAR", "A rusty, old crowbar. Seems sturdy.", true); crowbar->setTarget(door);
-	Item* apple = new Item("APPLE", "A shiny juicy looking apple.", true); apple->setTarget(NULL);
-	Shack->setObstacleN(door); sItems->add(crowbar); sItems->add(apple);
-	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL"); lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry."); lilgirl->setAT("I'm hungry.");
-
-
 	VillageCent = new Room("Village Center", vItems, "You are in the center of the village there is a small well. Next to the well is an old man with a long beard and a long staff. He appears to be very wise, yet very confused. You try talking to him but all he does is mumble. To the south of the center is the Shack. To the East is a fenced graveyard. To the West is a bank. To the North is a Mansion.");
-	Obstacle* guard = new Obstacle("GUARD"); guard->prevent("WEST"); guard->setpInfo("A Guard is preventing you from entering the Bank."); guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
-	Obstacle* window = new Obstacle("WINDOW"); window->prevent("NORTH"); window->setpInfo("There are several planks of wood nailed to the door. The Window next to the door is a little cracked."); window->setOccur("The Window breaks.");
-	Obstacle* key = new Obstacle("KEY"); key->prevent("EAST"); key->setpInfo("The gate to the graveyard is firmly locked."); key->setOccur("The gate makes a creaking sound as it opens.");
-	VillageCent->setObstacleN(window); VillageCent->setObstacleW(guard); VillageCent->setObstacleE(key); VillageCent->setObstacleS(NULL);
-
 	Bank = new Room("Bank", bItems, "The Bank seems to be under construction due to some unusual damages.In the bank there is a lot of stuff that was burnt from the fire. Weirdly enough, there is a wall that seemed to not be affected by the fire.");
 	Graveyard = new Room("Graveyard", gItems, "You just had a weird vision about the village being on fire.\nThe villagers were trembling in fear, shouting and trying to get away from something.\n I wonder what.\n The Graveyard is misty. Some tombs seems to be built recently.");
 	LargeHouse = new Room("Mansion", lItems, "The house looks really fancy. Would look better if not for the dust that had collected over the months. There's a beautiful backyard at the back of the house. The living room seems to have a weird symbol.One of the windows seems to be unlocked.");
 
-	// Setting the room connections
-	Shack->setNorth(VillageCent); Shack->setSouth(NULL); Shack->setEast(NULL); Shack->setWest(NULL);
-	VillageCent->setNorth(LargeHouse); VillageCent->setSouth(Shack); VillageCent->setEast(Graveyard); VillageCent->setWest(Bank);
-	Graveyard->setNorth(NULL); Graveyard->setSouth(NULL); Graveyard->setEast(NULL); Graveyard->setWest(VillageCent);
-	Bank->setNorth(NULL); Bank->setSouth(NULL); Bank->setEast(VillageCent); Bank->setWest(NULL);
-	LargeHouse->setNorth(NULL); LargeHouse->setSouth(VillageCent); LargeHouse->setEast(NULL); LargeHouse->setWest(NULL);
+	Shack->setNorth(VillageCent);
+	Shack->setSouth(NULL);
+	Shack->setEast(NULL); 
+	Shack->setWest(NULL);
+	Shack->setObstacleN(door);
+
+	VillageCent->setNorth(LargeHouse);
+	VillageCent->setSouth(Shack);
+	VillageCent->setEast(Graveyard);
+	VillageCent->setWest(Bank);
+	VillageCent->setObstacleN(window); 
+	VillageCent->setObstacleW(guard); 
+	VillageCent->setObstacleE(gate);
+	VillageCent->setObstacleS(NULL);
+	
+	Graveyard->setNorth(NULL);
+	Graveyard->setSouth(NULL); 
+	Graveyard->setEast(NULL); 
+	Graveyard->setWest(VillageCent);
+	
+	Bank->setNorth(NULL); 
+	Bank->setSouth(NULL); 
+	Bank->setEast(VillageCent); 
+	Bank->setWest(NULL);
+	
+	LargeHouse->setNorth(NULL); 
+	LargeHouse->setSouth(VillageCent);
+	LargeHouse->setEast(NULL); 
+	LargeHouse->setWest(NULL);
+
+	
+	// placing NPCs
+	NPC* lilgirl = new NPC(Shack, "LITTLEGIRL");
+	lilgirl->setFT("Hello mister. It looks you are finally awake. Sorry if you are hurt but I had to drag you inside this Shack. I've been living for a couple days in this abandoned place. There was a fire last night and I found you with your clothes half-burnt. I'm pretty hungry.");
+	lilgirl->setAT("I'm hungry.");
+
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 
-	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \'help\'" << endl << endl;
+	cout << "Welcome to the ISA Aventure Game. If you ever need any help, just type \"help\"" << endl << endl;
 
 	cout << "You wake up in a shack. A little girl that tells you how she dragged you from outside. She tells you that there was a recent fire in the village and that she managed to save you.\n\n";
-	cout << Shack->getDescription() << endl << endl;
+	Shack->enter();//cout << Shack->getDescription() << endl << endl;
 	while(true)
 	{
 		string line;
