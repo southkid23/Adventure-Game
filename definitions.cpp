@@ -127,7 +127,7 @@ void Player::doAction(string verb, string noun)
 			cout << it->getInfo() << endl << endl;
 		}
 		else
-			cout << "Cannot examine " << noun << endl;
+			cout << "Cannot examine " << noun << "." << endl;
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
@@ -143,25 +143,45 @@ void Player::doAction(string verb, string noun)
 				cout << "USE " << noun << " ON WHAT? ";
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
-				if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleN()->getName() == target)
-				{
-					cout << currentR()->getObstacleN()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+				if(currentR()->getObstacleN() != NULL)
+				{	
+					if(currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleN()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+						cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleE()->getName() == target)
+				else if(currentR()->getObstacleE() != NULL)	
 				{
-					cout << currentR()->getObstacleE()->getOccur() << endl;
-					currentR()->getObstacleE()->prevent("nothing");
+					if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleE()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+						cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleS()->getName() == target)
-				{
-					cout << currentR()->getObstacleS()->getOccur() << endl;
-					currentR()->getObstacleS()->prevent("nothing");
+				else if(currentR()->getObstacleS() != NULL)
+				{	
+					if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleS()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+							cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
-				else if(getInventory()->findName(noun)->getTarget()->getName() == target && currentR()->getObstacleW()->getName() == target)
-				{
-					cout << currentR()->getObstacleW()->getOccur() << endl;
-					currentR()->getObstacleW()->prevent("nothing");
+				else if(currentR()->getObstacleW() != NULL)
+				{	
+					if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+					{
+						cout << currentR()->getObstacleW()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
+					}
+					else
+							cout << "Cannot use " << noun << " on " << target << ".\n";
 				}
 
 				else
@@ -236,12 +256,12 @@ void Player::doAction(string verb, string noun)
 			if(getInventory()->findName(noun)->getnTarget() != NULL)
 			{
 				cout << "To? ";
-				string target = ""; cin >> target; cout << endl; 
+				string target = ""; cin >> target;
 				toUpper(target);
 				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
 				{
-					cout << currentR()->getNPC()->getOccur(); cout << noun;
-					getInventory()->removeItem(getInventory()->findName(noun));
+					cout << currentR()->getNPC()->getOccur();
+					getInventory()->removeItem(noun);
 					getInventory()->add(currentR()->getNPC()->getHas());
 				}
 				else
@@ -405,14 +425,17 @@ void List::removeItem(string item)
 			{
 				Node* walker3 = walker;
 				walker = walker->next;
-				delete walker3;
-				walker3 = NULL;
 				while(true)
 				{
 					if(walker2->next == walker3)
+					{
 						walker2->next = walker;
+						break;
+					}
 					walker2 = walker2->next;
 				}
+				delete walker3;
+				walker3 = NULL;
 				break;
 			}
 			walker = walker->next;
@@ -424,8 +447,8 @@ string NPC::talk()
 {
 	if(talked == false)
 	{
-		return firstT;
 		talked=true;
+		return firstT;
 	}
 	else
 		return afterT;
