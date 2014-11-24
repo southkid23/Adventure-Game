@@ -3,9 +3,7 @@
 #include <string>
 using namespace std;
 
-
-class NPC;
-
+ 
 class Obstacle{
 private:
 	string name;
@@ -31,28 +29,26 @@ private:
 	string itemName;//Item name
 	string itemInfo;//Item Description
 	Obstacle* target;//what Item can be used on
-	NPC* nTarget;
 	bool isTakeable;//If an item is pickable
 	string book;//When item is read(if book)
 	//new stuff
-	Item* iTarget;
+	Item* iTarget;Item* product;
 
 public:
 	Item(){}
-	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;target = NULL;iTarget = NULL;}//Item Constructor
+	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;target = NULL;iTarget = NULL;product = NULL;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
 	void setTarget(Obstacle* o){target = o;}
 	void setiTarget(Item* targ){iTarget = targ;}//If to be used on another item
-	void setnTarget(NPC* t){nTarget = t;}
+	void setProduct(Item* prod){product = prod;}
 	string getName()const{return itemName;}//Gets name of item
 	string getInfo()const{return itemInfo;}//Gets item description
 	string read()const{return book;}//outputs when item is to be read
 	Obstacle* getTarget()const{return target;}//Gets what item current can be used on
-	NPC* getnTarget()const{return nTarget;}
 	Item* getiTarget()const{return iTarget;}
-
+	Item* getProduct()const{return product;}
 	virtual bool isTak()const{return isTakeable;}// returns if takeable or not
 	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
@@ -71,14 +67,16 @@ class List{
 		Node* getHead(){return head;};
 		bool isEmpty();
 		void add (Item* item);
-		void removeItem(Item* item);
+		void removeItem(string item);
 		std::ostream& listAll(std::ostream& out);
 		int find (Item* value);
+		int find (string value);
 		Item* findName(string value);
 		int getSize();
 };
 
 
+class NPC;
 
 class Room
 {
@@ -93,10 +91,8 @@ public:
 	Room(string n,List* rIt,string descr);//Room constructor. Should Create room
 	~Room(){delete [] obst;}
 	ostream& roomitems(ostream&);//List of items contained in room Eg. Furniture
-	//ostream& roomNPC(ostream&);//List of non-playable characters in room
 	bool entered(){return hasBeen;};//Check if room has been discovered
 	void enter();//When player enters the room
-	//Room** getDoors(){return doors;}
 	string getDescription()const{return description;}//Get room description
 	string getName()const{return name;}//Get room name
 	List* getrItems()const{return rItems;}//Get room items
@@ -118,6 +114,7 @@ public:
 	void setObstacleS(Obstacle* obs){obst[2]=obs;}
 	void setObstacleW(Obstacle* obs){obst[3]=obs;}
 	void setNPC(NPC* n){npc=n;}
+	//ostream& roomNPC(ostream&);//List of non-playable characters in room
 };
 
 
@@ -145,20 +142,15 @@ private:
 	string name;
 	string firstT;
 	string afterT;
-	string occur;
-	string has;
 	bool talked;
 
 public:
-	NPC(Room* r, string n, string has):Player(r){name=n; talked=false;}
+	NPC(Room* r, string n):Player(r){name=n; talked=false;}
 	~NPC(){delete inventory;}
 	string talk();
 	string getName()const{return name;}
 	string getFT()const{return firstT;}
 	string getAT()const{return afterT;}
-	string getOccur()const{return occur;}
-	Item* getHas()const{return getInventory()->findName(has);}
 	void setFT(string s){firstT=s;}
 	void setAT(string s){afterT=s;}
-	void setOccur(string s){occur=s;}
 };
