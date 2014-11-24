@@ -121,8 +121,13 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "EXAMINE")//Examine returns an item description
 	{
-		Item* it = getInventory()->findName(noun);
-		cout << it->getInfo() << endl << endl;
+		if(getInventory()->findName(noun) != NULL)
+		{	
+			Item* it = getInventory()->findName(noun);
+			cout << it->getInfo() << endl << endl;
+		}
+		else
+			cout << "Cannot examine " << noun << endl;
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
