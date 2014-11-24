@@ -377,6 +377,7 @@ void List::removeItem(string item)
 				Node* walker3 = walker;
 				walker = walker->next;
 				delete walker3;
+				walker3 = NULL;
 				while(true)
 				{
 					if(walker2->next == walker3)
