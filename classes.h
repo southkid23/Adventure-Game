@@ -39,7 +39,7 @@ private:
 
 public:
 	Item(){}
-	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isT = isTakeable;target = NULL;iTarget = NULL;product = NULL;nTarget = NULL;}//Item Constructor
+	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isTakeable = isT;target = NULL;iTarget = NULL;product = NULL;nTarget = NULL;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
@@ -54,7 +54,7 @@ public:
 	NPC* getnTarget()const{return nTarget;}
 	Item* getiTarget()const{return iTarget;}
 	Item* getProduct()const{return product;}
-	virtual bool isTak()const{return isTakeable;}// returns if takeable or not
+	bool isTak()const{return isTakeable;}// returns if takeable or not
 	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
 
