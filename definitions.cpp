@@ -371,6 +371,7 @@ void List::removeItem(string item)
 		Node* walker3 = head;
 		head = head->next;
 		delete walker3;
+		walker3 = NULL;
 	}
 	else
 	{
@@ -381,13 +382,14 @@ void List::removeItem(string item)
 				Node* walker3 = walker;
 				walker = walker->next;
 				delete walker3;
-				break;
+				walker3 = NULL;
 				while(true)
 				{
 					if(walker2->next == walker3)
 						walker2->next = walker;
 					walker2 = walker2->next;
 				}
+				break;
 			}
 			walker = walker->next;
 		}
