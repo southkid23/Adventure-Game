@@ -61,7 +61,7 @@ ostream& Room::roomitems(ostream& out)
 		rItems->listAll(out);out << "";
 	}
 	else
-		out << "THERE IS NOTHING IN THIS ROOM.";
+		out << "THERE IS NOTHING IN THIS ROOM." << endl;
 	return out;
 }
 
@@ -204,7 +204,7 @@ void Player::doAction(string verb, string noun)
 				cout << noun << " cannot be used." << ".\n\n";
 		}
 		else
-			cout << "You do not have a " << noun << " to use.\n\n";
+			cout << "YOU DON'T HAVE A " << noun << " TO USE.\n\n";
 	}
 	else if(verb == "TAKE") // takes an item
 	{
@@ -270,14 +270,19 @@ void Player::doAction(string verb, string noun)
 		else
 			cout << "You do not have a " << noun << " to give.\n\n";
 	}
-	else if(verb == "LIST" || "INVENTORY")
-		listAllItems();
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
-		cout << "To move from one room/place to the other, type \'go\' or \'move\' and followed by a direction. Ex. \'Go North\' or \'Move South\'. ";
-		cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' or \'get\' or \'drop\' followed by the name of the item. "; 
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- READ\n- TALK\n- GIVE\n\n";
+		/*cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' \'drop\' followed by the name of the item. "; 
 		cout << "To interact an item with and object just type \'use\' and then followed by the name of the item. ";
 		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
+	*/}
+	else if(verb == "LIST" || "INVENTORY")
+	{
+		if(getInventory()->isEmpty())
+			cout << "THERE IS NOTHING IN YOUR INVENTORY.\n\n";
+		else
+			listAllItems();
 	}
 	else
 		cout << "Sorry but I don't understand.\n" << endl;
@@ -399,7 +404,7 @@ std::ostream& List::listAll(std::ostream& out)//Lists all item in list
 			out << "THIS ROOM IS EMPTY.\n";
 			break;
 		}
-		out << walker->data->getName() << endl;
+		out << "- " << walker->data->getName() << endl;
 		walker = walker->next;
 	}
 	return out;
