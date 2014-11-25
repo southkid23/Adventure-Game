@@ -97,12 +97,14 @@ int main()
 	uTomb = new Room("TOMB", uItems, "YOU ENCOUNTER A LOT OF COBWEB AS YOU GO DOWN THE STAIRWAY. IT GETS DARKER THE DEEPER YOU GO. AT THE END, HOWEVER, YOU SEE A LIGHT. YOU ENTER A SMALL, LIT-UP CAVE. THE CANDLES ILLUMANTING THE CAVE ARE ABOUT TO GO OUT. IT LOOKS LIKE SOMEBODY OCCUPIED THIS PLACE FOR A COUPLE DAYS. THERE ARE SEVERAL ANIMAL SKINS HUNG ON THE WALLS AND LAID ON THE FLOOR.");
 	bRoom = new Room("BACKROOM",brItems, "YOU ENTER A ROOM FILLED WITH SHELVES OF BOOKS. IT DOESN'T SEEM LIKE THIS PART OF THE BUILDING WAS AFFECTED BY FIRE. THERE IS A FANCY DESK AT THE BACK OF THE ROOM. ON THE DESK IS A SHINY GLASS BALL.");
 	
+	// Setting movable direction for the room 'Shack'
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 
 	Shack->setWest(NULL);
 	Shack->setObstacleN(door);
 
+	// Setting movable direction for the room 'Village Center'
 	VillageCent->setNorth(LargeHouse);
 	VillageCent->setSouth(Shack);
 	VillageCent->setEast(Graveyard);
@@ -112,12 +114,14 @@ int main()
 	VillageCent->setObstacleE(gate);
 	VillageCent->setObstacleS(NULL);
 	
+	// Setting movable direction for the room 'Graveyard'
 	Graveyard->setNorth(NULL);
 	Graveyard->setSouth(uTomb); 
 	Graveyard->setEast(NULL); 
 	Graveyard->setWest(VillageCent);
 	Graveyard->setObstacleS(tomb);
 
+	// Setting movable direction for the room 'Shack'
 	uTomb->setNorth(Graveyard);
 	uTomb->setSouth(NULL);
 	uTomb->setEast(NULL);
