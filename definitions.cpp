@@ -134,11 +134,11 @@ void Player::doAction(string verb, string noun)
 		else
 			cout << "Cannot examine " << noun << "." << endl;
 	}
-	else if(verb == "READ")//Read reads an item if it is a "book"
+	/*else if(verb == "READ")//Read reads an item if it is a "book"
 	{
 		Item* it = getInventory()->findName(noun);
 		cout << it->read();
-	}
+	}*/
 	else if(verb == "USE")//Used to carry out actions on targets
 	{
 		if(getInventory()->findName(noun) != NULL)
