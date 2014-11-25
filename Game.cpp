@@ -70,7 +70,6 @@ int main()
 	gold->setTarget(guard);
 
 	Item* pStone = new Item("PHILOSOPHER'S_STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
-
 	pStone->setiTarget(aTable); pStone->setProduct(gold);
 
 	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
@@ -217,7 +216,7 @@ int main()
 	begger->getInventory()->add(lockpick);
 	begger->setOccur("\"OH DING! THERE YOU ARE! NOW, LET US CONTINUE OUR JOURNEY TO THE WEST. TO SHOW MY APPRECIATION, TAKE THIS MY YOUNG LAD.\"\n\nHE GAVE YOU A LOCKPICK.\n\n");
 
-	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "STONE");
+	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "PHILOSOPHER'S_STONE");
 	oldman->setFT("\"WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE\nAND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE...\"");
 	oldman->setAT("\"KNOWLEDGE IS POWER AND POWER IS FREEDOM!\"");
 	VillageCent->setNPC(oldman);
@@ -273,27 +272,15 @@ int main()
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
 
 	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
-
-
-
 	// Rooms Deallocations	
 	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
 	delete uTomb; delete bRoom; delete backyard; delete storage;
 	// Items Deallocations
-	delete vItems;
-	delete sItems;
-	delete bItems;
-	delete gItems;
-	delete lItems;
-	delete uItems;
-	delete byItems;
-	delete stItems;
-	delete brItems;
+	delete vItems;delete sItems;delete bItems;delete gItems;delete lItems;
+	delete uItems;delete byItems;delete stItems;delete brItems;
 	// NPCs Deallocation
-	delete player;
-	delete lilgirl;
-	delete oldman;
-	delete begger;
+	delete player;delete lilgirl;
+	delete oldman;delete begger;
 
 	system("PAUSE");
 
