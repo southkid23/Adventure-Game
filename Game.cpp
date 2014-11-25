@@ -149,7 +149,7 @@ int main()
 			;
 		else if (ss.rdbuf()->in_avail() != 0) // Check if there're any words left in buffer, if there are, then user input was more than 2 words.
 		{
-			cout << "Please only enter up to 2 words only." << endl;
+			cout << "PLEASE ENTER ONLY 2 WORDS." << endl;
 			noun = ""; // Clears the variables
 			verb = "";
 		}

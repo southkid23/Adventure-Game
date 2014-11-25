@@ -31,7 +31,7 @@ private:
 	string itemName;//Item name
 	string itemInfo;//Item Description
 	Obstacle* target;//what Item can be used on
-	bool isTakeable;//If an item is pickable
+	bool isTakeable;bool isReadable;//If an item is pickable or readable
 	string book;//When item is read(if book)
 	//new stuff
 	Item* iTarget;Item* product;
@@ -39,7 +39,7 @@ private:
 
 public:
 	Item(){}
-	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isTakeable = isT;target = NULL;iTarget = NULL;product = NULL;nTarget = NULL;}//Item Constructor
+	Item(string thing, string info, bool isT){itemName = thing; itemInfo = info; isTakeable = isT;target = NULL;iTarget = NULL;product = NULL;nTarget = NULL;isReadable = false;}//Item Constructor
 	virtual ~Item(){};
 	void setName(string thing){itemName = thing;}//Sets item name
 	void setInfo(string info){itemInfo = info;}//Sets item description
@@ -55,6 +55,7 @@ public:
 	Item* getiTarget()const{return iTarget;}
 	Item* getProduct()const{return product;}
 	bool isTak()const{return isTakeable;}// returns if takeable or not
+	bool isRead()const{return isReadable;}
 	bool worksOn(Obstacle* t)const{return t == target;}//check if item is used on another item
 };
 
