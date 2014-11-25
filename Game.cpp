@@ -256,6 +256,12 @@ int main()
 			noun = ""; // Clears the variables
 			verb = "";
 		}
+		
+		else if((verb == "READ" && noun == "BLACKNOTE") && (player->getInventory()->findName(noun) != NULL))
+		{
+			cout << "AS YOU READ, LITTLE FRAGMENTS OF YOUR PAST START COMING BACK TO YOU. YOU REALIZE THAT YOU ARE A SERIAL KILLER AND THAT YOU CAUSED THE FIRE IN THE VILLAGE. YOU FRANTICALLY LOOK AROUND AND REALIZED THAT THIS IS YOUR BACKYARD. YOU REMEMBER THAT DEEPER IN THE HOLE YOU JUST DUG, YOU BURIED SOMEBODY...\n";
+			break;
+		}
 		else
 			player->doAction(verb, noun);
 	}
