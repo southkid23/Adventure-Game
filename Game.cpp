@@ -68,13 +68,9 @@ int main()
 
 	Item* gold = new Item("GOLD", "PURE GOLD. CAN CORRUPT EVEN THE MOST INNOCENT.", true);
 	gold->setTarget(guard);
-<<<<<<< HEAD
 
 	Item* pStone = new Item("PHILOSOPHER'S_STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
-=======
-	
-	Item* pStone = new Item("STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
->>>>>>> 66747f00790d86836a17acce80df5cc26cb534f7
+
 	pStone->setiTarget(aTable); pStone->setProduct(gold);
 
 	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
@@ -275,27 +271,19 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
-	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
-
+	
+	delete shovel;delete blacknote;delete dirt;
+	delete explosive, desk, gNote, apple, ckey, lchest, fbook, key, pStone, gold, lockpick, bananaskin, aTable, glassBall, bedFrame, Monkey,crowbar;
 	// Rooms Deallocations	
 	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
 	delete uTomb; delete bRoom; delete backyard; delete storage;
 	// Items Deallocations
-	delete vItems;
-	delete sItems;
-	delete bItems;
-	delete gItems;
-	delete lItems;
-	delete uItems;
-	delete byItems;
-	delete stItems;
-	delete brItems;
+	delete vItems;delete sItems;delete bItems;delete gItems;delete lItems;
+	delete uItems;delete byItems;delete stItems;delete brItems;
 	// NPCs Deallocation
-	delete player;
-	delete lilgirl;
-	delete oldman;
-	delete begger;
-	
+	delete player;delete lilgirl;
+	delete oldman;delete begger;
+
 	system("PAUSE");
 
 }
