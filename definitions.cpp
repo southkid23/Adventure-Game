@@ -48,11 +48,7 @@ ostream& Room::roomNPC(ostream& out)
 		out << "THERE IS NO-ONE IN THIS ROOM";
 	else
 	{
-<<<<<<< HEAD
-		out << "PEOPLE IN THIS  ROOM:\n" << "- " << npc->getName();
-=======
 		out << "PEOPLE IN THIS AREA:\n" << npc->getName();
->>>>>>> 5bb3d76162870fce2163ec643e66533be48a618d
 	}
 	return out;
 }
