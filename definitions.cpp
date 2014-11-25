@@ -45,7 +45,7 @@ void Room::enter()
 ostream& Room::roomNPC(ostream& out)
 {
 	if(npc == NULL)
-		out << "THERE IS NO-ONE IN THIS ROOM";
+		out << "THERE IS NO-ONE IN THIS AREA.";
 	else
 	{
 		out << "PEOPLE IN THIS AREA:\n" << npc->getName();
@@ -57,11 +57,11 @@ ostream& Room::roomitems(ostream& out)
 {
 	if(!rItems->isEmpty())
 	{
-		out << "ITEM(S) IN ROOM:\n";
+		out << "ITEM(S) IN AREA:\n";
 		rItems->listAll(out);out << "";
 	}
 	else
-		out << "THERE IS NOTHING IN THIS ROOM." << endl;
+		out << "THERE IS NOTHING IN THIS AREA." << endl;
 	return out;
 }
 
@@ -132,7 +132,7 @@ void Player::doAction(string verb, string noun)
 			cout << it->getInfo() << endl << endl;
 		}
 		else
-			cout << "Cannot examine " << noun << "." << endl;
+			cout << "CANNOT EXAMINE " << noun << "." << endl;
 	}
 	/*else if(verb == "READ")//Read reads an item if it is a "book"
 	{
@@ -173,7 +173,7 @@ void Player::doAction(string verb, string noun)
 
 				else
 				{
-					cout << "Cannot use " << noun << " on " << target << ".\n\n";
+					cout << "CANNOT USE " << noun << " ON " << target << ".\n\n";
 				}
 
 			}
@@ -245,12 +245,12 @@ void Player::doAction(string verb, string noun)
 			}
 			else
 			{
-				cout << "There is no one by the name of " << noun << " in here.\n\n";
+				cout << "THERE IS NO ONE BY THE NAME OF " << noun << " IN HERE.\n\n";
 			}
 		}
 		else
 		{
-			cout << "There is no one to speak to.\n\n";
+			cout << "THERE IS NO ONE TO SPEAK TO.\n\n";
 		}
 	}
 	else if(verb == "GIVE")
@@ -259,7 +259,7 @@ void Player::doAction(string verb, string noun)
 		{
 			if(getInventory()->findName(noun)->getnTarget() != NULL)
 			{
-				cout << "To? ";
+				cout << "TO? ";
 				string target = ""; cin >> target;
 				toUpper(target);
 				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
@@ -269,13 +269,13 @@ void Player::doAction(string verb, string noun)
 					getInventory()->add(currentR()->getNPC()->getHas());
 				}
 				else
-				cout << "Cannot give " << noun << " to " << target << ".\n\n";
+				cout << "CANNOT GIVE " << noun << " TO " << target << ".\n\n";
 			}
 			else
-				cout << noun << " cannot be given.\n\n";
+				cout << noun << " CANNOT BE GIVEN.\n\n";
 		}
 		else
-			cout << "You do not have a " << noun << " to give.\n\n";
+			cout << "YOU DO NOT HAVE A " << noun << " TO GIVE.\n\n";
 	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
@@ -292,7 +292,7 @@ void Player::doAction(string verb, string noun)
 			listAllItems();
 	}
 	else
-		cout << "Sorry but I don't understand.\n" << endl;
+		cout << "-SORRY BUT I DO NOT UNDERSTAND.-\n" << endl;
 }
 
 
