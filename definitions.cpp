@@ -48,7 +48,11 @@ ostream& Room::roomNPC(ostream& out)
 		out << "THERE IS NO-ONE IN THIS ROOM";
 	else
 	{
+<<<<<<< HEAD
 		out << "PEOPLE IN THIS  ROOM:\n" << "- " << npc->getName();
+=======
+		out << "PEOPLE IN THIS AREA:\n" << npc->getName();
+>>>>>>> 5bb3d76162870fce2163ec643e66533be48a618d
 	}
 	return out;
 }
@@ -149,23 +153,24 @@ void Player::doAction(string verb, string noun)
 				string target = ""; cin >> target; cout << endl; 
 				toUpper(target);
 	
-				if(currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				if(currentR()->getObstacleN() != NULL && (currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 				{
+					cout << "HELLO";
 					cout << currentR()->getObstacleN()->getOccur() << endl;
 					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
-				else if(currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				else if(currentR()->getObstacleE() != NULL && (currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 				{
 					cout << currentR()->getObstacleE()->getOccur() << endl;
 					delete currentR()->getObstacleE(); currentR()->setObstacleE(NULL);
 				}
-				else if(currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				else if(currentR()->getObstacleS() != NULL && (currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 				{
 					cout << currentR()->getObstacleS()->getOccur() << endl;
 					delete currentR()->getObstacleS(); currentR()->setObstacleS(NULL);
 				}
 
-				else if(currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target)
+				else if(currentR()->getObstacleW() != NULL && (currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 				{
 					cout << currentR()->getObstacleW()->getOccur() << endl;
 					delete currentR()->getObstacleW(); currentR()->setObstacleW(NULL);
