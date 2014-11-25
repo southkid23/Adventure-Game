@@ -119,6 +119,8 @@ int main()
 	// Items in the Backroom of the Bank
 	brItems->add(desk);
 
+	byItems->add(dirt);
+
 	// Items in the Storage
 	stItems->add(shovel); 
 
