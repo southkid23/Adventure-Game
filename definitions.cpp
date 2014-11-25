@@ -151,7 +151,6 @@ void Player::doAction(string verb, string noun)
 	
 				if(currentR()->getObstacleN() != NULL && (currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 				{
-					cout << "HELLO";
 					cout << currentR()->getObstacleN()->getOccur() << endl;
 					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 				}
@@ -192,7 +191,10 @@ void Player::doAction(string verb, string noun)
 						cout << "YOU USE " << noun << " ON " << target << ".";
 						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
 						getInventory()->add(getInventory()->findName(noun)->getProduct());
-						getInventory()->removeItem(noun);getInventory()->removeItem(target);
+						if(getInventory()->findName(target) != NULL)
+							{getInventory()->removeItem(noun);getInventory()->removeItem(target);}
+						else
+							{getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);}
 					}
 					if(currentR()->getrItems()->find(target) != 0)
 					{

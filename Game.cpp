@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse;
+	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* Undertomb;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	 
@@ -28,7 +28,6 @@ int main()
 	window->prevent("NORTH");
 	window->setpInfo("THERE ARE SEVERAL PLANKS OF WOOD NAILED TO THE DOOR. THE WINDOW NEXT TO THE DOOR IS A LITTLE CRACKED."); 
 	window->setOccur("THE WINDOW BREAKS.");
-	
 	Obstacle* gate = new Obstacle("GATE");
 	gate->prevent("EAST");
 	gate->setpInfo("THE GATE TO THE GRAVEYARD IS FIRMLY LOCKED.");
@@ -36,12 +35,12 @@ int main()
 
 	Obstacle* tomb = new Obstacle("TOMB");
 	tomb->prevent("SOUTH");
-	tomb->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A LITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
+	tomb->setpInfo("THERE IS AN OLD AND ANCIENT TOMB. THE TOP OF THE TOMB SEEMS TO BE SHIFTED A \nLITLE. YOU TRY LIFTING THE TOP BUT IT IS TOO HEAVY.");
 	tomb->setOccur("YOU USE THE CROWBAR TO LIFT THE TOP OF THE TOMB. IT MAKES A LOUD SOUND AS IT HITS THE GROUND. YOU NOTICE THAT THERE IS A STAIRWAY THAT LEADS DOWN.");
 
 	//Items
 	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true);
-	crowbar->setTarget(gate);
+	crowbar->setTarget(tomb);
 	
 	Item* bananaskin = new Item("SKIN", "USELESS...", true);
 
@@ -56,22 +55,24 @@ int main()
 	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", false);
 	
 	Item* ckey = new Item("CKEY", "LOOKS LIKE A KEY TO A CHEST...", true);
-	ckey->setiTarget(lchest);ckey->setProduct(fbook);
+	ckey->setiTarget(lchest); ckey->setProduct(fbook);
 
 	Item* apple = new Item("APPLE", "A SHINY JUICY APPLE.", true);
 
-	
+	Item* gNote = new Item("NOTE", "THE MESSAGE ON THE NOTE MADE YOU MAD AND YOU FEEL LIKE BREAKING THE TOMB RIGHT \nBEHIND YOU.", true);
+
 	sItems->add(apple);
 	sItems->add(ckey);
 	sItems->add(bananaskin);
 	sItems->add(lchest);
+	gItems->add(gNote);
 
 
 	//Defining Rooms
 	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. THERE IS A LITTLE GIRL STRANGELY LOOKING AT\nYOU. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR OVERUSED.\nTHE DOOR TO THE NORTH LEADS TO OUTSIDE.");
 	VillageCent = new Room("VILLAGE CENTER", vItems, "YOU ARE IN THE CENTER OF THE VILLAGE THERE IS A SMALL WELL. NEXT TO THE WELL IS AN OLD MAN WITH A LONG BEARD AND A LONG STAFF. HE APPEARS TO BE VERY WISE, YET VERY CONFUSED. YOU TRY TALKING TO HIM BUT ALL HE DOES IS MUMBLE. TO THE SOUTH OF THE CENTER IS THE SHACK. TO THE EAST IS A FENCED GRAVEYARD. TO THE WEST IS A BANK. TO THE NORTH IS A MANSION.");
 	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES.IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
-	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY.");
+	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY. ONE OF THE TOMB \nLOOKS DIFFERENT. HMmM...");
 	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
 
 
@@ -94,6 +95,7 @@ int main()
 	Graveyard->setSouth(NULL); 
 	Graveyard->setEast(NULL); 
 	Graveyard->setWest(VillageCent);
+	Graveyard->setObstacleS(tomb);
 	
 	Bank->setNorth(NULL); 
 	Bank->setSouth(NULL); 
