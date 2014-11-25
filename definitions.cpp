@@ -302,7 +302,7 @@ void Player::doAction(string verb, string noun)
 		{	
 			getInventory()->add(currentR()->getrItems()->findName(noun));
 			currentR()->getrItems()->removeItem(noun);
-			cout << noun << " IS NOW IN YOUR INVENTORY." << endl;
+			cout << noun << " IS NOW IN YOUR INVENTORY.\n" << endl;
 		}
 	}
 	else if(verb == "TALK")
@@ -371,7 +371,7 @@ void Player::doAction(string verb, string noun)
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "THIS GAME ACCEPTS A MAX OF TWO WORD COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO\nSOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
-		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- BACK\n- LIST\n- HELP\n";
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- USE\n- TAKE\n- DROP\n- TALK\n- GIVE\n- BACK\n- LIST\n- HELP\n- EXAMINE\n ";
 		cout << "\nWHEN IN DOUBT, EXAMINE ITEMS...";//PressEnterToContinue();
 	}
 	else if(verb == "LIST")
