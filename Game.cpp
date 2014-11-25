@@ -269,10 +269,27 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
-	
+
+	// Rooms Deallocations	
 	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
 	delete uTomb; delete bRoom; delete backyard; delete storage;
+	// Items Deallocations
+	delete vItems;
+	delete sItems;
+	delete bItems;
+	delete gItems;
+	delete lItems;
+	delete uItems;
+	delete byItems;
+	delete stItems;
+	delete brItems;
+	// NPCs Deallocation
+	delete player;
+	delete lilgirl;
+	delete oldman;
+	delete begger;
 
 	system("PAUSE");
+
 }
 
