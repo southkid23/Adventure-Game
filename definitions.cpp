@@ -123,7 +123,7 @@ void Player::doAction(string verb, string noun)
 			else
 				cout << "THERE'S NOTHING THERE." << endl << endl;
 		}
-		else
+		else if(noun == "WEST")
 		{
 			if(currentR()->getObstacleW() != NULL && currentR()->getObstacleW()->prevent() == "WEST")
 				cout << currentR()->getObstacleW()->getpInfo() << endl << endl;
