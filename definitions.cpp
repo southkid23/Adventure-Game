@@ -200,8 +200,10 @@ void Player::doAction(string verb, string noun)
 					{
 						cout << "YOU USE " << noun << " ON " << target << ".";
 						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
-						getInventory()->add(getInventory()->findName(noun)->getProduct());
-						getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);
+						if(getInventory()->findName(target) != NULL)
+							{getInventory()->removeItem(noun);getInventory()->removeItem(target);}
+						else
+							{getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);}
 					}
 					else
 						cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
