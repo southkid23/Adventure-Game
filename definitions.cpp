@@ -187,12 +187,19 @@ void Player::doAction(string verb, string noun)
 					cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
 				else
 				{
-					if(target == getInventory()->findName(noun)->getiTarget()->getName())
+					if(getInventory()->find(target) != 0)
 					{
 						cout << "YOU USE " << noun << " ON " << target << ".";
 						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
 						getInventory()->add(getInventory()->findName(noun)->getProduct());
 						getInventory()->removeItem(noun);getInventory()->removeItem(target);
+					}
+					if(currentR()->getrItems()->find(target) != 0)
+					{
+						cout << "YOU USE " << noun << " ON " << target << ".";
+						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
+						getInventory()->add(getInventory()->findName(noun)->getProduct());
+						getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);
 					}
 					else
 						cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
