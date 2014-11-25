@@ -75,7 +75,7 @@ int main()
 
 	Item* fbook = new Item("BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("CHEST(CANNOT TAKE)", "WONDER WHAT'S INSIDE...", false);
+	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", false);
 	
 	Item* ckey = new Item("CKEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest); ckey->setProduct(fbook);
@@ -165,7 +165,7 @@ int main()
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("\"THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN... OH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\"\n\nSHE GIVES YOU A KEY.\n\n");
+	lilgirl->setOccur("\"THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN...\nOH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\"\n\nSHE GIVES YOU A KEY.\n");
 
 	NPC* begger = new NPC(Bank, "BEGGER", "PICKLOCK");
 	begger->setFT("\"HEY THERE YOUNG LAD, DID YOU HAPPEN TO SEE MY DING RUNNING AROUND THE AREA? YOU WILL BE REWARDED IF YOU HELP ME FIND HIM\"");
@@ -176,8 +176,8 @@ int main()
 	begger->setOccur("\"OH DING! THERE YOU ARE! NOW, LET US CONTINUE OUR JOURNEY TO THE WEST. TO SHOW MY APPRECIATION, TAKE THIS PICKLOCK MY YOUNG LAD.\"\n\n HE GAVE YOU A PICKLOCK.\n\n");
 
 	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "STONE");
-	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE.'");
-	oldman->setAT("'KNOWLEDGE IS POWER AND POWER IS FREEDOM!'");
+	oldman->setFT("\"WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE...\"");
+	oldman->setAT("\"KNOWLEDGE IS POWER AND POWER IS FREEDOM!\"");
 	VillageCent->setNPC(oldman);
 	fbook->setnTarget(oldman);
 	oldman->getInventory()->add(pStone);

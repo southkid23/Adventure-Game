@@ -46,7 +46,7 @@ void Room::enter()
 	else
 		cout << "YOU ARE BACK TO THE " << getName() << endl << endl;
 	roomitems(cout);cout << "" << endl;
-	roomNPC(cout);cout << "" << endl << endl;
+	roomNPC(cout);cout << "" << endl;
 	hasBeen = true;
 }
 
@@ -56,7 +56,7 @@ ostream& Room::roomNPC(ostream& out)
 		out << "THERE IS NO-ONE IN THIS AREA.";
 	else
 	{
-		out << "PEOPLE IN THIS AREA:\n" << "- " << npc->getName();
+		out << "PEOPLE IN THIS AREA:\n" << "- " << npc->getName() << endl;
 	}
 	return out;
 }
@@ -78,11 +78,13 @@ void Player::doAction(string verb, string noun)
 	//cout << "verb is " << verb << endl << "Noun is " << noun << endl;
 	if(verb == "GO")
 	{
-		if(noun == "")
+		while(noun == "")
 		{
-			cout << "GO WHERE?";cin >> noun;toUpper(noun);
+			cout << "GO WHERE?\n";cin >> noun;toUpper(noun);
 		}
-		if(noun == "NORTH")//To Go North//Same for south,east and west
+		if(noun == "BACK")
+			cout << "OKAY...\n\n";
+		else if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
 			if(currentR()->getObstacleN() != NULL && currentR()->getObstacleN()->prevent() == "NORTH")
 				cout << currentR()->getObstacleN()->getpInfo() << endl << endl;
@@ -137,29 +139,44 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "EXAMINE")//Examine returns an item description
 	{
-		if(noun == "")
-		{
-			cout << "EXAMINE WHAT?\n";getInventory()->listAll(cout); cout << "\n";
-			if(!getInventory()->isEmpty())
-			{
-				cin >> noun;toUpper(noun);
-			}
-		}
-		if(getInventory()->find(noun) != 0)
-		{	
-			cout << getInventory()->findName(noun)->getInfo() << endl << endl;
-		}
+		if(getInventory()->isEmpty())
+			cout << "YOU DO NOT HAVE ANYTHING TO EXAMINE.\n\n";
 		else
-			cout << "CANNOT EXAMINE " << noun << ".\n" << endl;
+		{
+			while(noun == "")
+			{
+				cout << "EXAMINE WHAT?\n";
+				if(!getInventory()->isEmpty())
+				{
+					getInventory()->listAll(cout); cout << "";
+				}
+				if(!currentR()->getrItems()->isEmpty())
+				{
+					currentR()->getrItems()->listAll(cout); cout << "";
+				}
+				cout << endl;
+				cin >> noun;toUpper(noun);cout << endl;
+			}
+			if(noun == "BACK")
+				cout << "OKAY...\n\n";
+			else if(getInventory()->find(noun) != 0)
+				cout << getInventory()->findName(noun)->getInfo() << endl;
+			else if(currentR()->getrItems()->find(noun) != 0)
+				cout << currentR()->getrItems()->findName(noun)->getInfo() << endl;
+			else
+				cout << "NO SUCH ITEM EXISTS." << endl;
+		}
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
-		if(noun == "")
+		while(noun == "")
 		{
 			cout << "READ WHAT?\n";getInventory()->listAll(cout); cout << "\n";
 			cin >> noun;toUpper(noun);
 		}
-		if(getInventory()->find(noun) == 0)
+		if(noun == "BACK")
+			cout << "OKAY...\n\n";
+		else if(getInventory()->find(noun) == 0)
 			cout << "YOU DO NOT HAVE THIS ITEM.";
 		if(!getInventory()->findName(noun)->isRead())
 			cout << noun << " CANNOT BE READ.";
@@ -171,107 +188,133 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "USE")//Used to carry out actions on targets
 	{
-		if(getInventory()->findName(noun) != NULL)
-		{	
-			if(getInventory()->findName(noun)->getTarget() != NULL)
+		if(getInventory()->isEmpty())
+			cout << "YOU DO NOT HAVE ANYTHING TO USE.\n\n";
+		else
+		{
+			while(noun == "")
 			{
-				cout << "USE " << noun << " ON WHAT? ";
-				string target = ""; cin >> target; cout << endl; 
-				toUpper(target);
-	
-				if(currentR()->getObstacleN() != NULL && (currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
-				{
-					cout << currentR()->getObstacleN()->getOccur() << endl;
-					delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
-				}
-				else if(currentR()->getObstacleE() != NULL && (currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
-				{
-					cout << currentR()->getObstacleE()->getOccur() << endl;
-					delete currentR()->getObstacleE(); currentR()->setObstacleE(NULL);
-				}
-				else if(currentR()->getObstacleS() != NULL && (currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
-				{
-					cout << currentR()->getObstacleS()->getOccur() << endl;
-					delete currentR()->getObstacleS(); currentR()->setObstacleS(NULL);
-				}
-
-				else if(currentR()->getObstacleW() != NULL && (currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
-				{
-					cout << currentR()->getObstacleW()->getOccur() << endl;
-					delete currentR()->getObstacleW(); currentR()->setObstacleW(NULL);
-				}		
-
-				else
-				{
-					cout << "CANNOT USE " << noun << " ON " << target << ".\n\n";
-				}
-
+				cout << "USE WHAT?\n";getInventory()->listAll(cout);cout << "\n";
+				cin >> noun;toUpper(noun);
 			}
-			else if(getInventory()->findName(noun)->getiTarget() != NULL)
-			{
-				cout << "USE " << noun << " ON WHAT? ";
-				string target = ""; cin >> target; cout << endl; 
-				toUpper(target);
-				if(getInventory()->find(target) == 0 && currentR()->getrItems()->find(target) == 0)
-					cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
-				else
+			if(noun == "BACK")
+				cout << "OKAY...\n\n";
+			else if(getInventory()->find(noun) != 0)
+			{	
+				if(getInventory()->findName(noun)->getTarget() != NULL)
 				{
-					if(getInventory()->find(target) != 0)
+					cout << "\nUSE " << noun << " ON WHAT?\n";
+					string target = ""; cin >> target; cout << endl; 
+					toUpper(target);
+	
+					if(currentR()->getObstacleN() != NULL && (currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << "YOU USE " << noun << " ON " << target << ".";
-						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
-						getInventory()->add(getInventory()->findName(noun)->getProduct());
-						if(getInventory()->findName(target) != NULL)
-							{getInventory()->removeItem(noun);getInventory()->removeItem(target);}
-						else
-							{getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);}
+						cout << currentR()->getObstacleN()->getOccur() << endl;
+						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 					}
-					if(currentR()->getrItems()->find(target) != 0)
+					else if(currentR()->getObstacleE() != NULL && (currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << "YOU USE " << noun << " ON " << target << ".";
-						cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
-						getInventory()->add(getInventory()->findName(noun)->getProduct());
-						getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);
+						cout << currentR()->getObstacleE()->getOccur() << endl;
+						delete currentR()->getObstacleE(); currentR()->setObstacleE(NULL);
 					}
+					else if(currentR()->getObstacleS() != NULL && (currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
+					{
+						cout << currentR()->getObstacleS()->getOccur() << endl;
+						delete currentR()->getObstacleS(); currentR()->setObstacleS(NULL);
+					}
+
+					else if(currentR()->getObstacleW() != NULL && (currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
+					{
+						cout << currentR()->getObstacleW()->getOccur() << endl;
+						delete currentR()->getObstacleW(); currentR()->setObstacleW(NULL);
+					}		
+
 					else
-						cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
+					{
+						cout << "CANNOT USE " << noun << " ON " << target << ".\n";
+					}
+
 				}
+				else if(getInventory()->findName(noun)->getiTarget() != NULL)
+				{
+					cout << "\nUSE " << noun << " ON WHAT?\n";
+					if(!getInventory()->isEmpty())
+					{
+						getInventory()->listAll(cout); cout << "";
+					}
+					if(!currentR()->getrItems()->isEmpty())
+					{
+						currentR()->getrItems()->listAll(cout); cout << "";
+					}
+					cout << endl;
+					string target = ""; cin >> target; cout << endl; 
+					toUpper(target);
+					if(getInventory()->find(target) == 0 && currentR()->getrItems()->find(target) == 0)
+						cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
+					else
+					{
+						if(getInventory()->find(target) != 0)
+						{
+							cout << "YOU USE " << noun << " ON " << target << ".";
+							cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
+							getInventory()->add(getInventory()->findName(noun)->getProduct());
+							if(getInventory()->findName(target) != NULL)
+								{getInventory()->removeItem(noun);getInventory()->removeItem(target);}
+							else
+								{getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);}
+						}
+						if(currentR()->getrItems()->find(target) != 0)
+						{
+							cout << "YOU USE " << noun << " ON " << target << ".";
+							cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
+							getInventory()->add(getInventory()->findName(noun)->getProduct());
+							getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);
+						}
+						else
+							cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
+					}
+				}
+				else
+					cout << endl << noun << " cannot be used." << ".\n";
 			}
 			else
-				cout << noun << " cannot be used." << ".\n\n";
+				cout << "\nYOU DON'T HAVE A(N) " << noun << " TO USE.\n";
 		}
-		else
-			cout << "YOU DON'T HAVE A " << noun << " TO USE.\n\n";
 	}
 	else if(verb == "TAKE") // takes an item
 	{
-		if(noun == "")
+		while(noun == "")
 		{
-			cout << "TAKE WHAT?\n"; currentR()->roomitems(cout);cout << "\n";
+			cout << "TAKE WHAT?\n"; currentR()->getrItems()->listAll(cout);cout << "\n";
 			cin >> noun;cout << endl;toUpper(noun);
 		}
-		if(currentR()->getrItems()->findName(noun) == NULL || !currentR()->getrItems()->findName(noun)->isTak())
+		if(noun == "BACK")
+			cout << "OKAY...\n\n";
+		else if(currentR()->getrItems()->findName(noun) == NULL || !currentR()->getrItems()->findName(noun)->isTak())
 		{
-			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl;
+			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "";
 		}
 		else
 		{	
 			getInventory()->add(currentR()->getrItems()->findName(noun));
 			currentR()->getrItems()->removeItem(noun);
-			cout << noun << " IS NOW IN YOUR INVENTORY." << endl << endl;
+			cout << noun << " IS NOW IN YOUR INVENTORY." << endl;
 		}
 	}
 	else if(verb == "TALK")
 	{
-		if(noun == "")
+		while(noun == "")
 		{
-			cout << "TALK TO WHO?\n\n";cin >> noun;toUpper(noun);
+			cout << "TALK TO WHO?\n- " << currentR()->getNPC()->getName() << endl << endl;
+			cin >> noun;toUpper(noun);
 		}
-		if(currentR()->getNPC() != NULL)
+		if(noun == "BACK")
+			cout << "OKAY...\n\n";
+		else if(currentR()->getNPC() != NULL)
 		{
 			if(currentR()->getNPC()->getName() == noun)
 			{
-				cout << currentR()->getNPC()->talk() << endl << endl;
+				cout << currentR()->getNPC()->talk() << endl;
 			}
 			else
 			{
@@ -285,64 +328,87 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "GIVE")
 	{
-		if(getInventory()->find(noun) != 0)
+		if(getInventory()->isEmpty())
+			cout << "YOU DO NOT HAVE ANYTHING TO GIVE.\n\n";
+		else
 		{
-			if(getInventory()->findName(noun)->getnTarget() != NULL)
+			while(noun == "")
 			{
-				cout << "TO? ";
-				string target = ""; cin >> target;
-				toUpper(target);
-				if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
-				{
-					cout << endl << currentR()->getNPC()->getOccur();
-					getInventory()->removeItem(noun);
-					getInventory()->add(currentR()->getNPC()->getHas());
-				}
+				cout << "GIVE WHAT?\n";getInventory()->listAll(cout);cout << "\n";
+				cin >> noun;toUpper(noun);
+			}	
+			if(noun == "BACK")
+				cout << "OKAY...\n\n";
+			else if(getInventory()->find(noun) != 0)
+			{
+				if(getInventory()->findName(noun)->getnTarget() == NULL)
+					cout << endl << noun << " CANNOT BE GIVEN.\n";
 				else
-				cout << "CANNOT GIVE " << noun << " TO " << target << ".\n\n";
+				{
+					cout << "\nGIVE " << noun << " TO?\n- " << currentR()->getNPC()->getName() << endl << endl;
+					string target = ""; cin >> target;
+					toUpper(target);
+					if(target != currentR()->getNPC()->getName())
+						cout << "\nTHER IS NO " << target << " IN THIS ROOM.\n";
+					else if(getInventory()->findName(noun)->getnTarget()->getName() == target && currentR()->getNPC()->getName() == target)
+					{
+						cout << endl << currentR()->getNPC()->getOccur();
+						getInventory()->removeItem(noun);
+						getInventory()->add(currentR()->getNPC()->getHas());
+					}
+					else
+						cout << "\nCANNOT GIVE " << noun << " TO " << target << ".\n";
+				}
 			}
 			else
-				cout << noun << " CANNOT BE GIVEN.\n\n";
+				cout << "\nYOU DO NOT HAVE A " << noun << " TO GIVE.\n";
 		}
-		else
-			cout << "YOU DO NOT HAVE A " << noun << " TO GIVE.\n\n";
 	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
-		cout << "THIS GAME ACCEPTS A MAX OF TWO WORD COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO SOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
-		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";PressEnterToContinue();
+		cout << "THIS GAME ACCEPTS A MAX OF TWO WORD COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO\nSOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";//PressEnterToContinue();
 	}
 	else if(verb == "LIST")
 	{
-		if(noun == "")
+		while(noun == "")
 		{
-			cout << "INVENTORY OR ROOM_ITEMS?\n";
-			cin >> noun;toUpper(noun);
+			cout << "\nINVENTORY OR ROOM_ITEMS?\n";
+			cin >> noun;toUpper(noun);cout << endl;
 		}
-		if(noun == "INVENTORY")
+		if(noun == "BACK")
+			cout << "OKAY...\n\n";
+		else if(noun == "INVENTORY")
 		{
-			getInventory()->listAll(cout);cout << "";
+			getInventory()->listAll(cout);cout << "\n";
 		}
 		else if(noun == "ROOM_ITEMS")
 		{
-			currentR()->getrItems()->listAll(cout);cout << "";
+			currentR()->getrItems()->listAll(cout);cout << "\n";
 		}
 	}
 	else if(verb == "DROP")
 	{
-		if(noun == "")
-		{
-			cout << "DROP WHAT?\n";getInventory()->listAll(cout);cout << "\n";
-			cin >> noun;toUpper(noun);
-		}
-		if(getInventory()->find(noun) != 0)
-		{
-			cout << "YOU HAVE DROPPED " << noun << ".\n\n";
-			currentR()->getrItems()->add(getInventory()->findName(noun));
-			getInventory()->removeItem(noun);
-		}
+		if(getInventory()->isEmpty())
+			cout << "YOU DO NOT HAVE ANYTHING TO DROP.\n\n";
 		else
-			cout << "ITEM NOT IN INVENTORY.\n";
+		{
+			while(noun == "")
+			{
+				cout << "DROP WHAT?\n";getInventory()->listAll(cout);cout << "\n";
+				cin >> noun;toUpper(noun);
+			}
+			if(noun == "BACK")
+				cout << "OKAY...\n\n";
+			else if(getInventory()->find(noun) != 0)
+			{
+				cout << "YOU HAVE DROPPED " << noun << ".\n";
+				currentR()->getrItems()->add(getInventory()->findName(noun));
+				getInventory()->removeItem(noun);
+			}
+			else
+				cout << "ITEM NOT IN INVENTORY.\n";
+		}
 	}
 	else
 		cout << "SORRY BUT I DO NOT UNDERSTAND.\n" << endl;
