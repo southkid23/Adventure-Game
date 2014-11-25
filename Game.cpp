@@ -11,7 +11,7 @@ int main()
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	List* uItems = new List(); List* brItems = new List();
-	 
+	
 
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
@@ -165,7 +165,7 @@ int main()
 	Shack->setNPC(lilgirl);
 	apple->setnTarget(lilgirl);
 	lilgirl->getInventory()->add(key);
-	lilgirl->setOccur("\"THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN... OH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\"\n\nSHE GIVES YOU A KEY.\n\n");
+	lilgirl->setOccur("\"THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN...\nOH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\"\n\nSHE GIVES YOU A KEY.\n");
 
 	NPC* begger = new NPC(Bank, "BEGGER", "PICKLOCK");
 	begger->setFT("\"HEY THERE YOUNG LAD, DID YOU HAPPEN TO SEE MY DING RUNNING AROUND THE AREA? YOU WILL BE REWARDED IF YOU HELP ME FIND HIM\"");
@@ -176,8 +176,8 @@ int main()
 	begger->setOccur("\"OH DING! THERE YOU ARE! NOW, LET US CONTINUE OUR JOURNEY TO THE WEST. TO SHOW MY APPRECIATION, TAKE THIS PICKLOCK MY YOUNG LAD.\"\n\n HE GAVE YOU A PICKLOCK.\n\n");
 
 	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "STONE");
-	oldman->setFT("'WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE.'");
-	oldman->setAT("'KNOWLEDGE IS POWER AND POWER IS FREEDOM!'");
+	oldman->setFT("\"WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE...\"");
+	oldman->setAT("\"KNOWLEDGE IS POWER AND POWER IS FREEDOM!\"");
 	VillageCent->setNPC(oldman);
 	fbook->setnTarget(oldman);
 	oldman->getInventory()->add(pStone);
@@ -186,12 +186,18 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 	
-	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n";
-	cout << "WELCOME TO THE ISA AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
-	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\nFOR COMMAND LIST TYPE \"HELP\"" << endl;
-	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl << endl;
+	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n";
+	cout << "WELCOME TO THE I.S.A. AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
+	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\n";//FOR COMMAND LIST TYPE \"HELP\"" << endl;
+	cout << " \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl << endl;
+	cout << "WOULD YOU LIKE A BRIEF OVERVIEW?(YES/NO)\n";string reply = "";
+	cin >> reply;toUpper(reply); cout << endl << endl;
+	if(reply == "YES"){
+		player->doAction("HELP","");
+	}
+	cout << "\nYOU ARE READY TO BEGIN!!\n";PressEnterToContinue();
 
-	cout << "YOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING\nABOUT YOUR PAST. YOU LOOK AROUND AND THERE'S NOTHING YOU RECOGNIZE.\n\n";
+	cout << "\n\n\nYOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING\nABOUT YOUR PAST. YOU LOOK AROUND AND THERE'S NOTHING YOU RECOGNIZE.\n\n";
 	Shack->enter();
 	while(true)
 	{
@@ -209,13 +215,12 @@ int main()
 			;
 		else if (ss.rdbuf()->in_avail() != 0) // Check if there're any words left in buffer, if there are, then user input was more than 2 words.
 		{
-			cout << "PLEASE ENTER ONLY 2 WORDS." << endl;
+			cout << "PLEASE ENTER NOT MORE THAN 2 WORDS." << endl;
 			noun = ""; // Clears the variables
 			verb = "";
 		}
 		else
 			player->doAction(verb, noun);
-		cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n";
 	}
 }
 
