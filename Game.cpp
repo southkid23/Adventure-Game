@@ -7,9 +7,10 @@ using namespace std;
 
 int main()
 {
-	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* Undertomb;
+	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
+	List* uItems = new List(); List* brItems = new List();
 	 
 
 	//Setting Obstacles
@@ -19,15 +20,16 @@ int main()
 	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	
 
-	/*Obstacle* door = new Obstacle("DOOR"); 
+	Obstacle* door = new Obstacle("DOOR"); 
 	door->prevent("NORTH"); door->setpInfo("DOOR IS LOCKED.");
-	door->setOccur("DOOR GETS BROKEN DOWN.");*/
+	door->setOccur("THROWN TO THE DOOR. DOOR GETS BROKEN DOWN.");
 
 
 	Obstacle* window = new Obstacle("WINDOW");
 	window->prevent("NORTH");
 	window->setpInfo("THERE ARE SEVERAL PLANKS OF WOOD NAILED TO THE DOOR. THE WINDOW NEXT TO THE DOOR IS A LITTLE CRACKED."); 
 	window->setOccur("THE WINDOW BREAKS.");
+
 	Obstacle* gate = new Obstacle("GATE");
 	gate->prevent("EAST");
 	gate->setpInfo("THE GATE TO THE GRAVEYARD IS FIRMLY LOCKED.");
@@ -42,10 +44,18 @@ int main()
 	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true);
 	crowbar->setTarget(tomb);
 	
+	Item* bedFrame = new Item("BED_FRAME","A STURDY METAL BED FRAME WITHOUT A MATTRESS ON IT.", true);
+	bedFrame->setTarget(door);
+
+	Item* aTable = new Item("TABLE", "THE TABLE HAS SOME WEIRD LOOKING SYMBOLS. IT LOOKS LIKE IT MIGHT HAVE BEEN USED FOR WITCHCRAFT OR ALCHEMY.", false);
+
 	Item* bananaskin = new Item("SKIN", "USELESS...", true);
 
+	Item* gold = new Item("GOLD", "PURE GOLD. CAN CORRUPT EVEN THE MOST INNOCENT.", true);
+	gold->setTarget(guard);
+
 	Item* pStone = new Item("STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
-	pStone->setiTarget(bananaskin); pStone->setProduct(crowbar);
+	pStone->setiTarget(aTable); pStone->setProduct(gold);
 
 	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
 	key->setTarget(gate);
@@ -61,27 +71,40 @@ int main()
 
 	Item* gNote = new Item("NOTE", "THE MESSAGE ON THE NOTE MADE YOU MAD AND YOU FEEL LIKE BREAKING THE TOMB RIGHT \nBEHIND YOU.", true);
 
+	// Items in Shack
 	sItems->add(apple);
 	sItems->add(ckey);
 	sItems->add(bananaskin);
 	sItems->add(lchest);
+	sItems->add(bedFrame);
+
+	// Items in VillageCenter
+	vItems->add(crowbar);
+
+	// Items in Graveyard 
 	gItems->add(gNote);
+
+	// Items in Undertomb
+	uItems->add(aTable);
 
 
 	//Defining Rooms
 	Shack = new Room("SHACK", sItems,"YOU ARE IN AN OLD AND DUSTY SHACK. THERE IS A LITTLE GIRL STRANGELY LOOKING AT\nYOU. EVERYTHING SEEMS TO BE WORN OUT FROM AGE OR OVERUSED.\nTHE DOOR TO THE NORTH LEADS TO OUTSIDE.");
 	VillageCent = new Room("VILLAGE CENTER", vItems, "YOU ARE IN THE CENTER OF THE VILLAGE THERE IS A SMALL WELL. NEXT TO THE WELL IS AN OLD MAN WITH A LONG BEARD AND A LONG STAFF. HE APPEARS TO BE VERY WISE, YET VERY CONFUSED. YOU TRY TALKING TO HIM BUT ALL HE DOES IS MUMBLE. TO THE SOUTH OF THE CENTER IS THE SHACK. TO THE EAST IS A FENCED GRAVEYARD. TO THE WEST IS A BANK. TO THE NORTH IS A MANSION.");
-	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES.IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
+	Bank = new Room("BANK", bItems, "THE BANK SEEMS TO BE UNDER CONSTRUCTION DUE TO SOME UNUSUAL DAMAGES. IN THE BANK THERE IS A LOT OF STUFF THAT WAS BURNT FROM THE FIRE. WEIRDLY ENOUGH, THERE IS A WALL THAT SEEMED TO NOT BE AFFECTED BY THE FIRE.");
 	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY. ONE OF THE TOMB \nLOOKS DIFFERENT. HMmM...");
 	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
-
-
+	uTomb = new Room("TOMB", uItems, "YOU ENCOUNTER A LOT OF COBWEB AS YOU GO DOWN THE STAIRWAY. IT GETS DARKER THE DEEPER YOU GO. AT THE END, HOWEVER, YOU SEE A LIGHT. YOU ENTER A SMALL, LIT-UP CAVE. THE CANDLES ILLUMANTING THE CAVE ARE ABOUT TO GO OUT. IT LOOKS LIKE SOMEBODY OCCUPIED THIS PLACE FOR A COUPLE DAYS. THERE ARE SEVERAL ANIMAL SKINS HUNG ON THE WALLS AND LAID ON THE FLOOR.");
+	bRoom = new Room("BACKROOM",brItems, "YOU ENTER A ROOM FILLED WITH SHELVES OF BOOKS. IT DOESN'T SEEM LIKE THIS PART OF THE BUILDING WAS AFFECTED BY FIRE. THERE IS A FANCY DESK AT THE BACK OF THE ROOM. ON THE DESK IS A SHINY GLASS BALL.");
+	
+	// Setting movable direction for the room 'Shack'
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 
 	Shack->setWest(NULL);
-	//Shack->setObstacleN(door);
+	Shack->setObstacleN(door);
 
+	// Setting movable direction for the room 'Village Center'
 	VillageCent->setNorth(LargeHouse);
 	VillageCent->setSouth(Shack);
 	VillageCent->setEast(Graveyard);
@@ -91,13 +114,20 @@ int main()
 	VillageCent->setObstacleE(gate);
 	VillageCent->setObstacleS(NULL);
 	
+	// Setting movable direction for the room 'Graveyard'
 	Graveyard->setNorth(NULL);
-	Graveyard->setSouth(NULL); 
+	Graveyard->setSouth(uTomb); 
 	Graveyard->setEast(NULL); 
 	Graveyard->setWest(VillageCent);
 	Graveyard->setObstacleS(tomb);
+
+	// Setting movable direction for the room 'Shack'
+	uTomb->setNorth(Graveyard);
+	uTomb->setSouth(NULL);
+	uTomb->setEast(NULL);
+	uTomb->setWest(NULL);
 	
-	Bank->setNorth(NULL); 
+	Bank->setNorth(bRoom); 
 	Bank->setSouth(NULL); 
 	Bank->setEast(VillageCent); 
 	Bank->setWest(NULL);
