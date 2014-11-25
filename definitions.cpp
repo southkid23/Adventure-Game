@@ -53,7 +53,7 @@ void Room::enter()
 ostream& Room::roomNPC(ostream& out)
 {
 	if(npc == NULL)
-		out << "THERE IS NO-ONE IN THIS AREA.";
+		out << "THERE IS NO-ONE IN THIS AREA.\n";
 	else
 	{
 		out << "PEOPLE IN THIS AREA:\n" << "- " << npc->getName() << endl;
@@ -203,29 +203,29 @@ void Player::doAction(string verb, string noun)
 			{	
 				if(getInventory()->findName(noun)->getTarget() != NULL)
 				{
-					cout << "\nUSE " << noun << " ON WHAT?\n";
+					cout << "\nUSE " << noun << " ON WHAT?\n\n";
 					string target = ""; cin >> target; cout << endl; 
 					toUpper(target);
 	
 					if(currentR()->getObstacleN() != NULL && (currentR()->getObstacleN()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << currentR()->getObstacleN()->getOccur() << endl;
+						cout << currentR()->getObstacleN()->getOccur() << endl; getInventory()->removeItem(noun);
 						delete currentR()->getObstacleN(); currentR()->setObstacleN(NULL);
 					}
 					else if(currentR()->getObstacleE() != NULL && (currentR()->getObstacleE()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << currentR()->getObstacleE()->getOccur() << endl;
+						cout << currentR()->getObstacleE()->getOccur() << endl; getInventory()->removeItem(noun);
 						delete currentR()->getObstacleE(); currentR()->setObstacleE(NULL);
 					}
 					else if(currentR()->getObstacleS() != NULL && (currentR()->getObstacleS()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << currentR()->getObstacleS()->getOccur() << endl;
+						cout << currentR()->getObstacleS()->getOccur() << endl; getInventory()->removeItem(noun);
 						delete currentR()->getObstacleS(); currentR()->setObstacleS(NULL);
 					}
 
 					else if(currentR()->getObstacleW() != NULL && (currentR()->getObstacleW()->getName() == target && getInventory()->findName(noun)->getTarget()->getName() == target))
 					{
-						cout << currentR()->getObstacleW()->getOccur() << endl;
+						cout << currentR()->getObstacleW()->getOccur() << endl; getInventory()->removeItem(noun);
 						delete currentR()->getObstacleW(); currentR()->setObstacleW(NULL);
 					}		
 
@@ -237,7 +237,7 @@ void Player::doAction(string verb, string noun)
 				}
 				else if(getInventory()->findName(noun)->getiTarget() != NULL)
 				{
-					cout << "\nUSE " << noun << " ON WHAT?\n";
+					cout << "\nUSE " << noun << " ON WHAT?\n\n";
 					if(!getInventory()->isEmpty())
 					{
 						getInventory()->listAll(cout); cout << "";
@@ -256,7 +256,7 @@ void Player::doAction(string verb, string noun)
 						if(getInventory()->find(target) != 0)
 						{
 							cout << "YOU USE " << noun << " ON " << target << ".";
-							cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n";
+							cout << "YOU NOW HAVE " << getInventory()->findName(noun)->getProduct()->getName() << ".\n ";
 							getInventory()->add(getInventory()->findName(noun)->getProduct());
 							if(getInventory()->findName(target) != NULL)
 								{getInventory()->removeItem(noun);getInventory()->removeItem(target);}
@@ -275,7 +275,7 @@ void Player::doAction(string verb, string noun)
 					}
 				}
 				else
-					cout << endl << noun << " cannot be used." << ".\n";
+					cout << endl << noun << " CANNOT BE USED." << ".\n\n";
 			}
 			else
 				cout << "\nYOU DON'T HAVE A(N) " << noun << " TO USE.\n";
@@ -373,7 +373,7 @@ void Player::doAction(string verb, string noun)
 	{
 		while(noun == "")
 		{
-			cout << "\nINVENTORY OR ROOM_ITEMS?\n";
+			cout << "\nINVENTORY OR ROOM_ITEMS?\n\n";
 			cin >> noun;toUpper(noun);cout << endl;
 		}
 		if(noun == "BACK")

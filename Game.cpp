@@ -2,17 +2,17 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdlib.h>
 using namespace std;
-
 
 int main()
 {
+	system("color 2");
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	List* uItems = new List(); List* brItems = new List();
 	
-
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
 	guard->prevent("WEST"); 
@@ -150,13 +150,18 @@ int main()
 	Bank->setEast(VillageCent); 
 	Bank->setWest(NULL);
 	Bank->setObstacleN(backDoor);
+
+	// Settting moveable directions for the room 'Bank'
+	bRoom->setNorth(NULL); 
+	bRoom->setSouth(Bank); 
+	bRoom->setEast(NULL); 
+	bRoom->setWest(NULL);
 	
 	// Setting moveable directions and obstacles for the room 'Large House'
 	LargeHouse->setNorth(NULL); 
 	LargeHouse->setSouth(VillageCent);
 	LargeHouse->setEast(NULL); 
 	LargeHouse->setWest(NULL);
-
 	
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
@@ -168,12 +173,12 @@ int main()
 	lilgirl->setOccur("\"THANK YOU FOR THE APPLE! SORRY, I DON'T HAVE ANYTHING TO GIVE IN RETURN...\nOH WAIT! I FOUND THIS USELESS KEY THE OTHER DAY!\"\n\nSHE GIVES YOU A KEY.\n");
 
 	NPC* begger = new NPC(Bank, "BEGGER", "PICKLOCK");
-	begger->setFT("\"HEY THERE YOUNG LAD, DID YOU HAPPEN TO SEE MY DING RUNNING AROUND THE AREA? YOU WILL BE REWARDED IF YOU HELP ME FIND HIM\"");
+	begger->setFT("\"HEY THERE YOUNG LAD, DID YOU HAPPEN TO SEE MY DING RUNNING AROUND THE AREA? YOU WILL BE REWARDED IF YOU HELP ME FIND HIM\"\n");
 	begger->setAT("\"DING! WHERE ARE YOU. . . DING!\"");
 	Bank->setNPC(begger);
 	Monkey->setnTarget(begger);
 	begger->getInventory()->add(pickLock);
-	begger->setOccur("\"OH DING! THERE YOU ARE! NOW, LET US CONTINUE OUR JOURNEY TO THE WEST. TO SHOW MY APPRECIATION, TAKE THIS PICKLOCK MY YOUNG LAD.\"\n\n HE GAVE YOU A PICKLOCK.\n\n");
+	begger->setOccur("\"OH DING! THERE YOU ARE! NOW, LET US CONTINUE OUR JOURNEY TO THE WEST. TO SHOW MY APPRECIATION, TAKE THIS MY YOUNG LAD.\"\n\nHE GAVE YOU A PICKLOCK.\n\n");
 
 	NPC* oldman = new NPC(VillageCent, "OLD_MAN", "STONE");
 	oldman->setFT("\"WHY, HELLO THERE YOUNG LAD. I'M TRAVELING FAR AND WIDE IN SEARCH OF KNOWLDEGE AND EXPERIENCE. I WONDER WHAT KIND OF INTERESTING THINGS I CAN FIND IN THIS VILLAGE...\"");
@@ -186,10 +191,10 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 	
-	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n";
+	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n";
 	cout << "WELCOME TO THE I.S.A. AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
 	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\n";//FOR COMMAND LIST TYPE \"HELP\"" << endl;
-	cout << " \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl << endl;
+	cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl << endl << endl;
 	cout << "WOULD YOU LIKE A BRIEF OVERVIEW?(YES/NO)\n";string reply = "";
 	cin >> reply;toUpper(reply); cout << endl << endl;
 	if(reply == "YES"){
