@@ -271,17 +271,9 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
-<<<<<<< HEAD
-	
-	delete shovel;delete blacknote;delete dirt;
-	delete explosive, desk, gNote, apple, ckey, lchest, fbook, key, pStone, gold, lockpick, bananaskin, aTable, glassBall, bedFrame, Monkey,crowbar;
-=======
 
 	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
 
-
-
->>>>>>> 46eb3a58ab67d5e9c8ecdce4b47b4dc2e7641ba3
 	// Rooms Deallocations	
 	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
 	delete uTomb; delete bRoom; delete backyard; delete storage;
@@ -289,15 +281,8 @@ int main()
 	delete vItems;delete sItems;delete bItems;delete gItems;delete lItems;
 	delete uItems;delete byItems;delete stItems;delete brItems;
 	// NPCs Deallocation
-<<<<<<< HEAD
 	delete player;delete lilgirl;
 	delete oldman;delete begger;
-=======
-	delete player;
-	delete lilgirl;
-	delete oldman;
-	delete begger;
->>>>>>> 46eb3a58ab67d5e9c8ecdce4b47b4dc2e7641ba3
 
 	system("PAUSE");
 
