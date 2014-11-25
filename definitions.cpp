@@ -165,6 +165,8 @@ void Player::doAction(string verb, string noun)
 				cout << currentR()->getrItems()->findName(noun)->getInfo() << endl;
 			else
 				cout << "NO SUCH ITEM EXISTS." << endl;
+			if(currentR()->getrItems()->find(noun) != 0 || getInventory()->find(noun) != 0)
+				cout << endl;
 		}
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
@@ -251,6 +253,8 @@ void Player::doAction(string verb, string noun)
 					toUpper(target);
 					if(getInventory()->find(target) == 0 && currentR()->getrItems()->find(target) == 0)
 						cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
+					else if(target == noun)
+						cout << "YOU CANNOT USE " << noun << " ON ITSELF.\n";
 					else
 					{
 						if(getInventory()->find(target) != 0)
