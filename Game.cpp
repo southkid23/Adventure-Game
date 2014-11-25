@@ -271,7 +271,27 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
+<<<<<<< HEAD
 	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
+=======
+
+	delete vItems;
+	delete sItems;
+	delete bItems;
+	delete gItems;
+	delete lItems;
+	delete uItems;
+	delete byItems;
+	delete stItems;
+	delete brItems;
+
+	delete player;
+	delete lilgirl;
+	delete oldman;
+	delete begger;
+
+>>>>>>> 2042430cabb4eb745a0552f17fef3df121477a2a
 	system("PAUSE");
+
 }
 
