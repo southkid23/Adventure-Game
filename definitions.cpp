@@ -367,7 +367,7 @@ void Player::doAction(string verb, string noun)
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
 		cout << "THIS GAME ACCEPTS A MAX OF TWO WORD COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO\nSOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
-		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";//PressEnterToContinue();
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- BACK\n\n";//PressEnterToContinue();
 	}
 	else if(verb == "LIST")
 	{
