@@ -269,7 +269,7 @@ int main()
 		else
 			player->doAction(verb, noun);
 	}
-	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
+	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!" << endl << endl;
 
 	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
 	// Rooms Deallocations	
