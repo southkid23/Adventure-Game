@@ -274,6 +274,8 @@ int main()
 
 	delete shovel;delete blacknote;delete dirt;delete explosive,desk,gNote,apple,ckey,lchest,fbook,key,pStone,gold,lockpick,bananaskin,aTable,glassBall,bedFrame,Monkey,crowbar;
 
+
+
 	// Rooms Deallocations	
 	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
 	delete uTomb; delete bRoom; delete backyard; delete storage;
@@ -292,6 +294,7 @@ int main()
 	delete lilgirl;
 	delete oldman;
 	delete begger;
+
 	system("PAUSE");
 
 }
