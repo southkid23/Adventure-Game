@@ -11,7 +11,7 @@ int main()
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	List* uItems = new List(); List* brItems = new List();
-	 
+	
 
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
@@ -62,7 +62,7 @@ int main()
 
 	Item* fbook = new Item("BOOK", "SEEMS LIKE IT IS A BOOK FROM ANOTHER COUNTRY.", true);
 
-	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", false);
+	Item* lchest = new Item("CHEST(CANNOT TAKE)", "WONDER WHAT'S INSIDE...", false);
 	
 	Item* ckey = new Item("CKEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest); ckey->setProduct(fbook);

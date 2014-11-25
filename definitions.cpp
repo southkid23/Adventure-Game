@@ -70,7 +70,10 @@ void Player::doAction(string verb, string noun)
 	//cout << "verb is " << verb << endl << "Noun is " << noun << endl;
 	if(verb == "GO")
 	{
-
+		if(noun == "")
+		{
+			cout << "GO WHERE?";cin >> noun;toUpper(noun);
+		}
 		if(noun == "NORTH")//To Go North//Same for south,east and west
 		{
 			if(currentR()->getObstacleN() != NULL && currentR()->getObstacleN()->prevent() == "NORTH")
@@ -126,19 +129,27 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "EXAMINE")//Examine returns an item description
 	{
-		if(getInventory()->findName(noun) != NULL)
+		if(noun == "")
+		{
+			cout << "EXAMINE WHAT?\n";getInventory()->listAll(cout); cout << "\n";
+			if(!getInventory()->isEmpty())
+			{
+				cin >> noun;toUpper(noun);
+			}
+		}
+		if(getInventory()->find(noun) != 0)
 		{	
-			Item* it = getInventory()->findName(noun);
-			cout << it->getInfo() << endl << endl;
+			cout << getInventory()->findName(noun)->getInfo() << endl << endl;
 		}
 		else
-			cout << "CANNOT EXAMINE " << noun << "." << endl;
+			cout << "CANNOT EXAMINE " << noun << ".\n" << endl;
 	}
 	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
 		if(noun == "")
 		{
-			cout << "READ WHAT?\n\n";cin >> noun;toUpper(noun);
+			cout << "READ WHAT?\n";getInventory()->listAll(cout); cout << "\n";
+			cin >> noun;toUpper(noun);
 		}
 		if(getInventory()->find(noun) == 0)
 			cout << "YOU DO NOT HAVE THIS ITEM.";
@@ -226,20 +237,20 @@ void Player::doAction(string verb, string noun)
 	}
 	else if(verb == "TAKE") // takes an item
 	{
-
 		if(noun == "")
 		{
-			cout << "TAKE WHAT?\n\n";cin >> noun;toUpper(noun);
+			cout << "TAKE WHAT?\n"; currentR()->roomitems(cout);cout << "\n";
+			cin >> noun;cout << endl;toUpper(noun);
 		}
 		if(currentR()->getrItems()->findName(noun) == NULL || !currentR()->getrItems()->findName(noun)->isTak())
 		{
-			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl << endl;
+			cout << "THERE IS NO SUCH ITEM IN THE ROOM OR CANNOT BE TAKEN." << endl;currentR()->roomitems(cout);cout << "" << endl;
 		}
 		else
 		{	
 			getInventory()->add(currentR()->getrItems()->findName(noun));
 			currentR()->getrItems()->removeItem(noun);
-			cout << noun << " is now in your Inventory." << endl << endl;
+			cout << noun << " IS NOW IN YOUR INVENTORY." << endl << endl;
 		}
 	}
 	else if(verb == "TALK")
@@ -415,13 +426,10 @@ Item* List::findName(string value)
 std::ostream& List::listAll(std::ostream& out)//Lists all item in list
 {
 	Node* walker = head;
+		if(head == NULL)
+			out << "- NOTHING TO SHOW.\n";
 	while(walker != NULL)
 	{
-		if(head == NULL)
-		{
-			out << "THIS ROOM IS EMPTY.\n";
-			break;
-		}
 		out << "- " << walker->data->getName() << endl;
 		walker = walker->next;
 	}
