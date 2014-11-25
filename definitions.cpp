@@ -68,7 +68,7 @@ ostream& Room::roomitems(ostream& out)
 void Player::doAction(string verb, string noun)
 {
 	//cout << "verb is " << verb << endl << "Noun is " << noun << endl;
-	if(verb == "GO" || verb == "MOVE")
+	if(verb == "GO")
 	{
 
 		if(noun == "NORTH")//To Go North//Same for south,east and west
@@ -134,11 +134,22 @@ void Player::doAction(string verb, string noun)
 		else
 			cout << "CANNOT EXAMINE " << noun << "." << endl;
 	}
-	/*else if(verb == "READ")//Read reads an item if it is a "book"
+	else if(verb == "READ")//Read reads an item if it is a "book"
 	{
-		Item* it = getInventory()->findName(noun);
-		cout << it->read();
-	}*/
+		if(noun == "")
+		{
+			cout << "READ WHAT?\n\n";cin >> noun;toUpper(noun);
+		}
+		if(getInventory()->find(noun) == 0)
+			cout << "YOU DO NOT HAVE THIS ITEM.";
+		if(!getInventory()->findName(noun)->isRead())
+			cout << noun << " CANNOT BE READ.";
+		else
+		{
+			Item* it = getInventory()->findName(noun);
+			cout << it->read();
+		}
+	}
 	else if(verb == "USE")//Used to carry out actions on targets
 	{
 		if(getInventory()->findName(noun) != NULL)
