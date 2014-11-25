@@ -36,7 +36,6 @@ int main()
 	window->setpInfo("THERE ARE SEVERAL PLANKS OF WOOD NAILED TO THE DOOR. THE WINDOW NEXT TO THE DOOR IS A LITTLE CRACKED AND SEEMS EASILY BREAKABLE."); 
 	window->setOccur("GLASSBALL WAS THROWN AT THE WINDOW. THE WINDOW BREAKS. YOU HEAR THE SOUND OF THE \nENERGY OF THE UNIVERSE UNLEASED FROM THE GLASSBALL. NOTHING HAPPENED. THE WORLD\nSEEMS TO BE STILL INTACT.");
 
-
 	Obstacle* gate = new Obstacle("GATE");
 	gate->prevent("EAST");
 	gate->setpInfo("THE GATE TO THE GRAVEYARD IS FIRMLY LOCKED.");
@@ -61,7 +60,7 @@ int main()
 
 	Item* aTable = new Item("TABLE", "THE TABLE HAS SOME WEIRD LOOKING SYMBOLS. IT LOOKS LIKE IT MIGHT HAVE BEEN USED FOR WITCHCRAFT OR ALCHEMY.", false);
 
-	Item* bananaskin = new Item("SKIN", "USELESS...", true);
+	Item* bananaskin = new Item("SKIN", "USELESS PIECE OF SKIN...", true);
 
 	Item* lockpick = new Item("LOCKPICK", "OLD AND RUSTY BUT SEEMS STEADY ENOUGH TO USE IT FOR ONE LAST TIME.", true);
 	lockpick->setTarget(backDoor); 
@@ -69,7 +68,7 @@ int main()
 	Item* gold = new Item("GOLD", "PURE GOLD. CAN CORRUPT EVEN THE MOST INNOCENT.", true);
 	gold->setTarget(guard);
 
-	Item* pStone = new Item("STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
+	Item* pStone = new Item("PHILOSOPHER'S_STONE", "YOU FEEL A STRANGE POWERFUL AURA.", true);
 	pStone->setiTarget(aTable); pStone->setProduct(gold);
 
 	Item* key = new Item("KEY","I WONDER WHAT THIS UNLOCKS...",true);
@@ -270,6 +269,10 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
+	
+	delete Shack; delete VillageCent; delete Graveyard; delete Bank; delete LargeHouse;
+	delete uTomb; delete bRoom; delete backyard; delete storage;
+
 	system("PAUSE");
 }
 
