@@ -102,7 +102,7 @@ int main()
 	uItems->add(aTable);
 
 	// Items in the Backroom of the Bank
-	bRoom->add(glassBall);
+	brItems->add(glassBall);
 
 
 	//Defining Rooms
