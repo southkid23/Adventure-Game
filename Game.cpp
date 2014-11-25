@@ -11,7 +11,7 @@ int main()
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
-	List* uItems = new List(); List* brItems = new List();
+	List* uItems = new List(); List* brItems = new List(); List* byItems = new List(); List* stItems = new List();
 	
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
@@ -84,6 +84,18 @@ int main()
 
 	Item* gNote = new Item("NOTE", "THE MESSAGE ON THE NOTE MADE YOU MAD AND YOU FEEL LIKE BREAKING THE TOMB RIGHT \nBEHIND YOU.", true);
 
+	Item* desk = new Item("DESK", "A FANCY DESK. IT MIGHT HAVE BEEN USED TO COUNT THE MONEY.", false);
+
+	Item* explosive = new Item("EXPLOSIVE", "THE SMELL OF GUNPOWDER IS INTOXICATING.", true);
+	explosive->setiTarget(desk); explosive->setProduct(glassBall);
+
+	Item* dirt = new Item("DIRT", "A FRESH PATCH OF DIRT.", false);
+
+	Item* blacknote = new Item("BLACKNOTE", "A DIRTY BLACKNOTE WITH WHITE WORDS ON IT. IT MAY BE IMPORTANT TO READ.", true);
+
+	Item* shovel = new Item("SHOVEL", "A STURDY SHOVEL. SEEMS LIKE IT WAS RECENTLY USED BEFORE.", true);
+	shovel->setiTarget(dirt); shovel->setProduct(blacknote);
+
 	// Items in Shack
 	sItems->add(apple);
 	sItems->add(ckey);
@@ -101,8 +113,16 @@ int main()
 	// Items in Undertomb
 	uItems->add(aTable);
 
+	// Items in the Bank
+	bItems->add(explosive);
+
 	// Items in the Backroom of the Bank
-	brItems->add(glassBall);
+	brItems->add(desk);
+
+	byItems->add(dirt);
+
+	// Items in the Storage
+	stItems->add(shovel); 
 
 
 	//Defining Rooms
@@ -113,7 +133,9 @@ int main()
 	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
 	uTomb = new Room("TOMB", uItems, "YOU ENCOUNTER A LOT OF COBWEB AS YOU GO DOWN THE STAIRWAY. IT GETS DARKER THE DEEPER YOU GO. AT THE END, HOWEVER, YOU SEE A LIGHT. YOU ENTER A SMALL, LIT-UP CAVE. THE CANDLES ILLUMANTING THE CAVE ARE ABOUT TO GO OUT. IT LOOKS LIKE SOMEBODY OCCUPIED THIS PLACE FOR A COUPLE DAYS. THERE ARE SEVERAL ANIMAL SKINS HUNG ON THE WALLS AND LAID ON THE FLOOR.");
 	bRoom = new Room("BACKROOM", brItems, "YOU ENTER A ROOM FILLED WITH SHELVES OF BOOKS. IT DOESN'T SEEM LIKE THIS PART OF THE BUILDING WAS AFFECTED BY FIRE. THERE IS A FANCY DESK AT THE BACK OF THE ROOM. ON THE DESK IS A SHINY GLASS BALL.");
-	
+	Room* backyard = new Room("BACKYARD", byItems, "THE BACKYARD WAS A GREEN AND FLOURISHING WORK OF NATURE. PLANTS OF ALL COLOR AND VARIATION WERE PLANTED ALL OVER THE AREA. THERE IS A HUGE OAK TREE STUMP IN THE MIDDLE OF THE GARDEN. NEAR THE TREE STUMP YOU SEE A PATCH OF FRESHLY MOVED DIRT.");
+	Room* storage = new Room("STORAGE", stItems, "A SMALL STORAGE CONTAINER. SEEMS LIKE IT MIGHT CONTAIN A LOT OF USEFUL TOOLS.");
+
 	// Setting movable direction and obstacles for the room 'Shack'
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
@@ -158,11 +180,21 @@ int main()
 	bRoom->setWest(NULL);
 	
 	// Setting moveable directions and obstacles for the room 'Large House'
-	LargeHouse->setNorth(NULL); 
+	LargeHouse->setNorth(backyard); 
 	LargeHouse->setSouth(VillageCent);
 	LargeHouse->setEast(NULL); 
 	LargeHouse->setWest(NULL);
-	
+
+	backyard->setNorth(NULL);
+	backyard->setSouth(LargeHouse);
+	backyard->setEast(storage);
+	backyard->setWest(NULL);
+
+	storage->setNorth(NULL);
+	storage->setSouth(NULL);
+	storage->setEast(NULL);
+	storage->setWest(backyard);
+
 	// placing NPCs
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
 	lilgirl->setFT("\"HELLO MISTER. IT LOOKS YOU ARE FINALLY AWAKE. SORRY IF YOU ARE HURT BUT I HAD\nTO DRAG YOU INSIDE THIS SHACK. I'VE BEEN LIVING FOR A COUPLE DAYS IN THIS\nABANDONED PLACE. THERE WAS A FIRE LAST NIGHT AND I FOUND YOU WITH YOUR CLOTHES\nHALF-BURNT. PULLING YOU SURE MADE ME HUNGRY.\"");
@@ -186,7 +218,7 @@ int main()
 	VillageCent->setNPC(oldman);
 	fbook->setnTarget(oldman);
 	oldman->getInventory()->add(pStone);
-	oldman->setOccur("'MY GOD! THIS BOOK IS... NOTHING YOU SHOULD BE CONCERNED ABOUT. THIS BOOK WILL BE VERY USEFUL HOWEVER. FOR YOUR TROUBLE, HERE IS SMALL STONE.'\n\nHE GIVES YOU A PHILOSOPHER'S_STONE.\n\n");
+	oldman->setOccur("\"MY GOD! THIS BOOK IS... NOTHING YOU SHOULD BE CONCERNED ABOUT. THIS BOOK WILL BE VERY USEFUL HOWEVER. FOR YOUR TROUBLE, HERE IS A SMALL STONE.\"\n\nHE GIVES YOU A PHILOSOPHER'S_STONE.\n\n");
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
