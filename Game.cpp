@@ -270,6 +270,23 @@ int main()
 			player->doAction(verb, noun);
 	}
 	cout << "/nCONGRATULATIONS!!!!!!!!! YOU BEAT THE GAME!!";
+
+	delete vItems;
+	delete sItems;
+	delete bItems;
+	delete gItems;
+	delete lItems;
+	delete uItems;
+	delete byItems;
+	delete stItems;
+	delete brItems;
+
+	delete player;
+	delete lilgirl;
+	delete oldman;
+	delete begger;
+
 	system("PAUSE");
+
 }
 
