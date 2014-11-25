@@ -10,7 +10,7 @@ int main()
 	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
-	List* uItems = new List();
+	List* uItems = new List(); List* brItems = new List();
 	 
 
 	//Setting Obstacles
@@ -20,9 +20,9 @@ int main()
 	guard->setOccur("The Guard smiles. He then lies down and takes a nap.");
 	
 
-	/*Obstacle* door = new Obstacle("DOOR"); 
+	Obstacle* door = new Obstacle("DOOR"); 
 	door->prevent("NORTH"); door->setpInfo("DOOR IS LOCKED.");
-	door->setOccur("DOOR GETS BROKEN DOWN.");*/
+	door->setOccur("DOOR GETS BROKEN DOWN.");
 
 
 	Obstacle* window = new Obstacle("WINDOW");
@@ -88,7 +88,8 @@ int main()
 	Graveyard = new Room("GRAVEYARD", gItems, "YOU JUST HAD A WEIRD VISION ABOUT THE VILLAGE ON FIRE.\nTHE VILLAGERS WERE TREMBLING IN FEAR, SHOUTING AND TRYING TO GET AWAY FROM SOMETHING.\nI WONDER WHAT...\nTHE GRAVEYARD IS MISTY. SOME TOMBS SEEMS TO BE BUILT RECENTLY. ONE OF THE TOMB \nLOOKS DIFFERENT. HMmM...");
 	LargeHouse = new Room("MANSION", lItems, "THE HOUSE LOOKS REALLY FANCY. WOULD LOOK BETTER IF NOT FOR THE DUST THAT HAD COLLECTED OVER THE MONTHS. THERE'S A BEAUTIFUL BACKYARD AT THE BACK OF THE HOUSE. THE LIVING ROOM SEEMS TO HAVE A WEIRD SYMBOL.ONE OF THE WINDOWS SEEMS TO BE UNLOCKED.");
 	uTomb = new Room("TOMB", uItems, "YOU ENCOUNTER A LOT OF COBWEB AS YOU GO DOWN THE STAIRWAY. IT GETS DARKER THE DEEPER YOU GO. AT THE END, HOWEVER, YOU SEE A LIGHT. YOU ENTER A SMALL, LIT-UP CAVE. THE CANDLES ILLUMANTING THE CAVE ARE ABOUT TO GO OUT. IT LOOKS LIKE SOMEBODY OCCUPIED THIS PLACE FOR A COUPLE DAYS. THERE ARE SEVERAL ANIMAL SKINS HUNG ON THE WALLS AND LAID ON THE FLOOR.");
-
+	bRoom = new Room("BACKROOM",brItems, "YOU ENTER A ROOM FILLED WITH SHELVES OF BOOKS. IT DOESN'T SEEM LIKE THIS PART OF THE BUILDING WAS AFFECTED BY FIRE. THERE IS A FANCY DESK AT THE BACK OF THE ROOM. ON THE DESK IS A SHINY GLASS BALL.");
+	
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 

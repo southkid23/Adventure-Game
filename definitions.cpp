@@ -284,7 +284,7 @@ void Player::doAction(string verb, string noun)
 		cout << "To interact an item with and object just type \'use\' and then followed by the name of the item. ";
 		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
 	*/}
-	else if(verb == "LIST" || "INVENTORY")
+	else if(verb == "LIST" || verb == "INVENTORY")
 	{
 		if(getInventory()->isEmpty())
 			cout << "THERE IS NOTHING IN YOUR INVENTORY.\n\n";
