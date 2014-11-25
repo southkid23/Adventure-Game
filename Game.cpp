@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	system("color 2");
-	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom;
+	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom; Room* backyard; Room* storage;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	List* uItems = new List(); List* brItems = new List(); List* byItems = new List(); List* stItems = new List();
