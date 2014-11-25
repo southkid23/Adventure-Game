@@ -124,9 +124,9 @@ int main()
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
-
-	cout << "WELCOME TO THE ISA AVENTURE GAME. IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\"" << endl;
-	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)" << endl << endl << endl << endl << endl;
+	
+	cout << "WELCOME TO THE ISA AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
+	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\nFOR COMMAND LIST TYPE \"HELP\"" << endl << endl << endl << endl;
 
 	cout << "YOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING\nABOUT YOUR PAST. YOU LOOK AROUND.\n\n";
 	Shack->enter();
@@ -153,7 +153,6 @@ int main()
 		else
 			player->doAction(verb, noun);
 	}
-
 }
 
 
