@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb;
+	Room* Shack;Room* VillageCent;Room* Graveyard;Room* Bank;Room* LargeHouse; Room* uTomb; Room* bRoom;
 	
 	List* vItems = new List(); List* sItems = new List(); List* bItems = new List(); List* gItems = new List(); List* lItems = new List();
 	List* uItems = new List(); List* brItems = new List();
@@ -22,7 +22,7 @@ int main()
 
 	Obstacle* door = new Obstacle("DOOR"); 
 	door->prevent("NORTH"); door->setpInfo("DOOR IS LOCKED.");
-	door->setOccur("DOOR GETS BROKEN DOWN.");
+	door->setOccur("THROWN TO THE DOOR. DOOR GETS BROKEN DOWN.");
 
 
 	Obstacle* window = new Obstacle("WINDOW");
@@ -44,6 +44,9 @@ int main()
 	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true);
 	crowbar->setTarget(tomb);
 	
+	Item* bedFrame = new Item("BED_FRAME","A STURDY METAL BED FRAME WITHOUT A MATTRESS ON IT.", true);
+	bedFrame->setTarget(door);
+
 	Item* aTable = new Item("TABLE", "THE TABLE HAS SOME WEIRD LOOKING SYMBOLS. IT LOOKS LIKE IT MIGHT HAVE BEEN USED FOR WITCHCRAFT OR ALCHEMY.", false);
 
 	Item* bananaskin = new Item("SKIN", "USELESS...", true);
@@ -68,16 +71,20 @@ int main()
 
 	Item* gNote = new Item("NOTE", "THE MESSAGE ON THE NOTE MADE YOU MAD AND YOU FEEL LIKE BREAKING THE TOMB RIGHT \nBEHIND YOU.", true);
 
-
+	// Items in Shack
 	sItems->add(apple);
 	sItems->add(ckey);
 	sItems->add(bananaskin);
 	sItems->add(lchest);
+	sItems->add(bedFrame);
 
+	// Items in VillageCenter
 	vItems->add(crowbar);
 
+	// Items in Graveyard 
 	gItems->add(gNote);
 
+	// Items in Undertomb
 	uItems->add(aTable);
 
 
@@ -90,12 +97,14 @@ int main()
 	uTomb = new Room("TOMB", uItems, "YOU ENCOUNTER A LOT OF COBWEB AS YOU GO DOWN THE STAIRWAY. IT GETS DARKER THE DEEPER YOU GO. AT THE END, HOWEVER, YOU SEE A LIGHT. YOU ENTER A SMALL, LIT-UP CAVE. THE CANDLES ILLUMANTING THE CAVE ARE ABOUT TO GO OUT. IT LOOKS LIKE SOMEBODY OCCUPIED THIS PLACE FOR A COUPLE DAYS. THERE ARE SEVERAL ANIMAL SKINS HUNG ON THE WALLS AND LAID ON THE FLOOR.");
 	bRoom = new Room("BACKROOM",brItems, "YOU ENTER A ROOM FILLED WITH SHELVES OF BOOKS. IT DOESN'T SEEM LIKE THIS PART OF THE BUILDING WAS AFFECTED BY FIRE. THERE IS A FANCY DESK AT THE BACK OF THE ROOM. ON THE DESK IS A SHINY GLASS BALL.");
 	
+	// Setting movable direction for the room 'Shack'
 	Shack->setNorth(VillageCent);
 	Shack->setSouth(NULL);
 	Shack->setEast(NULL); 
 	Shack->setWest(NULL);
-	//Shack->setObstacleN(door);
+	Shack->setObstacleN(door);
 
+	// Setting movable direction for the room 'Village Center'
 	VillageCent->setNorth(LargeHouse);
 	VillageCent->setSouth(Shack);
 	VillageCent->setEast(Graveyard);
@@ -105,18 +114,20 @@ int main()
 	VillageCent->setObstacleE(gate);
 	VillageCent->setObstacleS(NULL);
 	
+	// Setting movable direction for the room 'Graveyard'
 	Graveyard->setNorth(NULL);
 	Graveyard->setSouth(uTomb); 
 	Graveyard->setEast(NULL); 
 	Graveyard->setWest(VillageCent);
 	Graveyard->setObstacleS(tomb);
 
+	// Setting movable direction for the room 'Shack'
 	uTomb->setNorth(Graveyard);
 	uTomb->setSouth(NULL);
 	uTomb->setEast(NULL);
 	uTomb->setWest(NULL);
 	
-	Bank->setNorth(NULL); 
+	Bank->setNorth(bRoom); 
 	Bank->setSouth(NULL); 
 	Bank->setEast(VillageCent); 
 	Bank->setWest(NULL);
