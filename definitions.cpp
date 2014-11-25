@@ -255,7 +255,7 @@ void Player::doAction(string verb, string noun)
 						cout << target << " IS NOT IN YOUR INVENTORY OR ROOM" << endl << endl;
 					else if(target == noun)
 						cout << "YOU CANNOT USE " << noun << " ON ITSELF.\n";
-					else
+					else if(target == getInventory()->findName(noun)->getiTarget()->getName())
 					{
 						if(getInventory()->find(target) != 0)
 						{
@@ -274,9 +274,9 @@ void Player::doAction(string verb, string noun)
 							getInventory()->add(getInventory()->findName(noun)->getProduct());
 							getInventory()->removeItem(noun);currentR()->getrItems()->removeItem(target);
 						}
-						else
-							cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
 					}
+					else
+						cout << "YOU CAN'T USE " << noun << " ON " << target << endl;
 				}
 				else
 					cout << endl << noun << " CANNOT BE USED." << ".\n\n";
