@@ -1,7 +1,15 @@
 #include "classes.h"
 #include <iostream>
 #include <string>
+#include <limits>
 using namespace std;
+
+void PressEnterToContinue()
+  {
+	cout << "\nPRESS ENTER TO CONTINUE... ";
+	cin.sync();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  }
 
 void toUpper(string& input)
 {
@@ -48,7 +56,7 @@ ostream& Room::roomNPC(ostream& out)
 		out << "THERE IS NO-ONE IN THIS AREA.";
 	else
 	{
-		out << "PEOPLE IN THIS AREA:\n" << npc->getName();
+		out << "PEOPLE IN THIS AREA:\n" << "- " << npc->getName();
 	}
 	return out;
 }
@@ -301,18 +309,43 @@ void Player::doAction(string verb, string noun)
 	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
-		cout << "THIS GAME ONLY TAKES IN A TWO WORD COMBINATION COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO SOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
-		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";
+		cout << "THIS GAME ACCEPTS A MAX OF TWO WORD COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO SOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";PressEnterToContinue();
 	}
-	else if(verb == "LIST" || verb == "INVENTORY")
+	else if(verb == "LIST")
 	{
-		if(getInventory()->isEmpty())
-			cout << "THERE IS NOTHING IN YOUR INVENTORY.\n\n";
+		if(noun == "")
+		{
+			cout << "INVENTORY OR ROOM_ITEMS?\n";
+			cin >> noun;toUpper(noun);
+		}
+		if(noun == "INVENTORY")
+		{
+			getInventory()->listAll(cout);cout << "";
+		}
+		else if(noun == "ROOM_ITEMS")
+		{
+			currentR()->getrItems()->listAll(cout);cout << "";
+		}
+	}
+	else if(verb == "DROP")
+	{
+		if(noun == "")
+		{
+			cout << "DROP WHAT?\n";getInventory()->listAll(cout);cout << "\n";
+			cin >> noun;toUpper(noun);
+		}
+		if(getInventory()->find(noun) != 0)
+		{
+			cout << "YOU HAVE DROPPED " << noun << ".\n\n";
+			currentR()->getrItems()->add(getInventory()->findName(noun));
+			getInventory()->removeItem(noun);
+		}
 		else
-			listAllItems();
+			cout << "ITEM NOT IN INVENTORY.\n";
 	}
 	else
-		cout << "-SORRY BUT I DO NOT UNDERSTAND.-\n" << endl;
+		cout << "SORRY BUT I DO NOT UNDERSTAND.\n" << endl;
 }
 
 

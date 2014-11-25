@@ -186,12 +186,18 @@ int main()
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
 	
-	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n";
-	cout << "WELCOME TO THE ISA AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
-	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\nFOR COMMAND LIST TYPE \"HELP\"" << endl;
-	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl << endl;
+	cout << " \n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n";
+	cout << "WELCOME TO THE I.S.A. AVENTURE GAME."/* IF YOU EVER NEED ANY HELP, JUST TYPE \"HELP\""*/ << endl;
+	cout << "(PLAYER INPUT IS NOT CASE SENSITIVE)\n";//FOR COMMAND LIST TYPE \"HELP\"" << endl;
+	cout << " \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" << endl << endl;
+	cout << "WOULD YOU LIKE A BRIEF OVERVIEW?(YES/NO)\n";string reply = "";
+	cin >> reply;toUpper(reply); cout << endl << endl;
+	if(reply == "YES"){
+		player->doAction("HELP","");
+	}
+	cout << "\nYOU ARE READY TO BEGIN!!\n";PressEnterToContinue();
 
-	cout << "YOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING\nABOUT YOUR PAST. YOU LOOK AROUND AND THERE'S NOTHING YOU RECOGNIZE.\n\n";
+	cout << "\n\n\nYOU WAKE UP IN A SHACK. YOU FEEL A LITTLE DIZZY AND CAN'T REMEMBER ANYTHING\nABOUT YOUR PAST. YOU LOOK AROUND AND THERE'S NOTHING YOU RECOGNIZE.\n\n";
 	Shack->enter();
 	while(true)
 	{
@@ -209,13 +215,12 @@ int main()
 			;
 		else if (ss.rdbuf()->in_avail() != 0) // Check if there're any words left in buffer, if there are, then user input was more than 2 words.
 		{
-			cout << "PLEASE ENTER ONLY 2 WORDS." << endl;
+			cout << "PLEASE ENTER NOT MORE THAN 2 WORDS." << endl;
 			noun = ""; // Clears the variables
 			verb = "";
 		}
 		else
 			player->doAction(verb, noun);
-		cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\n";
 	}
 }
 
