@@ -301,11 +301,9 @@ void Player::doAction(string verb, string noun)
 	}
 	else if (verb == "HELP")//Gives extremely useful advice
 	{
-		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- READ\n- TALK\n- GIVE\n\n";
-		/*cout << "There will be items in the room that you will be able to pick up or drop them. Type \'take\' \'drop\' followed by the name of the item. "; 
-		cout << "To interact an item with and object just type \'use\' and then followed by the name of the item. ";
-		cout << "\n\nHere are a list of some extra commands: " << endl << "Examine" << endl << "Read" << endl << endl;
-	*/}
+		cout << "THIS GAME ONLY TAKES IN A TWO WORD COMBINATION COMMANDS, FOR EXAMPLE \"TAKE ITEM\" OR \"GO SOUTH\". ONLY COMMANDS LISTED IN THE LIST BELLOW CAN BE USED.\n";
+		cout << "COMMAND LIST: \n- GO (NORTH,SOUTH,EAST,WEST)\n- TAKE\n- DROP\n- USE\n- EXAMINE\n- TALK\n- GIVE\n- INVENTORY\n\n";
+	}
 	else if(verb == "LIST" || verb == "INVENTORY")
 	{
 		if(getInventory()->isEmpty())
