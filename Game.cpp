@@ -16,9 +16,9 @@ int main()
 	//Setting Obstacles
 	Obstacle* guard = new Obstacle("GUARD"); 
 	guard->prevent("WEST"); 
-	guard->setpInfo("A Guard is preventing you from entering the Bank.");
-	guard->setOccur("THE GUARD SMILES... HE THEN LIES DOWN TO TAKE A NAP.");
-	
+
+	guard->setpInfo("A GUARD IS PREVENTING YOU FROM ENTERING THE BANK.");
+	guard->setOccur("THE GUARD SMILES. HE THEN LIES DOWN AND TAKES A NAP.");	
 
 	Obstacle* door = new Obstacle("DOOR"); 
 	door->prevent("NORTH"); 
@@ -48,7 +48,7 @@ int main()
 	tomb->setOccur("YOU USE THE CROWBAR TO LIFT THE TOP OF THE TOMB. IT MAKES A LOUD SOUND AS IT\nHITS THE GROUND. YOU NOTICE THAT THERE IS A STAIRWAY THAT LEADS DOWN.");
 
 	//Items
-	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true);
+	Item* crowbar = new Item("CROWBAR", "A RUSTY, OLD CROWBAR. SEEMS STURDY.", true); 
 	crowbar->setTarget(tomb);
 
 	Item* Monkey = new Item("MONKEY", "AN ACTIVE MONKEY THAT SEEMS A LITTLE LOST. IT HAS A TAG AROUND ITS NECK. LOOKING CLOSELY, IT SAYS \'DING THE MONKEY\'", true);
@@ -79,7 +79,7 @@ int main()
 
 	Item* lchest = new Item("CHEST", "WONDER WHAT'S INSIDE...", false);
 	
-	Item* ckey = new Item("CKEY", "LOOKS LIKE A KEY TO A CHEST...", true);
+	Item* ckey = new Item("CHEST_KEY", "LOOKS LIKE A KEY TO A CHEST...", true);
 	ckey->setiTarget(lchest); ckey->setProduct(fbook);
 
 	Item* apple = new Item("APPLE", "A SHINY JUICY APPLE.", true);
@@ -107,22 +107,22 @@ int main()
 
 	// Items in VillageCenter
 	vItems->add(crowbar);
-
 	// Items in Graveyard 
 	gItems->add(gNote);
 	gItems->add(Monkey);
-
+	
 	// Items in Undertomb
 	uItems->add(aTable);
-
+	
 	// Items in the Bank
 	bItems->add(explosive);
-
+	
 	// Items in the Backroom of the Bank
 	brItems->add(desk);
-
+	
+	// Items in the Backyard of the Large House
 	byItems->add(dirt);
-
+	
 	// Items in the Storage
 	stItems->add(shovel); 
 
@@ -199,7 +199,7 @@ int main()
 	storage->setEast(NULL);
 	storage->setWest(backyard);
 
-	// placing NPCs
+	// Place NPCs into different rooms
 	NPC* lilgirl = new NPC(Shack, "LITTLE_GIRL", "KEY");
 	lilgirl->setFT("\"HELLO MISTER. IT LOOKS YOU ARE FINALLY AWAKE. SORRY IF YOU ARE HURT BUT I HAD\nTO DRAG YOU INSIDE THIS SHACK. I'VE BEEN LIVING FOR A COUPLE DAYS IN THIS\nABANDONED PLACE. THERE WAS A FIRE LAST NIGHT AND I FOUND YOU WITH YOUR CLOTHES\nHALF-BURNT.\n\nDRAGGING YOU SURE MADE ME HUNGRY...\"");
 	lilgirl->setAT("\"I'M HUNGRY\"");
@@ -222,7 +222,7 @@ int main()
 	VillageCent->setNPC(oldman);
 	fbook->setnTarget(oldman);
 	oldman->getInventory()->add(pStone);
-	oldman->setOccur("\"MY GOD! THIS BOOK IS... NOTHING YOU SHOULD BE CONCERNED ABOUT. THIS BOOK WILL BE VERY USEFUL HOWEVER. FOR YOUR TROUBLE, HERE IS A SMALL STONE.\"\n\nHE GIVES YOU A PHILOSOPHER'S_STONE.\n\n");
+	oldman->setOccur("\"MY GOD! THIS BOOK IS... NOTHING YOU SHOULD BE CONCERNED ABOUT. THIS BOOK WILL BE VERY USEFUL HOWEVER. FOR YOUR TROUBLE, TAKE THIS.\"\n\nHE GIVES YOU A PHILOSOPHER'S_STONE.\n\n");
 	
 	// placing the player in the Shack
 	Player* player = new Player(Shack);
